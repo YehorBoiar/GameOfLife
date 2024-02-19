@@ -17,6 +17,8 @@ public class Renderer {
     private static int width = 100;
     private static boolean[][] grid = new boolean[height][width];
     private Logic logic = new Logic(); // instantiate Logic class
+    private int lastMouseX = -1;
+    private int lastMouseY = -1;
 
     public boolean getGameState() {
         return gameState;
@@ -44,12 +46,61 @@ public class Renderer {
         frame.setSize(width * 10, height * 10);
         frame.getContentPane().setBackground(BLACK);
 
+        addMouseListeners();
+        addKeyListeners();
+
+        frame.add(new MyPanel());
+        frame.setResizable(false);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setVisible(true);
+    }
+    
+    private void addMouseListeners(){
         frame.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 handleMouseClick(e);
             }
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                lastMouseX = -1;
+                lastMouseY = -1;
+            }    
         });
+
+        frame.addMouseMotionListener(new MouseAdapter() {
+            @Override
+            public void mouseDragged(MouseEvent e) {
+                handleMouseDrag(e);
+            }
+        });
+        
+    }
+    private void handleMouseDrag(MouseEvent e) {
+        int x = e.getX() / 10;
+        int y = (e.getY() - 40) / 10;
+
+        if (x >= 0 && x < width && y >= 0 && y < height) {
+            if (lastMouseX != -1 && lastMouseY != -1) {
+                // Draw a line of squares from the last mouse position to the current position
+                int deltaX = x - lastMouseX;
+                int deltaY = y - lastMouseY;
+                int steps = Math.max(Math.abs(deltaX), Math.abs(deltaY));
+
+                for (int step = 0; step < steps; step++) {
+                    int stepX = lastMouseX + step * deltaX / steps;
+                    int stepY = lastMouseY + step * deltaY / steps;
+
+                    grid[stepY][stepX] = !grid[stepY][stepX];
+                }
+            }
+
+            lastMouseX = x;
+            lastMouseY = y;
+            frame.repaint(); // Repaint the frame to update the drawing
+        }
+    }
+    private void addKeyListeners(){
         frame.addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
@@ -58,10 +109,6 @@ public class Renderer {
                 }
             }
         });
-        frame.add(new MyPanel());
-        frame.setResizable(false);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setVisible(true);
     }
 
     private void toggleGameState() {
