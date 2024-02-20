@@ -1,9 +1,6 @@
 import java.awt.FileDialog;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.Reader;
-import java.nio.file.Files;
-import java.util.Optional;
 import java.util.Scanner;
 
 import javax.swing.JFrame;
@@ -15,18 +12,17 @@ class Load {
 	public void loadFile() {
 		try {
 			FileDialog fd = new FileDialog(new JFrame());
-			fd.setVisible(true);	
+			fd.setVisible(true);
 			File file = fd.getFiles()[0];
 
-			if(!getExtension(file.getAbsolutePath()).equals("gol")){
-				JOptionPane.showMessageDialog(null, "File you've chosen is not .gol file"); 
+			if (!getExtension(file.getAbsolutePath()).equals("gol")) {
+				JOptionPane.showMessageDialog(null, "File you've chosen is not .gol file");
 				System.out.println("File you've chosen is not .gol file");
 				return;
 			}
-			
 
 			Scanner scanner = new Scanner(file);
-			boolean[][] gridFromFile = writeToGrid(scanner);
+			boolean[][] gridFromFile = writeToGrid(scanner, fd);
 			renderer.setGrid(gridFromFile);
 			scanner.close();
 		} catch (FileNotFoundException e) {
@@ -34,13 +30,37 @@ class Load {
 		}
 	}
 
-	private boolean[][] writeToGrid(Scanner scanner) { // TODO - Handle the case when grid from file is smaller than
-														// original grid
-		boolean[][] newGrid = new boolean[Renderer.getHeight()][Renderer.getHeight()];
-		int counter = 0;
+	private boolean[][] writeToGrid(Scanner scanner, FileDialog fd) {
+		int maxRows = Renderer.getHeight();
+		int maxCols = Renderer.getWidth();
+
+		int rows = 0;
+		int cols = 0;
+
 		while (scanner.hasNextLine()) {
 			String line = scanner.nextLine();
-			for (int i = 0; i < line.length(); i++) {
+			rows++;
+
+			if (line.length() > cols) {
+				cols = line.length();
+			}
+		}
+
+		try {
+			scanner = new Scanner(new File(fd.getFiles()[0].getAbsolutePath()));
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+
+		boolean[][] newGrid = new boolean[Math.max(rows, maxRows)][Math.max(cols, maxCols)];
+
+		int counter = 0;
+		while (scanner.hasNextLine() && counter < maxRows) {
+			String line = scanner.nextLine();
+
+			int lineLength = Math.min(line.length(), maxCols);
+
+			for (int i = 0; i < lineLength; i++) {
 				if (line.charAt(i) == 'o') {
 					newGrid[counter][i] = true;
 				} else {
@@ -52,7 +72,6 @@ class Load {
 		return newGrid;
 	}
 
-	
 	public String getExtension(String filePath) {
 		return filePath.substring(filePath.lastIndexOf(".") + 1);
 	}
