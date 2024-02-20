@@ -4,11 +4,9 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-
-import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.KeyStroke;
+
 
 public class Renderer {
     private boolean gameState = false;
@@ -22,6 +20,14 @@ public class Renderer {
     private Logic logic = new Logic(); // instantiate Logic class
     private int lastMouseX = -1;
     private int lastMouseY = -1;
+
+    public static int getHeight() {
+        return height;
+    }
+
+    public static int getWidth() {
+        return width;
+    }
 
     public boolean getGameState() {
         return gameState;
@@ -85,7 +91,6 @@ public class Renderer {
 
         if (x >= 0 && x < width && y >= 0 && y < height) {
             if (lastMouseX != -1 && lastMouseY != -1) {
-                // Draw a line of squares from the last mouse position to the current position
                 int deltaX = x - lastMouseX;
                 int deltaY = y - lastMouseY;
                 int steps = Math.max(Math.abs(deltaX), Math.abs(deltaY));
@@ -100,9 +105,10 @@ public class Renderer {
 
             lastMouseX = x;
             lastMouseY = y;
-            frame.repaint(); // Repaint the frame to update the drawing
+            frame.repaint(); 
         }
     }
+    
     private void addKeyListeners(){
         frame.addKeyListener(new KeyAdapter() {
             @Override
@@ -113,6 +119,10 @@ public class Renderer {
                 if (e.isControlDown() && e.getKeyCode() == KeyEvent.VK_S) {
                     Save save = new Save(grid);
                     save.SaveToFile();
+                }
+                if (e.isControlDown() && e.getKeyCode() == KeyEvent.VK_O) {
+                    Load load = new Load();
+                    load.loadFile();
                 }
             }
         });
