@@ -4,8 +4,11 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+
+import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.KeyStroke;
 
 public class Renderer {
     private boolean gameState = false;
@@ -106,6 +109,10 @@ public class Renderer {
             public void keyPressed(KeyEvent e) {
                 if (e.getKeyCode() == KeyEvent.VK_SPACE) {
                     toggleGameState();
+                }
+                if (e.isControlDown() && e.getKeyCode() == KeyEvent.VK_S) {
+                    Save save = new Save(grid);
+                    save.SaveToFile();
                 }
             }
         });
