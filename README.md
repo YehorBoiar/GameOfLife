@@ -2,10 +2,23 @@
 
 ## Workflow
 
--git add . 
+For implementing a new big feature you should create a new branch and do it there.
 
--git commit -m "Thoughtful message"
+```git 
+git branch <branchName>
+git checkout <branchName>
+```
 
--git push 
+When you finish implementing your featrure and you think that it can go to the master branch 
+```git 
+git checkout master
+git merge <branchName>
+```
 
-Write unit tests as you go
+And don't forget to commit your code as you go :)
+
+```git 
+git add <filename>
+git commit -m "Thoughtful message"
+```
+

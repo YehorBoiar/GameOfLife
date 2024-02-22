@@ -14,8 +14,8 @@ public class Renderer {
     private final Color WHITE = Color.WHITE;
     private JFrame frame;
     private static Renderer instance;
-    private static int height = 40;
-    private static int width = 40;
+    private static int height = 100;
+    private static int width = 100;
     private static boolean[][] grid = new boolean[height][width];
     private Logic logic = new Logic(); // instantiate Logic class
     private int lastMouseX = -1;
