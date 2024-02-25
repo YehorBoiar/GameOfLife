@@ -12,13 +12,17 @@ public class Renderer {
     private final Color WHITE = Color.WHITE;
     private JFrame frame;
     private static Renderer instance;
-    private static int height = 100;
-    private static int width = 100;
-    private static boolean[][] grid = new boolean[height][width];
+    private int height = 100;
+    private int width = 100;
+    private boolean[][] grid = new boolean[height][width];
     private Logic logic = new Logic(); // instantiate Logic class
     private int lastMouseX = -1;
     private int lastMouseY = -1;
 
+    public boolean[][] reverseElement(int row, int column){
+        this.grid[row][column] = !grid[row][column];
+        return this.grid;
+    }
     public int getLastMouseX() {
         return lastMouseX;
     }
@@ -43,11 +47,11 @@ public class Renderer {
         this.frame = frame;
     }
 
-    public static int getHeight() {
-        return height;
+    public int getHeight() {
+        return this.height;
     }
 
-    public static int getWidth() {
+    public int getWidth() {
         return width;
     }
 
@@ -60,11 +64,11 @@ public class Renderer {
     }
 
     public boolean[][] getGrid() {
-        return Renderer.grid;
+        return this.grid;
     }
 
     public void setGrid(boolean[][] grid) {
-        Renderer.grid = grid;
+        this.grid = grid;
         frame.repaint();
     }
 

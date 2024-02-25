@@ -1,6 +1,9 @@
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
+/**
+ * MyKeyAdapter is responsible for adding hotkeys to our program.
+ */
 public class MyKeyAdapter extends KeyAdapter{
     private final Renderer renderer;
 
@@ -8,8 +11,12 @@ public class MyKeyAdapter extends KeyAdapter{
         this.renderer = renderer;
     }
     
+    /**
+     * In this method we add hotkeys we want to have,
+     * and assign functionality to them.
+     */
     @Override
-    public void keyPressed(KeyEvent e) {
+    public void keyPressed(KeyEvent e) { 
         if (e.getKeyCode() == KeyEvent.VK_SPACE) {
             toggleGameState();
         }
@@ -27,4 +34,6 @@ public class MyKeyAdapter extends KeyAdapter{
         renderer.setGameState(!renderer.getGameState());
         System.out.println("Game State toggled to: " + renderer.getGameState());
     }
+
+    // TODO - Write CTRL-Q to exit the program.
 }
