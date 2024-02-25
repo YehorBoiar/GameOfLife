@@ -25,3 +25,26 @@ git add <filename>
 git commit -m "Thoughtful message"
 ```
 
+## File structure
+```lua
+src/
+|-- main/
+|   |-- YourMainClass.java
+|
+|-- input/
+|   |-- MyMouseListener.java
+|   |-- MyMouseMotionAdapter.java
+|   |-- MyKeyAdapter.java
+|
+|-- renderer/
+|   |-- Renderer.java
+|
+|-- logic/
+|   |-- Logic.java
+|
+|-- ui/
+|   |-- ButtonPanel.java
+|
+|-- fileio/
+|   |-- LoadSaveManager.java
+```
