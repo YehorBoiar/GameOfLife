@@ -1,7 +1,5 @@
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -19,10 +17,74 @@ public class Renderer {
     private int lastMouseX = -1;
     private int lastMouseY = -1;
 
+
+
+    private Renderer() {
+        frame = new JFrame("Game of Life");
+        configFrame();
+    }
+
+    private void configFrame() {
+        frame.setSize(width * 10, height * 10);
+        frame.getContentPane().setBackground(BLACK);
+
+        frame.addMouseListener(new MyMouseListener(this));
+        frame.addKeyListener(new MyKeyAdapter(this));
+        frame.addMouseMotionListener(new MyMouseMotionAdapter(this));
+
+        frame.add(new MyPanel());
+        frame.setResizable(false);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setVisible(true);
+    }
+
+
+    class MyPanel extends JPanel {
+        public MyPanel() {
+            setBackground(BLACK); // Set the background color to black
+        }
+
+        @Override
+        protected void paintComponent(Graphics g) {
+            super.paintComponent(g);
+            drawSquares(g);
+        }
+    }
+
+
+    public void drawSquares(Graphics g) {
+        for (int i = 0; i < height; i++) {
+            for (int j = 0; j < width; j++) {
+                if (grid[i][j]) {
+                    g.setColor(WHITE);
+                    g.fillRect(j * 10, i * 10, 10, 10);
+                } else {
+                    g.setColor(BLACK);
+                    g.fillRect(j * 10, i * 10, 10, 10);
+                }
+            }
+        }
+    }
+
+    public void updateGrid() {
+        if (gameState) {
+            grid = logic.gridUpdate(grid);
+            frame.repaint();
+        }
+    }
+
+    public static synchronized Renderer getInstance() {
+        if (instance == null) {
+            instance = new Renderer();
+        }
+        return instance;
+    }
+
     public boolean[][] reverseElement(int row, int column){
         this.grid[row][column] = !grid[row][column];
         return this.grid;
     }
+    
     public int getLastMouseX() {
         return lastMouseX;
     }
@@ -70,118 +132,5 @@ public class Renderer {
     public void setGrid(boolean[][] grid) {
         this.grid = grid;
         frame.repaint();
-    }
-
-    private Renderer() {
-        frame = new JFrame("Game of Life");
-        configFrame();
-    }
-
-    private void configFrame() {
-        frame.setSize(width * 10, height * 10);
-        frame.getContentPane().setBackground(BLACK);
-
-        addMouseListeners();
-        frame.addKeyListener(new MyKeyAdapter(this));
-
-        frame.add(new MyPanel());
-        frame.setResizable(false);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setVisible(true);
-    }
-    
-    private void addMouseListeners(){
-        frame.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                handleMouseClick(e);
-            }
-            @Override
-            public void mouseReleased(MouseEvent e) {
-                lastMouseX = -1;
-                lastMouseY = -1;
-            }    
-        });
-
-        frame.addMouseMotionListener(new MouseAdapter() {
-            @Override
-            public void mouseDragged(MouseEvent e) {
-                handleMouseDrag(e);
-            }
-        });
-        
-    }
-    
-    private void handleMouseDrag(MouseEvent e) {
-        int x = e.getX() / 10;
-        int y = (e.getY() - 40) / 10;
-
-        if (x >= 0 && x < width && y >= 0 && y < height) {
-            if (lastMouseX != -1 && lastMouseY != -1) {
-                int deltaX = x - lastMouseX;
-                int deltaY = y - lastMouseY;
-                int steps = Math.max(Math.abs(deltaX), Math.abs(deltaY));
-
-                for (int step = 0; step < steps; step++) {
-                    int stepX = lastMouseX + step * deltaX / steps;
-                    int stepY = lastMouseY + step * deltaY / steps;
-
-                    grid[stepY][stepX] = !grid[stepY][stepX];
-                }
-            }
-
-            lastMouseX = x;
-            lastMouseY = y;
-            frame.repaint(); 
-        }
-    }
-    
-    private void handleMouseClick(MouseEvent e) {
-        int x = e.getX() / 10;
-        int y = (e.getY() - 40) / 10;
-        grid[y][x] = !grid[y][x];
-        System.out.println("Mouse Clicked: " + x + "," + y);
-        frame.repaint(); // Repaint the frame to update the drawing
-    }
-
-    class MyPanel extends JPanel {
-        public MyPanel() {
-            setBackground(BLACK); // Set the background color to black
-        }
-
-        @Override
-        protected void paintComponent(Graphics g) {
-            super.paintComponent(g);
-            drawSquares(g);
-        }
-    }
-
-
-    public void drawSquares(Graphics g) {
-        for (int i = 0; i < height; i++) {
-            for (int j = 0; j < width; j++) {
-                if (grid[i][j]) {
-                    g.setColor(WHITE);
-                    g.fillRect(j * 10, i * 10, 10, 10);
-                } else {
-                    g.setColor(BLACK);
-                    g.fillRect(j * 10, i * 10, 10, 10);
-                }
-            }
-        }
-    }
-
-    public void updateGrid() {
-        if (gameState) {
-            grid = logic.gridUpdate(grid);
-            frame.repaint();
-        }
-    }
-
-    public static synchronized Renderer getInstance() {
-        if (instance == null) {
-            instance = new Renderer();
-        }
-        return instance;
     }
 }
