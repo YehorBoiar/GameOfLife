@@ -33,6 +33,10 @@ public class MyKeyAdapter extends KeyAdapter{
             Load load = new Load();
             load.loadFile();
         }
+        if(e.isControlDown() && e.getKeyCode() == KeyEvent.VK_Q){
+            renderer.getFrame().dispose();
+            System.exit(0);
+        }
     }
 
     private void toggleGameState() {
