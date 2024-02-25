@@ -1,7 +1,5 @@
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JFrame;
@@ -20,6 +18,30 @@ public class Renderer {
     private Logic logic = new Logic(); // instantiate Logic class
     private int lastMouseX = -1;
     private int lastMouseY = -1;
+
+    public int getLastMouseX() {
+        return lastMouseX;
+    }
+
+    public void setLastMouseX(int lastMouseX) {
+        this.lastMouseX = lastMouseX;
+    }
+
+    public int getLastMouseY() {
+        return lastMouseY;
+    }
+
+    public void setLastMouseY(int lastMouseY) {
+        this.lastMouseY = lastMouseY;
+    }
+
+    public JFrame getFrame(){
+        return this.frame;
+    }
+
+    public void setFrame(JFrame frame){
+        this.frame = frame;
+    }
 
     public static int getHeight() {
         return height;
@@ -56,7 +78,7 @@ public class Renderer {
         frame.getContentPane().setBackground(BLACK);
 
         addMouseListeners();
-        addKeyListeners();
+        frame.addKeyListener(new MyKeyAdapter(this));
 
         frame.add(new MyPanel());
         frame.setResizable(false);
@@ -85,6 +107,7 @@ public class Renderer {
         });
         
     }
+    
     private void handleMouseDrag(MouseEvent e) {
         int x = e.getX() / 10;
         int y = (e.getY() - 40) / 10;
@@ -109,28 +132,12 @@ public class Renderer {
         }
     }
     
-    private void addKeyListeners(){
-        frame.addKeyListener(new KeyAdapter() {
-            @Override
-            public void keyPressed(KeyEvent e) {
-                if (e.getKeyCode() == KeyEvent.VK_SPACE) {
-                    toggleGameState();
-                }
-                if (e.isControlDown() && e.getKeyCode() == KeyEvent.VK_S) {
-                    Save save = new Save(grid);
-                    save.SaveToFile();
-                }
-                if (e.isControlDown() && e.getKeyCode() == KeyEvent.VK_O) {
-                    Load load = new Load();
-                    load.loadFile();
-                }
-            }
-        });
-    }
-
-    private void toggleGameState() {
-        gameState = !gameState;
-        System.out.println("Game State toggled to: " + gameState);
+    private void handleMouseClick(MouseEvent e) {
+        int x = e.getX() / 10;
+        int y = (e.getY() - 40) / 10;
+        grid[y][x] = !grid[y][x];
+        System.out.println("Mouse Clicked: " + x + "," + y);
+        frame.repaint(); // Repaint the frame to update the drawing
     }
 
     class MyPanel extends JPanel {
@@ -145,13 +152,6 @@ public class Renderer {
         }
     }
 
-    private void handleMouseClick(MouseEvent e) {
-        int x = e.getX() / 10;
-        int y = (e.getY() - 40) / 10;
-        grid[y][x] = !grid[y][x];
-        System.out.println("Mouse Clicked: " + x + "," + y);
-        frame.repaint(); // Repaint the frame to update the drawing
-    }
 
     public void drawSquares(Graphics g) {
         for (int i = 0; i < height; i++) {
