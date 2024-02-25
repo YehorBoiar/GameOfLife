@@ -2,6 +2,7 @@ package input;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseWheelEvent;
 
 import renderer.Renderer;
 
@@ -49,30 +50,25 @@ public class MyMouseMotionAdapter extends MouseAdapter {
         int y = (int) ((e.getY() - 40) / 10 / renderer.getZoomFactor());
     
         if (x >= 0 && x < renderer.getWidth() && y >= 0 && y < renderer.getHeight()) {
-            if (renderer.getLastMouseX() != -1 && renderer.getLastMouseY() != -1) {
-                int deltaX = x - renderer.getLastMouseX();
-                int deltaY = y - renderer.getLastMouseY();
-                int steps = Math.max(Math.abs(deltaX), Math.abs(deltaY));
-    
-                if (steps == 0) {
-                    return;
-                }
-    
-                for (int step = 0; step <= steps; step++) {
-                    int stepX = renderer.getLastMouseX() + step * deltaX / steps;
-                    int stepY = renderer.getLastMouseY() + step * deltaY / steps;
-    
-                    if (stepX >= 0 && stepX < renderer.getWidth() && stepY >= 0 && stepY < renderer.getHeight()) {
-                        renderer.reverseElement(stepY, stepX);
-                    }
-                }
-            }
-    
+            // Update the grid position directly without calculating steps
+            renderer.reverseElement(y, x);
             renderer.setLastMouseX(x);
             renderer.setLastMouseY(y);
             renderer.getFrame().repaint();
         }
     }
-    
+    /**
+     * Invoked when the mouse wheel is clicked and dragged.
+     *
+     * @param e The MouseWheelEvent representing the mouse wheel click and drag
+     *          event.
+     */
+    @Override
+    public void mouseWheelMoved(MouseWheelEvent e) {
+        // Check if the mouse wheel is clicked and dragged
+        if (e.getModifiersEx() == MouseWheelEvent.BUTTON2_DOWN_MASK) {
+            System.out.println("aboba");
+        }
+    }
 
 }

@@ -34,7 +34,6 @@ public class MyMouseListener extends MouseAdapter {
         // for some reason the never version BUTTON1_DOWN_MASK doesn't work, so I used the older version
         if ((e.getModifiers() & InputEvent.BUTTON1_MASK) == InputEvent.BUTTON1_MASK) {
             handleMouseClick(e);
-            System.out.println("aboba");
         }
     }
 
