@@ -32,7 +32,10 @@ public class MyMouseMotionAdapter extends MouseAdapter {
      */
     @Override
     public void mouseDragged(MouseEvent e) {
-        handleMouseDrag(e);
+        // Check if the right mouse button is pressed (RMB)
+        if ((e.getModifiersEx() & MouseEvent.BUTTON3_DOWN_MASK) != 0) {
+            handleMouseDrag(e);
+        }
     }
 
     /**

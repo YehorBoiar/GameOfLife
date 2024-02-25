@@ -1,5 +1,6 @@
 package input;
 
+import java.awt.event.InputEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -29,7 +30,12 @@ public class MyMouseListener extends MouseAdapter {
      */
     @Override
     public void mouseClicked(MouseEvent e) {
-        handleMouseClick(e);
+        // Check if the left mouse button is pressed (LMB). 
+        // for some reason the never version BUTTON1_DOWN_MASK doesn't work, so I used the older version
+        if ((e.getModifiers() & InputEvent.BUTTON1_MASK) == InputEvent.BUTTON1_MASK) {
+            handleMouseClick(e);
+            System.out.println("aboba");
+        }
     }
 
     /**
