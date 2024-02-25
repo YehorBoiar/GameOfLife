@@ -44,5 +44,4 @@ public class MyKeyAdapter extends KeyAdapter{
         System.out.println("Game State toggled to: " + renderer.getGameState());
     }
 
-    // TODO - Write CTRL-Q to exit the program.
 }

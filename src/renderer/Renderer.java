@@ -7,6 +7,7 @@ import javax.swing.JPanel;
 import input.MyKeyAdapter;
 import input.MyMouseListener;
 import input.MyMouseMotionAdapter;
+import input.ZoomHandler;
 import logic.Logic;
 
 /**
@@ -16,6 +17,7 @@ import logic.Logic;
  * based on user input.
  */
 public class Renderer {
+    private double zoomFactor = 1.0;
     private boolean gameState = false;
     private final Color BLACK = Color.BLACK;
     private final Color WHITE = Color.WHITE;
@@ -48,6 +50,7 @@ public class Renderer {
         frame.addMouseListener(new MyMouseListener(this));
         frame.addKeyListener(new MyKeyAdapter(this));
         frame.addMouseMotionListener(new MyMouseMotionAdapter(this));
+        frame.addMouseWheelListener(new ZoomHandler(this));
 
         frame.add(new MyPanel());
         frame.setResizable(false);
@@ -76,14 +79,19 @@ public class Renderer {
      * @param g The Graphics object used for drawing.
      */
     public void drawSquares(Graphics g) {
+        int squareSize = (int) (10 * zoomFactor);
+        
         for (int i = 0; i < height; i++) {
             for (int j = 0; j < width; j++) {
+                int x = (int) (j * 10 * zoomFactor);
+                int y = (int) (i * 10 * zoomFactor);
+    
                 if (grid[i][j]) {
                     g.setColor(WHITE);
-                    g.fillRect(j * 10, i * 10, 10, 10);
+                    g.fillRect(x, y, squareSize, squareSize);
                 } else {
                     g.setColor(BLACK);
-                    g.fillRect(j * 10, i * 10, 10, 10);
+                    g.fillRect(x, y, squareSize, squareSize);
                 }
             }
         }
@@ -124,6 +132,14 @@ public class Renderer {
         return this.grid;
     }
 
+    public void setZoomFactor(double zoomFactor){
+        this.zoomFactor = zoomFactor;
+    }
+
+    public double getZoomFactor(){
+        return this.zoomFactor;
+    }
+    
     public int getLastMouseX() {
         return lastMouseX;
     }

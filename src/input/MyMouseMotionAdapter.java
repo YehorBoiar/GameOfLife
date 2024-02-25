@@ -1,4 +1,5 @@
 package input;
+
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -6,9 +7,12 @@ import renderer.Renderer;
 
 /**
  * Custom MouseMotionAdapter for handling mouse dragging events in the Renderer.
- * This adapter is responsible for updating the grid based on mouse drag movements.
+ * This adapter is responsible for updating the grid based on mouse drag
+ * movements.
  */
 public class MyMouseMotionAdapter extends MouseAdapter {
+    // TODO - If you don't drag your mouse fast enough, it doesn't drag it.
+
     private final Renderer renderer;
 
     /**
@@ -32,7 +36,8 @@ public class MyMouseMotionAdapter extends MouseAdapter {
     }
 
     /**
-     * Handles the mouse drag event by updating the grid according to the drag movements.
+     * Handles the mouse drag event by updating the grid according to the drag
+     * movements.
      *
      * @param e The MouseEvent representing the mouse drag event.
      */
@@ -46,9 +51,8 @@ public class MyMouseMotionAdapter extends MouseAdapter {
                 int deltaY = y - renderer.getLastMouseY();
                 int steps = Math.max(Math.abs(deltaX), Math.abs(deltaY));
 
-                if(steps == 0){
-                    return;
-                }
+                // Ensure steps is at least 1 to avoid division by zero
+                steps = Math.max(steps, 1);
 
                 for (int step = 0; step <= steps; step++) {
                     int stepX = renderer.getLastMouseX() + step * deltaX / steps;
@@ -65,4 +69,5 @@ public class MyMouseMotionAdapter extends MouseAdapter {
             renderer.getFrame().repaint();
         }
     }
+
 }

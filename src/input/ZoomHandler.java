@@ -17,10 +17,12 @@ public class ZoomHandler implements MouseWheelListener {
         
         if (notches < 0) {
             System.out.println("Mouse wheel moved up");
-            // Handle zoom in or any other action
+            renderer.setZoomFactor(renderer.getZoomFactor()*1.1);
+            renderer.getFrame().repaint();
         } else {
             System.out.println("Mouse wheel moved down");
-            // Handle zoom out or any other action
+            renderer.setZoomFactor(renderer.getZoomFactor()/1.1);
+            renderer.getFrame().repaint();
         }
     }
 }
