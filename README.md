@@ -2,6 +2,9 @@
 
 ## Workflow
 
+Before you start write your code, please, write `git pull` so we don't have as much conflicts as we could.
+
+
 For implementing a new big feature you should create a new branch and do it there.
 
 ```git 
