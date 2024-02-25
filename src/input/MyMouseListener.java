@@ -1,4 +1,5 @@
 package input;
+
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -37,8 +38,9 @@ public class MyMouseListener extends MouseAdapter {
      * @param e The MouseEvent representing the mouse click event.
      */
     private void handleMouseClick(MouseEvent e) {
-        int x = e.getX() / 10;
-        int y = (e.getY() - 40) / 10;
+        int x = (int) (e.getX() / 10 / renderer.getZoomFactor());
+        int y = (int) ((e.getY() - 40) / 10 / renderer.getZoomFactor());
+        
         renderer.reverseElement(y, x);
         System.out.println("Mouse Clicked: " + x + "," + y);
         renderer.getFrame().repaint(); // Repaint the frame to update the drawing

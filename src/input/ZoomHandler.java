@@ -14,15 +14,22 @@ public class ZoomHandler implements MouseWheelListener {
     @Override
     public void mouseWheelMoved(MouseWheelEvent e) {
         int notches = e.getWheelRotation();
+
+        double newZoomFactor;
         
         if (notches < 0) {
-            System.out.println("Mouse wheel moved up");
-            renderer.setZoomFactor(renderer.getZoomFactor()*1.1);
-            renderer.getFrame().repaint();
+            // Zoom in
+            newZoomFactor = renderer.getZoomFactor() * 1.1;
         } else {
-            System.out.println("Mouse wheel moved down");
-            renderer.setZoomFactor(renderer.getZoomFactor()/1.1);
-            renderer.getFrame().repaint();
+            // Zoom out
+            newZoomFactor = renderer.getZoomFactor() / 1.1;
         }
+
+        // Limit the zoom factor to the minimum value
+        newZoomFactor = Math.max(1.0, newZoomFactor);
+
+        // Update the zoom factor and repaint
+        renderer.setZoomFactor(newZoomFactor);
+        renderer.getFrame().repaint();
     }
 }
