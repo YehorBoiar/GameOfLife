@@ -50,7 +50,7 @@ public class MyKeyAdapter extends KeyAdapter {
             downPan();
         }
         if (keyCode == KeyEvent.VK_UP) {
-            leftPan();
+            upPan();
         }
     }
 
@@ -111,6 +111,23 @@ public class MyKeyAdapter extends KeyAdapter {
         } else {
             // If moving out of bounds, set the pan offset to the maximum allowed
             renderer.setPanOffsetY(maxPanOffsetY);
+            renderer.getFrame().repaint();
+        }
+    }
+
+    private void upPan() {
+        int move = 10;
+    
+        // Calculate the new pan offset
+        int newPanOffsetY = renderer.getPanOffsetY() - move;
+    
+        // Check if the new pan offset is within bounds
+        if (newPanOffsetY >= 0) {
+            renderer.setPanOffsetY(newPanOffsetY);
+            renderer.getFrame().repaint();
+        } else {
+            // If moving out of bounds, set the pan offset to the minimum allowed
+            renderer.setPanOffsetY(0);
             renderer.getFrame().repaint();
         }
     }
