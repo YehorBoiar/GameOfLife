@@ -44,8 +44,8 @@ public class MyMouseMotionAdapter extends MouseAdapter {
      */
     private void handleMouseDrag(MouseEvent e) {
         int squareSize = (int) (10 * renderer.getZoomFactor());
-        int x = (int) Math.ceil((e.getX() + renderer.getPanOffsetX()) / squareSize);
-        int y = (int) Math.ceil((e.getY() + renderer.getPanOffsetY() - 40) / squareSize);
+        int x = (int) ((e.getX() + renderer.getPanOffsetX()) / squareSize);
+        int y = (int) ((e.getY() + renderer.getPanOffsetY() - 40) / squareSize);
     
         // Ensure the adjusted coordinates are within valid grid bounds
         x = Math.min(Math.max(0, x), renderer.getWidth() - 1);

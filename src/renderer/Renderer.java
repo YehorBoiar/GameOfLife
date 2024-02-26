@@ -17,6 +17,7 @@ import logic.Logic;
  * It manages the JFrame, drawing squares on the panel, and updating the grid
  * based on user input.
  */
+// TODO - create 2 sliders so we can move through grid more efficiently.
 public class Renderer {
     private double zoomFactor = 1.0;
     private boolean gameState = false;
@@ -90,8 +91,8 @@ public class Renderer {
     
         for (int i = 0; i < height; i++) {
             for (int j = 0; j < width; j++) {
-                int x = (int) (j * 10 * zoomFactor - panOffsetX);
-                int y = (int) (i * 10 * zoomFactor - panOffsetY);
+                int x = (int) (j * squareSize - panOffsetX);
+                int y = (int) (i * squareSize - panOffsetY);
     
                 if (grid[i][j]) {
                     g.setColor(WHITE);
