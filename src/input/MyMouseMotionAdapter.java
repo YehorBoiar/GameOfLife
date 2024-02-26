@@ -2,7 +2,6 @@ package input;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseWheelEvent;
 
 import renderer.Renderer;
 
@@ -12,8 +11,6 @@ import renderer.Renderer;
  * movements.
  */
 public class MyMouseMotionAdapter extends MouseAdapter {
-    // TODO - If you don't drag your mouse fast enough, it doesn't drag it.
-
     private final Renderer renderer;
 
     /**
@@ -33,12 +30,12 @@ public class MyMouseMotionAdapter extends MouseAdapter {
      */
     @Override
     public void mouseDragged(MouseEvent e) {
-        // Check if the right mouse button is pressed (RMB)
-        if ((e.getModifiersEx() & MouseEvent.BUTTON3_DOWN_MASK) != 0) {
+        // Check if the left mouse button is pressed (LMB)
+        if ((e.getModifiersEx() & MouseEvent.BUTTON1_DOWN_MASK) != 0) {
             handleMouseDrag(e);
         }
     }
-
+    
     /**
      * Handles the mouse drag event by updating the grid according to the drag
      * movements.
@@ -48,7 +45,7 @@ public class MyMouseMotionAdapter extends MouseAdapter {
     private void handleMouseDrag(MouseEvent e) {
         int x = (int) (e.getX() / 10 / renderer.getZoomFactor());
         int y = (int) ((e.getY() - 40) / 10 / renderer.getZoomFactor());
-    
+        
         if (x >= 0 && x < renderer.getWidth() && y >= 0 && y < renderer.getHeight()) {
             // Update the grid position directly without calculating steps
             renderer.reverseElement(y, x);
@@ -57,18 +54,6 @@ public class MyMouseMotionAdapter extends MouseAdapter {
             renderer.getFrame().repaint();
         }
     }
-    /**
-     * Invoked when the mouse wheel is clicked and dragged.
-     *
-     * @param e The MouseWheelEvent representing the mouse wheel click and drag
-     *          event.
-     */
-    @Override
-    public void mouseWheelMoved(MouseWheelEvent e) {
-        // Check if the mouse wheel is clicked and dragged
-        if (e.getModifiersEx() == MouseWheelEvent.BUTTON2_DOWN_MASK) {
-            System.out.println("aboba");
-        }
-    }
+
 
 }

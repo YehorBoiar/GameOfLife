@@ -1,11 +1,11 @@
 package input;
-
-import java.awt.event.MouseWheelListener;
 import java.awt.event.MouseWheelEvent;
+import java.awt.event.MouseWheelListener;
+
 import renderer.Renderer;
 
 /**
- * Custom MouseWheelListener for handling zooming events in the Renderer.
+ * Custom MouseAdapter for handling zooming events in the Renderer.
  * This listener allows zooming in and out based on the mouse wheel rotation.
  */
 public class ZoomHandler implements MouseWheelListener {
@@ -20,10 +20,10 @@ public class ZoomHandler implements MouseWheelListener {
         this.renderer = renderer;
     }
 
+
     /**
      * Invoked when the mouse wheel is moved.
      * Adjusts the zoom factor based on the mouse wheel rotation to zoom in or out.
-     *
      * @param e The MouseWheelEvent representing the mouse wheel movement.
      */
     @Override
@@ -47,4 +47,5 @@ public class ZoomHandler implements MouseWheelListener {
         renderer.setZoomFactor(newZoomFactor);
         renderer.getFrame().repaint();
     }
+
 }

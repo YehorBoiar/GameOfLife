@@ -7,6 +7,7 @@ import javax.swing.JPanel;
 import input.MyKeyAdapter;
 import input.MyMouseListener;
 import input.MyMouseMotionAdapter;
+import input.PanningHandler;
 import input.ZoomHandler;
 import logic.Logic;
 
@@ -29,6 +30,7 @@ public class Renderer {
     private Logic logic = new Logic(); // instantiate Logic class
     private int lastMouseX = -1;
     private int lastMouseY = -1;
+    
 
     /**
      * Private constructor to create a new instance of the Renderer class.
@@ -44,12 +46,14 @@ public class Renderer {
      * event listeners.
      */
     private void configFrame() {
+        frame.pack();
         frame.setSize(width * 10, height * 10);
         frame.getContentPane().setBackground(BLACK);
 
         frame.addMouseListener(new MyMouseListener(this));
         frame.addKeyListener(new MyKeyAdapter(this));
         frame.addMouseMotionListener(new MyMouseMotionAdapter(this));
+        frame.addMouseMotionListener(new PanningHandler(this));
         frame.addMouseWheelListener(new ZoomHandler(this));
 
         frame.add(new MyPanel());
@@ -58,6 +62,8 @@ public class Renderer {
         frame.setVisible(true);
     }
 
+
+    
     /**
      * Inner class representing the drawing panel inside the JFrame.
      */
