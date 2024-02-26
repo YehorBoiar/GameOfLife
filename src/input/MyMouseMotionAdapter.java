@@ -43,10 +43,15 @@ public class MyMouseMotionAdapter extends MouseAdapter {
      * @param e The MouseEvent representing the mouse drag event.
      */
     private void handleMouseDrag(MouseEvent e) {
-        int x = (int) (e.getX() / 10 / renderer.getZoomFactor());
-        int y = (int) ((e.getY() - 40) / 10 / renderer.getZoomFactor());
-        
-        if (x >= 0 && x < renderer.getWidth() && y >= 0 && y < renderer.getHeight()) {
+        int squareSize = (int) (10 * renderer.getZoomFactor());
+        int x = (int) ((e.getX() + renderer.getPanOffsetX()) / squareSize);
+        int y = (int) ((e.getY() + renderer.getPanOffsetY() - 40) / squareSize);
+    
+        // Ensure the adjusted coordinates are within valid grid bounds
+        x = Math.min(Math.max(0, x), renderer.getWidth() - 1);
+        y = Math.min(Math.max(0, y), renderer.getHeight() - 1);
+        // Check if we try to draw on the side.
+        if (x >= 0 && x < renderer.getWidth() && y >= 0 && y < renderer.getHeight()) { 
             // Update the grid position directly without calculating steps
             renderer.reverseElement(y, x);
             renderer.setLastMouseX(x);

@@ -43,9 +43,15 @@ public class MyMouseListener extends MouseAdapter {
      * @param e The MouseEvent representing the mouse click event.
      */
     private void handleMouseClick(MouseEvent e) {
-        int x = (int) (e.getX() / 10 / renderer.getZoomFactor());
-        int y = (int) ((e.getY() - 40) / 10 / renderer.getZoomFactor());
-        
+        int squareSize = (int) (10 * renderer.getZoomFactor());
+    
+        int x = (int) ((e.getX() + renderer.getPanOffsetX()) / squareSize);
+        int y = (int) ((e.getY() + renderer.getPanOffsetY() - 40) / squareSize);
+    
+        // Clamp the indices to valid grid bounds
+        x = Math.min(Math.max(0, x), renderer.getWidth() - 1);
+        y = Math.min(Math.max(0, y), renderer.getHeight() - 1);
+    
         renderer.reverseElement(y, x);
         System.out.println("Mouse Clicked: " + x + "," + y);
         renderer.getFrame().repaint(); // Repaint the frame to update the drawing

@@ -87,11 +87,11 @@ public class Renderer {
      */
     public void drawSquares(Graphics g) {
         int squareSize = (int) (10 * zoomFactor);
-        
+    
         for (int i = 0; i < height; i++) {
             for (int j = 0; j < width; j++) {
-                int x = (int) (j * 10 * zoomFactor) - panOffsetX;
-                int y = (int) (i * 10 * zoomFactor) - panOffsetY;
+                int x = (int) (j * 10 * zoomFactor - panOffsetX);
+                int y = (int) (i * 10 * zoomFactor - panOffsetY);
     
                 if (grid[i][j]) {
                     g.setColor(WHITE);
@@ -103,6 +103,7 @@ public class Renderer {
             }
         }
     }
+
 
     /** 
      * Updates the grid based on the Game of Life rules.
