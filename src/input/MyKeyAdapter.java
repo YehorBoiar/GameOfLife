@@ -42,7 +42,28 @@ public class MyKeyAdapter extends KeyAdapter{
         if(keyCode == KeyEvent.VK_RIGHT){
             rightPan();
         }
+        if(keyCode == KeyEvent.VK_LEFT){
+            leftPan();
+        }
     }
+
+    private void leftPan() {
+        int move = 10;
+    
+        // Calculate the new pan offset
+        int newPanOffsetX = renderer.getPanOffsetX() - move;
+    
+        // Check if the new pan offset is within bounds
+        if (newPanOffsetX >= 0) {
+            renderer.setPanOffsetX(newPanOffsetX);
+            renderer.getFrame().repaint();
+        } else {
+            // If moving out of bounds, set the pan offset to the minimum allowed
+            renderer.setPanOffsetX(0);
+            renderer.getFrame().repaint();
+        }
+    }
+
     private void rightPan() {
         int move = 10;
     
@@ -62,6 +83,8 @@ public class MyKeyAdapter extends KeyAdapter{
             renderer.getFrame().repaint();
         }
     }
+
+    
     
     
     private void toggleGameState() {
