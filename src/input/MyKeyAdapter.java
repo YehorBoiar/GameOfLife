@@ -11,7 +11,8 @@ import renderer.Renderer;
  * MyKeyAdapter is responsible for adding hotkeys to our program.
  */
 public class MyKeyAdapter extends KeyAdapter {
-    private final Renderer renderer;
+    private Renderer renderer;
+    private final int MOVE = 50; 
 
     public MyKeyAdapter(Renderer renderer) {
         this.renderer = renderer;
@@ -55,10 +56,10 @@ public class MyKeyAdapter extends KeyAdapter {
     }
 
     private void leftPan() {
-        int move = 10;
+        
 
         // Calculate the new pan offset
-        int newPanOffsetX = renderer.getPanOffsetX() - move;
+        int newPanOffsetX = renderer.getPanOffsetX() - MOVE;
 
         // Check if the new pan offset is within bounds
         if (newPanOffsetX >= 0) {
@@ -72,7 +73,7 @@ public class MyKeyAdapter extends KeyAdapter {
     }
 
     private void rightPan() {
-        int move = 10;
+        
 
         // Calculate the maximum pan offset to prevent panning beyond the rightmost edge
         // of the grid
@@ -80,7 +81,7 @@ public class MyKeyAdapter extends KeyAdapter {
                 - renderer.getFrame().getWidth());
 
         // Calculate the new pan offset
-        int newPanOffsetX = renderer.getPanOffsetX() + move;
+        int newPanOffsetX = renderer.getPanOffsetX() + MOVE;
 
         // Check if the new pan offset is within bounds
         if (newPanOffsetX <= maxPanOffsetX) {
@@ -94,15 +95,13 @@ public class MyKeyAdapter extends KeyAdapter {
     }
 
     private void downPan() {
-        int move = 10;
-
         // Calculate the maximum pan offset to prevent panning beyond the bottom edge of
         // the grid
         int maxPanOffsetY = (int) ((renderer.getHeight() * 10 * renderer.getZoomFactor())
                 - renderer.getFrame().getHeight());
 
         // Calculate the new pan offset
-        int newPanOffsetY = renderer.getPanOffsetY() + move;
+        int newPanOffsetY = renderer.getPanOffsetY() + MOVE;
 
         // Check if the new pan offset is within bounds
         if (newPanOffsetY <= maxPanOffsetY) {
@@ -116,10 +115,10 @@ public class MyKeyAdapter extends KeyAdapter {
     }
 
     private void upPan() {
-        int move = 10;
+        
     
         // Calculate the new pan offset
-        int newPanOffsetY = renderer.getPanOffsetY() - move;
+        int newPanOffsetY = renderer.getPanOffsetY() - MOVE;
     
         // Check if the new pan offset is within bounds
         if (newPanOffsetY >= 0) {
