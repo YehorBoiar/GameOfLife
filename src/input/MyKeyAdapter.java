@@ -1,4 +1,5 @@
 package input;
+
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
@@ -9,19 +10,19 @@ import renderer.Renderer;
 /**
  * MyKeyAdapter is responsible for adding hotkeys to our program.
  */
-public class MyKeyAdapter extends KeyAdapter{
+public class MyKeyAdapter extends KeyAdapter {
     private final Renderer renderer;
 
     public MyKeyAdapter(Renderer renderer) {
         this.renderer = renderer;
     }
-    
+
     /**
      * In this method we add hotkeys we want to have,
      * and assign functionality to them.
      */
     @Override
-    public void keyPressed(KeyEvent e) { 
+    public void keyPressed(KeyEvent e) {
         int keyCode = e.getKeyCode();
 
         if (keyCode == KeyEvent.VK_SPACE) {
@@ -35,24 +36,30 @@ public class MyKeyAdapter extends KeyAdapter{
             Load load = new Load();
             load.loadFile();
         }
-        if(e.isControlDown() && keyCode == KeyEvent.VK_Q){
+        if (e.isControlDown() && keyCode == KeyEvent.VK_Q) {
             renderer.getFrame().dispose();
             System.exit(0);
         }
-        if(keyCode == KeyEvent.VK_RIGHT){
+        if (keyCode == KeyEvent.VK_RIGHT) {
             rightPan();
         }
-        if(keyCode == KeyEvent.VK_LEFT){
+        if (keyCode == KeyEvent.VK_LEFT) {
+            leftPan();
+        }
+        if (keyCode == KeyEvent.VK_DOWN) {
+            downPan();
+        }
+        if (keyCode == KeyEvent.VK_UP) {
             leftPan();
         }
     }
 
     private void leftPan() {
         int move = 10;
-    
+
         // Calculate the new pan offset
         int newPanOffsetX = renderer.getPanOffsetX() - move;
-    
+
         // Check if the new pan offset is within bounds
         if (newPanOffsetX >= 0) {
             renderer.setPanOffsetX(newPanOffsetX);
@@ -66,13 +73,15 @@ public class MyKeyAdapter extends KeyAdapter{
 
     private void rightPan() {
         int move = 10;
-    
-        // Calculate the maximum pan offset to prevent panning beyond the rightmost edge of the grid
-        int maxPanOffsetX = (int) ((renderer.getWidth() * 10 * renderer.getZoomFactor()) - renderer.getFrame().getWidth());
-    
+
+        // Calculate the maximum pan offset to prevent panning beyond the rightmost edge
+        // of the grid
+        int maxPanOffsetX = (int) ((renderer.getWidth() * 10 * renderer.getZoomFactor())
+                - renderer.getFrame().getWidth());
+
         // Calculate the new pan offset
         int newPanOffsetX = renderer.getPanOffsetX() + move;
-    
+
         // Check if the new pan offset is within bounds
         if (newPanOffsetX <= maxPanOffsetX) {
             renderer.setPanOffsetX(newPanOffsetX);
@@ -84,9 +93,28 @@ public class MyKeyAdapter extends KeyAdapter{
         }
     }
 
-    
-    
-    
+    private void downPan() {
+        int move = 10;
+
+        // Calculate the maximum pan offset to prevent panning beyond the bottom edge of
+        // the grid
+        int maxPanOffsetY = (int) ((renderer.getHeight() * 10 * renderer.getZoomFactor())
+                - renderer.getFrame().getHeight());
+
+        // Calculate the new pan offset
+        int newPanOffsetY = renderer.getPanOffsetY() + move;
+
+        // Check if the new pan offset is within bounds
+        if (newPanOffsetY <= maxPanOffsetY) {
+            renderer.setPanOffsetY(newPanOffsetY);
+            renderer.getFrame().repaint();
+        } else {
+            // If moving out of bounds, set the pan offset to the maximum allowed
+            renderer.setPanOffsetY(maxPanOffsetY);
+            renderer.getFrame().repaint();
+        }
+    }
+
     private void toggleGameState() {
         renderer.setGameState(!renderer.getGameState());
         System.out.println("Game State toggled to: " + renderer.getGameState());

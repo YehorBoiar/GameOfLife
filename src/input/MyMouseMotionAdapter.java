@@ -59,6 +59,6 @@ public class MyMouseMotionAdapter extends MouseAdapter {
             renderer.getFrame().repaint();
         }
     }
-
+    
 
 }
