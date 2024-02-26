@@ -17,7 +17,6 @@ import logic.Logic;
  * It manages the JFrame, drawing squares on the panel, and updating the grid
  * based on user input.
  */
-// TODO - create 2 sliders so we can move through grid more efficiently.
 public class Renderer {
     private double zoomFactor = 1.0;
     private boolean gameState = false;
@@ -56,8 +55,7 @@ public class Renderer {
         frame.addMouseListener(new MyMouseListener(this));
         frame.addKeyListener(new MyKeyAdapter(this));
         frame.addMouseMotionListener(new MyMouseMotionAdapter(this));
-        // frame.addMouseMotionListener(new PanningHandler(this)); - Leave untill the
-        // best times
+        frame.addMouseMotionListener(new PanningHandler(this)); // TODO - make it work
         frame.addMouseWheelListener(new ZoomHandler(this));
 
         frame.add(new MyPanel());
