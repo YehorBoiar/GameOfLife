@@ -25,7 +25,7 @@ public class Renderer {
     private final Color WHITE = Color.WHITE;
     private JFrame frame;
     private static Renderer instance;
-    private int height = 100;
+    private int height = 100; // TODO - Handle the case when our grid becomes very large (e.g 1000x1000)
     private int width = 100;
     private boolean[][] grid = new boolean[height][width];
     private Logic logic = new Logic(); // instantiate Logic class
@@ -33,6 +33,7 @@ public class Renderer {
     private int lastMouseY = -1;
     private int panOffsetX = 0;
     private int panOffsetY = 0;
+
 
     /**
      * Private constructor to create a new instance of the Renderer class.
@@ -55,7 +56,8 @@ public class Renderer {
         frame.addMouseListener(new MyMouseListener(this));
         frame.addKeyListener(new MyKeyAdapter(this));
         frame.addMouseMotionListener(new MyMouseMotionAdapter(this));
-        // frame.addMouseMotionListener(new PanningHandler(this)); - Leave untill the best times
+        // frame.addMouseMotionListener(new PanningHandler(this)); - Leave untill the
+        // best times
         frame.addMouseWheelListener(new ZoomHandler(this));
 
         frame.add(new MyPanel());
@@ -65,7 +67,7 @@ public class Renderer {
     }
 
 
-    
+
     /**
      * Inner class representing the drawing panel inside the JFrame.
      */
@@ -88,12 +90,12 @@ public class Renderer {
      */
     public void drawSquares(Graphics g) {
         int squareSize = (int) (10 * zoomFactor);
-    
+
         for (int i = 0; i < height; i++) {
             for (int j = 0; j < width; j++) {
                 int x = (int) (j * squareSize - panOffsetX);
                 int y = (int) (i * squareSize - panOffsetY);
-    
+
                 if (grid[i][j]) {
                     g.setColor(WHITE);
                     g.fillRect(x, y, squareSize, squareSize);
@@ -105,8 +107,7 @@ public class Renderer {
         }
     }
 
-
-    /** 
+    /**
      * Updates the grid based on the Game of Life rules.
      * Repaints the frame to reflect the changes.
      */
@@ -119,6 +120,7 @@ public class Renderer {
 
     /**
      * Retrieves the singleton instance of the Renderer class.
+     * 
      * @return The Renderer instance.
      */
     public static synchronized Renderer getInstance() {
@@ -141,14 +143,14 @@ public class Renderer {
         return this.grid;
     }
 
-    public void setZoomFactor(double zoomFactor){
+    public void setZoomFactor(double zoomFactor) {
         this.zoomFactor = zoomFactor;
     }
 
-    public double getZoomFactor(){
+    public double getZoomFactor() {
         return this.zoomFactor;
     }
-    
+
     public int getPanOffsetX() {
         return panOffsetX;
     }
