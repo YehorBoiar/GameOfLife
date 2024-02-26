@@ -30,7 +30,8 @@ public class Renderer {
     private Logic logic = new Logic(); // instantiate Logic class
     private int lastMouseX = -1;
     private int lastMouseY = -1;
-    
+    private int panOffsetX = 0;
+    private int panOffsetY = 0;
 
     /**
      * Private constructor to create a new instance of the Renderer class.
@@ -89,8 +90,8 @@ public class Renderer {
         
         for (int i = 0; i < height; i++) {
             for (int j = 0; j < width; j++) {
-                int x = (int) (j * 10 * zoomFactor);
-                int y = (int) (i * 10 * zoomFactor);
+                int x = (int) (j * 10 * zoomFactor) - panOffsetX;
+                int y = (int) (i * 10 * zoomFactor) - panOffsetY;
     
                 if (grid[i][j]) {
                     g.setColor(WHITE);
@@ -103,7 +104,7 @@ public class Renderer {
         }
     }
 
-    /**
+    /** 
      * Updates the grid based on the Game of Life rules.
      * Repaints the frame to reflect the changes.
      */
@@ -146,6 +147,22 @@ public class Renderer {
         return this.zoomFactor;
     }
     
+    public int getPanOffsetX() {
+        return panOffsetX;
+    }
+
+    public void setPanOffsetX(int panOffsetX) {
+        this.panOffsetX = panOffsetX;
+    }
+
+    public int getPanOffsetY() {
+        return panOffsetY;
+    }
+
+    public void setPanOffsetY(int panOffsetY) {
+        this.panOffsetY = panOffsetY;
+    }
+
     public int getLastMouseX() {
         return lastMouseX;
     }

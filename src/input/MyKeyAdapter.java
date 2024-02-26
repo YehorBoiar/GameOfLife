@@ -22,23 +22,39 @@ public class MyKeyAdapter extends KeyAdapter{
      */
     @Override
     public void keyPressed(KeyEvent e) { 
-        if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+        int keyCode = e.getKeyCode();
+
+        if (keyCode == KeyEvent.VK_SPACE) {
             toggleGameState();
         }
-        if (e.isControlDown() && e.getKeyCode() == KeyEvent.VK_S) {
+        if (e.isControlDown() && keyCode == KeyEvent.VK_S) {
             Save save = new Save(renderer.getGrid());
             save.SaveToFile();
         }
-        if (e.isControlDown() && e.getKeyCode() == KeyEvent.VK_O) {
+        if (e.isControlDown() && keyCode == KeyEvent.VK_O) {
             Load load = new Load();
             load.loadFile();
         }
-        if(e.isControlDown() && e.getKeyCode() == KeyEvent.VK_Q){
+        if(e.isControlDown() && keyCode == KeyEvent.VK_Q){
             renderer.getFrame().dispose();
             System.exit(0);
         }
+        if(keyCode == KeyEvent.VK_RIGHT){
+            rightPan();
+        }
     }
 
+    private void rightPan(){
+        int panOffsetX = renderer.getPanOffsetX();
+        int move = 10;
+        // if ((panOffsetX + move) > renderer.getWidth()*renderer.getZoomFactor()) {
+        //     return;
+        // }
+
+        renderer.setPanOffsetX(panOffsetX+move);
+        renderer.getFrame().repaint(); 
+    }
+    
     private void toggleGameState() {
         renderer.setGameState(!renderer.getGameState());
         System.out.println("Game State toggled to: " + renderer.getGameState());
