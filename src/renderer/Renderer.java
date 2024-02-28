@@ -7,6 +7,8 @@ import javax.swing.JPanel;
 import input.MyKeyAdapter;
 import input.MyMouseListener;
 import input.MyMouseMotionAdapter;
+import input.PanningHandler;
+import input.ZoomHandler;
 import logic.Logic;
 
 /**
@@ -16,17 +18,21 @@ import logic.Logic;
  * based on user input.
  */
 public class Renderer {
+    private double zoomFactor = 1.0;
     private boolean gameState = false;
     private final Color BLACK = Color.BLACK;
     private final Color WHITE = Color.WHITE;
     private JFrame frame;
     private static Renderer instance;
-    private int height = 100;
+    private int height = 100; // TODO - Handle the case when our grid becomes very large (e.g 1000x1000)
     private int width = 100;
     private boolean[][] grid = new boolean[height][width];
     private Logic logic = new Logic(); // instantiate Logic class
     private int lastMouseX = -1;
     private int lastMouseY = -1;
+    private int panOffsetX = 0;
+    private int panOffsetY = 0;
+
 
     /**
      * Private constructor to create a new instance of the Renderer class.
@@ -42,18 +48,23 @@ public class Renderer {
      * event listeners.
      */
     private void configFrame() {
+        frame.pack();
         frame.setSize(width * 10, height * 10);
         frame.getContentPane().setBackground(BLACK);
 
         frame.addMouseListener(new MyMouseListener(this));
         frame.addKeyListener(new MyKeyAdapter(this));
         frame.addMouseMotionListener(new MyMouseMotionAdapter(this));
+        frame.addMouseMotionListener(new PanningHandler(this)); 
+        frame.addMouseWheelListener(new ZoomHandler(this));
 
         frame.add(new MyPanel());
         frame.setResizable(false);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
     }
+
+
 
     /**
      * Inner class representing the drawing panel inside the JFrame.
@@ -76,14 +87,19 @@ public class Renderer {
      * @param g The Graphics object used for drawing.
      */
     public void drawSquares(Graphics g) {
+        int squareSize = (int) (10 * zoomFactor);
+
         for (int i = 0; i < height; i++) {
             for (int j = 0; j < width; j++) {
+                int x = (int) (j * squareSize - panOffsetX);
+                int y = (int) (i * squareSize - panOffsetY);
+
                 if (grid[i][j]) {
                     g.setColor(WHITE);
-                    g.fillRect(j * 10, i * 10, 10, 10);
+                    g.fillRect(x, y, squareSize, squareSize);
                 } else {
                     g.setColor(BLACK);
-                    g.fillRect(j * 10, i * 10, 10, 10);
+                    g.fillRect(x, y, squareSize, squareSize);
                 }
             }
         }
@@ -102,6 +118,7 @@ public class Renderer {
 
     /**
      * Retrieves the singleton instance of the Renderer class.
+     * 
      * @return The Renderer instance.
      */
     public static synchronized Renderer getInstance() {
@@ -122,6 +139,30 @@ public class Renderer {
     public boolean[][] reverseElement(int row, int column) {
         this.grid[row][column] = !grid[row][column];
         return this.grid;
+    }
+
+    public void setZoomFactor(double zoomFactor) {
+        this.zoomFactor = zoomFactor;
+    }
+
+    public double getZoomFactor() {
+        return this.zoomFactor;
+    }
+
+    public int getPanOffsetX() {
+        return panOffsetX;
+    }
+
+    public void setPanOffsetX(int panOffsetX) {
+        this.panOffsetX = panOffsetX;
+    }
+
+    public int getPanOffsetY() {
+        return panOffsetY;
+    }
+
+    public void setPanOffsetY(int panOffsetY) {
+        this.panOffsetY = panOffsetY;
     }
 
     public int getLastMouseX() {

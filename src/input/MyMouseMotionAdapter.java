@@ -1,12 +1,16 @@
 package input;
+
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+
+import javax.swing.SwingUtilities;
 
 import renderer.Renderer;
 
 /**
  * Custom MouseMotionAdapter for handling mouse dragging events in the Renderer.
- * This adapter is responsible for updating the grid based on mouse drag movements.
+ * This adapter is responsible for updating the grid based on mouse drag
+ * movements.
  */
 public class MyMouseMotionAdapter extends MouseAdapter {
     private final Renderer renderer;
@@ -28,41 +32,38 @@ public class MyMouseMotionAdapter extends MouseAdapter {
      */
     @Override
     public void mouseDragged(MouseEvent e) {
-        handleMouseDrag(e);
+        // Check if the left mouse button is pressed (LMB)
+        if ((e.getModifiersEx() & MouseEvent.BUTTON1_DOWN_MASK) != 0) {
+            handleMouseDrag(e);
+        }
     }
-
+    
     /**
-     * Handles the mouse drag event by updating the grid according to the drag movements.
+     * Handles the mouse drag event by updating the grid according to the drag
+     * movements.
      *
      * @param e The MouseEvent representing the mouse drag event.
      */
     private void handleMouseDrag(MouseEvent e) {
-        int x = e.getX() / 10;
-        int y = (e.getY() - 40) / 10;
-
-        if (x >= 0 && x < renderer.getWidth() && y >= 0 && y < renderer.getHeight()) {
-            if (renderer.getLastMouseX() != -1 && renderer.getLastMouseY() != -1) {
-                int deltaX = x - renderer.getLastMouseX();
-                int deltaY = y - renderer.getLastMouseY();
-                int steps = Math.max(Math.abs(deltaX), Math.abs(deltaY));
-
-                if(steps == 0){
-                    return;
-                }
-
-                for (int step = 0; step <= steps; step++) {
-                    int stepX = renderer.getLastMouseX() + step * deltaX / steps;
-                    int stepY = renderer.getLastMouseY() + step * deltaY / steps;
-
-                    if (stepX >= 0 && stepX < renderer.getWidth() && stepY >= 0 && stepY < renderer.getHeight()) {
-                        renderer.reverseElement(stepY, stepX);
-                    }
-                }
+        if (SwingUtilities.isLeftMouseButton(e)) {
+            int squareSize = (int) (10 * renderer.getZoomFactor());
+            int x = (int) ((e.getX() + renderer.getPanOffsetX()) / squareSize);
+            int y = (int) ((e.getY() + renderer.getPanOffsetY() - 40) / squareSize);
+        
+            // Ensure the adjusted coordinates are within valid grid bounds
+            x = Math.min(Math.max(0, x), renderer.getWidth() - 1);
+            y = Math.min(Math.max(0, y), renderer.getHeight() - 1);
+            // Check if we try to draw on the side.
+            if (x >= 0 && x < renderer.getWidth() && y >= 0 && y < renderer.getHeight()) { 
+                // Update the grid position directly without calculating steps
+                renderer.reverseElement(y, x);
+                renderer.setLastMouseX(x);
+                renderer.setLastMouseY(y);
+                renderer.getFrame().repaint();
             }
 
-            renderer.setLastMouseX(x);
-            renderer.setLastMouseY(y);
-            renderer.getFrame().repaint();
         }
     }
+    
+
 }
