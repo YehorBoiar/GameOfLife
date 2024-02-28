@@ -3,6 +3,8 @@ package input;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+import javax.swing.SwingUtilities;
+
 import renderer.Renderer;
 
 /**
@@ -43,20 +45,23 @@ public class MyMouseMotionAdapter extends MouseAdapter {
      * @param e The MouseEvent representing the mouse drag event.
      */
     private void handleMouseDrag(MouseEvent e) {
-        int squareSize = (int) (10 * renderer.getZoomFactor());
-        int x = (int) ((e.getX() + renderer.getPanOffsetX()) / squareSize);
-        int y = (int) ((e.getY() + renderer.getPanOffsetY() - 40) / squareSize);
-    
-        // Ensure the adjusted coordinates are within valid grid bounds
-        x = Math.min(Math.max(0, x), renderer.getWidth() - 1);
-        y = Math.min(Math.max(0, y), renderer.getHeight() - 1);
-        // Check if we try to draw on the side.
-        if (x >= 0 && x < renderer.getWidth() && y >= 0 && y < renderer.getHeight()) { 
-            // Update the grid position directly without calculating steps
-            renderer.reverseElement(y, x);
-            renderer.setLastMouseX(x);
-            renderer.setLastMouseY(y);
-            renderer.getFrame().repaint();
+        if (SwingUtilities.isLeftMouseButton(e)) {
+            int squareSize = (int) (10 * renderer.getZoomFactor());
+            int x = (int) ((e.getX() + renderer.getPanOffsetX()) / squareSize);
+            int y = (int) ((e.getY() + renderer.getPanOffsetY() - 40) / squareSize);
+        
+            // Ensure the adjusted coordinates are within valid grid bounds
+            x = Math.min(Math.max(0, x), renderer.getWidth() - 1);
+            y = Math.min(Math.max(0, y), renderer.getHeight() - 1);
+            // Check if we try to draw on the side.
+            if (x >= 0 && x < renderer.getWidth() && y >= 0 && y < renderer.getHeight()) { 
+                // Update the grid position directly without calculating steps
+                renderer.reverseElement(y, x);
+                renderer.setLastMouseX(x);
+                renderer.setLastMouseY(y);
+                renderer.getFrame().repaint();
+            }
+
         }
     }
     

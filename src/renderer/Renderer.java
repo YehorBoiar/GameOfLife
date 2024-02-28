@@ -55,7 +55,7 @@ public class Renderer {
         frame.addMouseListener(new MyMouseListener(this));
         frame.addKeyListener(new MyKeyAdapter(this));
         frame.addMouseMotionListener(new MyMouseMotionAdapter(this));
-        frame.addMouseMotionListener(new PanningHandler(this)); // TODO - make it work
+        frame.addMouseMotionListener(new PanningHandler(this)); 
         frame.addMouseWheelListener(new ZoomHandler(this));
 
         frame.add(new MyPanel());

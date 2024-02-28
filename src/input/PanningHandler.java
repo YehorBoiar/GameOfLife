@@ -24,22 +24,10 @@ public class PanningHandler extends MouseAdapter {
     private void handleRMBDrag(MouseEvent e) {
         int deltaX = e.getX() - renderer.getLastMouseX();
         int deltaY = e.getY() - renderer.getLastMouseY();
-
-        System.out.println("e.getX(): " + e.getX());
-        System.out.println("e.getY(): " + e.getY());
-
-        System.out.println("renderer.getLastMouseX() " + renderer.getLastMouseX());
-        System.out.println("renderer.getLastMouseY() " + renderer.getLastMouseY());
     
         // Adjust the pan offset based on the dragging movement
         int newPanOffsetX = renderer.getPanOffsetX() - deltaX;
         int newPanOffsetY = renderer.getPanOffsetY() - deltaY;
-
-        System.out.println("renderer.getPanOffsetX(): " + renderer.getPanOffsetX());
-        System.out.println("renderer.getPanOffsetY(): " + renderer.getPanOffsetY());
-
-        System.out.println("Offset X is: " + newPanOffsetX);
-        System.out.println("Offset Y is: " + newPanOffsetY);
     
         // Update the pan offset within bounds
         newPanOffsetX = Math.max(0, Math.min(newPanOffsetX, getMaxPanOffsetX()));
