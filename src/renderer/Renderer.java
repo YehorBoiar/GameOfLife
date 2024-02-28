@@ -21,7 +21,6 @@ public class Renderer {
     private double zoomFactor = 1.0;
     private boolean gameState = false;
     private final Color BLACK = Color.BLACK;
-    private final Color WHITE = Color.WHITE;
     private JFrame frame;
     private static Renderer instance;
     private int height = 100; // TODO - Handle the case when our grid becomes very large (e.g 1000x1000)
@@ -57,7 +56,6 @@ public class Renderer {
         frame.addMouseMotionListener(new MyMouseMotionAdapter(this));
         frame.addMouseMotionListener(new PanningHandler(this)); 
         frame.addMouseWheelListener(new ZoomHandler(this));
-
         frame.add(new MyPanel());
         frame.setResizable(false);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -73,7 +71,7 @@ public class Renderer {
         public MyPanel() {
             setBackground(BLACK); // Set the background color to black
         }
-
+        
         @Override
         protected void paintComponent(Graphics g) {
             super.paintComponent(g);
@@ -83,7 +81,7 @@ public class Renderer {
 
     /**
      * Draws squares on the panel based on the current state of the grid.
-     * 
+     *
      * @param g The Graphics object used for drawing.
      */
     public void drawSquares(Graphics g) {
@@ -95,7 +93,9 @@ public class Renderer {
                 int y = (int) (i * squareSize - panOffsetY);
 
                 if (grid[i][j]) {
-                    g.setColor(WHITE);
+                    // Set color of squares in the rainbow sequence
+                    Color rainbowColor = getRainbowColor(i, j);
+                    g.setColor(rainbowColor);
                     g.fillRect(x, y, squareSize, squareSize);
                 } else {
                     g.setColor(BLACK);
@@ -104,6 +104,19 @@ public class Renderer {
             }
         }
     }
+
+        /**
+     * Helper method to get the rainbow color based on the position in the grid.
+     *
+     * @param row    The row index of the grid element.
+     * @param column The column index of the grid element.
+     * @return Color representing the rainbow color.
+     */
+    private Color getRainbowColor(int row, int column) {
+        float hue = (float) ((row * width + column) % 360) / 360.0f;
+        return Color.getHSBColor(hue, 1.0f, 1.0f);
+    }
+
 
     /**
      * Updates the grid based on the Game of Life rules.
