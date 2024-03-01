@@ -10,6 +10,7 @@ import input.MyMouseMotionAdapter;
 import input.PanningHandler;
 import input.ZoomHandler;
 import logic.Logic;
+import ui.StandrardStructuresPanel;
 
 /**
  * The Renderer class handles the visual representation of the Game of Life
@@ -18,6 +19,7 @@ import logic.Logic;
  * based on user input.
  */
 public class Renderer {
+    private JPanel mainPanel;
     private double zoomFactor = 1.0;
     private boolean gameState = false;
     private final Color BLACK = Color.BLACK;
@@ -56,7 +58,11 @@ public class Renderer {
         frame.addMouseMotionListener(new MyMouseMotionAdapter(this));
         frame.addMouseMotionListener(new PanningHandler(this)); 
         frame.addMouseWheelListener(new ZoomHandler(this));
-        frame.add(new MyPanel());
+
+        mainPanel = new MyPanel();
+        mainPanel.add(new StandrardStructuresPanel());
+        frame.add(mainPanel);
+
         frame.setResizable(false);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
@@ -76,7 +82,9 @@ public class Renderer {
         protected void paintComponent(Graphics g) {
             super.paintComponent(g);
             drawSquares(g);
+
         }
+
     }
 
     /**
