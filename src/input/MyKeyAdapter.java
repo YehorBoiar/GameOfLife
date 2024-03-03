@@ -6,6 +6,7 @@ import java.awt.event.KeyEvent;
 import fileio.Load;
 import fileio.Save;
 import renderer.Renderer;
+import ui.StandrardStructuresPanel;
 
 /**
  * MyKeyAdapter is responsible for adding hotkeys to our program.
@@ -29,6 +30,9 @@ public class MyKeyAdapter extends KeyAdapter {
         if (keyCode == KeyEvent.VK_SPACE) {
             toggleGameState();
         }
+        // if (e.isControlDown() && keyCode == KeyEvent.VK_M) {
+        //     displayStandardStructuresPanel();
+        // }
         if (e.isControlDown() && keyCode == KeyEvent.VK_S) {
             Save save = new Save(renderer.getGrid());
             save.SaveToFile();
@@ -54,6 +58,12 @@ public class MyKeyAdapter extends KeyAdapter {
             upPan();
         }
     }
+
+    // private void displayStandardStructuresPanel(){
+    //     StandrardStructuresPanel panel = renderer.getStructuresPanel();
+    //     panel.setDisplay(!panel.getDisplay());
+    //     System.out.println("Display standard structures: " + renderer.getStructuresPanel().getDisplay());
+    // }
 
     private void leftPan() {
         

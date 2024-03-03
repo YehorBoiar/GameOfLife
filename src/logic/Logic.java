@@ -62,20 +62,40 @@ public class Logic {
      * @param col  The column index of the cell.
      * @return The count of alive neighbors.
      */
-    private int countAliveNeighbors(boolean[][] grid, int row, int col) {
+    private static int countAliveNeighbors(boolean[][] grid, int row, int col) {
         int count = 0;
         int rows = grid.length;
         int cols = grid[0].length;
-    
+
         for (int i = row - 1; i <= row + 1; i++) {
             for (int j = col - 1; j <= col + 1; j++) {
-                if (i >= 0 && i < rows && j >= 0 && j < cols && !(i == row && j == col)) {
-                    count += grid[i][j] ? 1 : 0;
+
+                int toroidalRow = toroidalIndex(i, rows);
+
+                int toroidalCol = toroidalIndex(j, cols);
+
+                if (!(toroidalRow == row && toroidalCol == col)) {
+                    count += grid[toroidalRow][toroidalCol] ? 1 : 0;
                 }
+
             }
         }
-    
+
         return count;
     }
+
+    /**
+     * 
+     * @param index row or column index of specified cell
+     * @param max  number of rows/columns in grid
+     * @return the 'wrapped around' index of cell if the specified cell is out of
+     *         bounds
+     */
+    private static int toroidalIndex(int index, int max) {
+        return (index % max + max) % max;
+    }
+
+
+
     
 }

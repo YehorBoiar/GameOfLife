@@ -19,9 +19,11 @@ import ui.StandrardStructuresPanel;
  * based on user input.
  */
 public class Renderer {
+    private JPanel structuresPanel;
     private JPanel mainPanel;
     private double zoomFactor = 1.0;
     private boolean gameState = false;
+
     private final Color BLACK = Color.BLACK;
     private JFrame frame;
     private static Renderer instance;
@@ -60,7 +62,8 @@ public class Renderer {
         frame.addMouseWheelListener(new ZoomHandler(this));
 
         mainPanel = new MyPanel();
-        mainPanel.add(new StandrardStructuresPanel());
+        // structuresPanel = new StandrardStructuresPanel();
+        // mainPanel.add(structuresPanel);
         frame.add(mainPanel);
 
         frame.setResizable(false);
@@ -162,7 +165,7 @@ public class Renderer {
         return this.grid;
     }
 
-    public void setZoomFactor(double zoomFactor) {
+   public void setZoomFactor(double zoomFactor) {
         this.zoomFactor = zoomFactor;
     }
 

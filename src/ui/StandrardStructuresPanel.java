@@ -10,8 +10,20 @@ import javax.swing.JPanel;
 
 public class StandrardStructuresPanel extends JPanel {
     private final int BUTTON_SIZE = 60;
+    private boolean display = false;
+
+    public boolean getDisplay() {
+        return display;
+    }
+
+    public void setDisplay(boolean display) {
+        this.display = display;
+    }
 
     public StandrardStructuresPanel() {
+        if(!display){
+            return;
+        }
         setLayout(new FlowLayout());
         JButton button = createButton("<html>Glider<br>Gun</html>", null);
         add(button);
