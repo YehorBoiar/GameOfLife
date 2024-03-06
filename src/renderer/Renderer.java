@@ -1,5 +1,6 @@
 package renderer;
 
+import ui.ButtonPanel;
 import java.awt.Color;
 import java.awt.Graphics;
 import javax.swing.JFrame;
@@ -62,9 +63,11 @@ public class Renderer {
         frame.addMouseWheelListener(new ZoomHandler(this));
 
         mainPanel = new MyPanel();
+        mainPanel.add(new ButtonPanel(this));
         // structuresPanel = new StandrardStructuresPanel();
         // mainPanel.add(structuresPanel);
         frame.add(mainPanel);
+
 
         frame.setResizable(false);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
