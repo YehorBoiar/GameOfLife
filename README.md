@@ -28,7 +28,6 @@ git commit -m "Thoughtful message"
 ## File structure
 ```
 └── 📁p2repo
-    └── GUI_Discussion.docx
     └── README.md
     └── 📁games
         └── game0.gol
