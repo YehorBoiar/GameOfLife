@@ -34,6 +34,9 @@ public class MyKeyAdapter extends KeyAdapter {
         if (e.isControlDown() && keyCode == KeyEvent.VK_D){
             renderer.setEraseElements(!renderer.isEraseElements());
         }
+        if (e.isControlDown()){
+            renderer.setEraseElements(!renderer.isEraseElements());
+        }
         // if (e.isControlDown() && keyCode == KeyEvent.VK_M) {
         //     displayStandardStructuresPanel();
         // }
