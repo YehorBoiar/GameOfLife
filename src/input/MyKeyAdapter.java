@@ -29,6 +29,7 @@ public class MyKeyAdapter extends KeyAdapter {
 
         if (keyCode == KeyEvent.VK_SPACE) {
             toggleGameState();
+            renderer.getFrame().repaint();
         }
         // if (e.isControlDown() && keyCode == KeyEvent.VK_M) {
         //     displayStandardStructuresPanel();

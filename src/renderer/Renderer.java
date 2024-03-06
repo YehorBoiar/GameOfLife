@@ -85,9 +85,33 @@ public class Renderer {
         protected void paintComponent(Graphics g) {
             super.paintComponent(g);
             drawSquares(g);
-
+            if (!gameState) {
+                drawGrid(g);
+            }
         }
 
+    }
+
+    /**
+     * Draws a white grid on a panel
+     * @param g
+     */
+    private void drawGrid(Graphics g) {
+        int squareSize = (int) (10 * zoomFactor);
+    
+        // Draw vertical grid lines (columns)
+        for (int i = 0; i <= width; i++) {
+            int x = (int) (i * squareSize - panOffsetX);
+            g.setColor(Color.WHITE);
+            g.drawLine(x, 0, x, getHeight()*squareSize);
+        }
+    
+        // Draw horizontal grid lines (rows)
+        for (int j = 0; j <= height; j++) {
+            int y = (int) (j * squareSize - panOffsetY);
+            g.setColor(Color.WHITE);
+            g.drawLine(0, y, getWidth()*squareSize, y);
+        }
     }
 
     /**
