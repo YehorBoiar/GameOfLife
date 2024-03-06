@@ -11,7 +11,7 @@ import input.MyMouseMotionAdapter;
 import input.PanningHandler;
 import input.ZoomHandler;
 import logic.Logic;
-import ui.StandrardStructuresPanel;
+import ui.StandardStructuresPanel;
 
 /**
  * The Renderer class handles the visual representation of the Game of Life
