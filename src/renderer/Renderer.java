@@ -182,18 +182,17 @@ public class Renderer {
      *
      * @param row    The row index of the grid element.
      * @param column The column index of the grid element.
-     * @return The updated grid.
+     * @param erase  If true, sets the element to false (erasing mode); if false, sets the element to true (drawing mode).
+     * @return The updated grid after toggling the state of the specified element.
      */
     public boolean[][] reverseElement(int row, int column, boolean erase) {
         if (erase) {
             this.grid[row][column] = false;
-        }else{
+        } else {
             this.grid[row][column] = true;
         }
         return this.grid;
     }
-
-
 
    public void setZoomFactor(double zoomFactor) {
         this.zoomFactor = zoomFactor;
