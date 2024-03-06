@@ -56,7 +56,7 @@ public class MyMouseMotionAdapter extends MouseAdapter {
             // Check if we try to draw on the side.
             if (x >= 0 && x < renderer.getWidth() && y >= 0 && y < renderer.getHeight()) { 
                 // Update the grid position directly without calculating steps
-                renderer.reverseElement(y, x);
+                renderer.reverseElement(y, x, renderer.isEraseElements());
                 renderer.setLastMouseX(x);
                 renderer.setLastMouseY(y);
                 renderer.getFrame().repaint();

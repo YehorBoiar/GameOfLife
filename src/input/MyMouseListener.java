@@ -48,7 +48,7 @@ public class MyMouseListener extends MouseAdapter {
             x = Math.min(Math.max(0, x), renderer.getWidth() - 1);
             y = Math.min(Math.max(0, y), renderer.getHeight() - 1);
 
-            renderer.reverseElement(y, x);
+            renderer.reverseElement(y, x, renderer.isEraseElements());
             System.out.println("Mouse Clicked: " + x + "," + y);
             renderer.getFrame().repaint(); // Repaint the frame to update the drawing
         }

@@ -23,7 +23,7 @@ public class Renderer {
     private JPanel mainPanel;
     private double zoomFactor = 1.0;
     private boolean gameState = false;
-
+    private boolean eraseElements = false;
     private final Color BLACK = Color.BLACK;
     private JFrame frame;
     private static Renderer instance;
@@ -184,10 +184,16 @@ public class Renderer {
      * @param column The column index of the grid element.
      * @return The updated grid.
      */
-    public boolean[][] reverseElement(int row, int column) {
-        this.grid[row][column] = !grid[row][column];
+    public boolean[][] reverseElement(int row, int column, boolean erase) {
+        if (erase) {
+            this.grid[row][column] = false;
+        }else{
+            this.grid[row][column] = true;
+        }
         return this.grid;
     }
+
+
 
    public void setZoomFactor(double zoomFactor) {
         this.zoomFactor = zoomFactor;
@@ -261,4 +267,14 @@ public class Renderer {
         this.grid = grid;
         frame.repaint();
     }
+
+    public boolean isEraseElements() {
+        return eraseElements;
+    }
+
+    public void setEraseElements(boolean eraseElements) {
+        this.eraseElements = eraseElements;
+    }
+
+    
 }

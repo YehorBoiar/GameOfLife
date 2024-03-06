@@ -31,6 +31,9 @@ public class MyKeyAdapter extends KeyAdapter {
             toggleGameState();
             renderer.getFrame().repaint();
         }
+        if (e.isControlDown() && keyCode == KeyEvent.VK_D){
+            renderer.setEraseElements(!renderer.isEraseElements());
+        }
         // if (e.isControlDown() && keyCode == KeyEvent.VK_M) {
         //     displayStandardStructuresPanel();
         // }
