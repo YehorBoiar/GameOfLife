@@ -102,14 +102,14 @@ public class Renderer {
         // Draw vertical grid lines (columns)
         for (int i = 0; i <= width; i++) {
             int x = (int) (i * squareSize - panOffsetX);
-            g.setColor(Color.WHITE);
+            g.setColor(Color.GRAY);
             g.drawLine(x, 0, x, getHeight()*squareSize);
         }
     
         // Draw horizontal grid lines (rows)
         for (int j = 0; j <= height; j++) {
             int y = (int) (j * squareSize - panOffsetY);
-            g.setColor(Color.WHITE);
+            g.setColor(Color.GRAY);
             g.drawLine(0, y, getWidth()*squareSize, y);
         }
     }
