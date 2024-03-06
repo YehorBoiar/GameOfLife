@@ -15,4 +15,12 @@ public class Main {
             }
         }
     }
+
+    public static void speedUp() {
+        speed -= 10;
+    }
+
+    public static void slowDown() {
+        speed += 10;
+    }
 }
