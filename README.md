@@ -26,25 +26,29 @@ git commit -m "Thoughtful message"
 ```
 
 ## File structure
-```lua
-src/
-|-- main/
-|   |-- YourMainClass.java
-|
-|-- input/
-|   |-- MyMouseListener.java
-|   |-- MyMouseMotionAdapter.java
-|   |-- MyKeyAdapter.java
-|
-|-- renderer/
-|   |-- Renderer.java
-|
-|-- logic/
-|   |-- Logic.java
-|
-|-- ui/
-|   |-- ButtonPanel.java
-|
-|-- fileio/
-|   |-- LoadSaveManager.java
+```
+└── 📁p2repo
+    └── GUI_Discussion.docx
+    └── README.md
+    └── 📁games
+        └── game0.gol
+    └── 📁src
+        └── 📁fileio
+            └── Load.java
+            └── Save.java
+        └── 📁input
+            └── MyKeyAdapter.java
+            └── MyMouseListener.java
+            └── MyMouseMotionAdapter.java
+            └── PanningHandler.java
+            └── ZoomHandler.java
+        └── 📁logic
+            └── Logic.java
+        └── 📁main
+            └── Main.java
+        └── 📁renderer
+            └── Renderer.java
+        └── 📁ui
+            └── ButtonPanel.java
+            └── StandrardStructuresPanel.java
 ```
