@@ -6,7 +6,7 @@ import java.awt.event.KeyEvent;
 import fileio.Load;
 import fileio.Save;
 import renderer.Renderer;
-import ui.StandrardStructuresPanel;
+import ui.StandardStructuresPanel;
 
 /**
  * MyKeyAdapter is responsible for adding hotkeys to our program.
