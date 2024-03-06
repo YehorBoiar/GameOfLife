@@ -72,6 +72,7 @@ public class ButtonPanel extends JPanel implements ActionListener{
 
         if (e.getSource() == stopButton) {
             renderer.setGameState(false);
+            renderer.getFrame().repaint();;
         }
 
         if (e.getSource() == speedUpButton) {
