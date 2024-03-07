@@ -17,7 +17,11 @@ public class Main {
     }
 
     public static void speedUp() {
-        speed -= 10;
+        if (speed >= 20) {
+            speed -= 10;
+        }else{
+            System.out.println("You've reached the limit!");
+        }
     }
 
     public static void slowDown() {
