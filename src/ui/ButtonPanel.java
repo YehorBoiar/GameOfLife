@@ -30,7 +30,7 @@ public class ButtonPanel extends JPanel implements ActionListener{
      */
     public ButtonPanel(Renderer renderer) {
         this.renderer = renderer;
-
+        //TODO add zoom button and back to the start menu button.
         configButton = new JButton("Config");
         startButton = new JButton("Start");
         stopButton = new JButton("Stop");

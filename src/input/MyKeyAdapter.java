@@ -2,14 +2,10 @@ package input;
 
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-
-import javax.swing.JPanel;
-
 import fileio.Load;
 import fileio.Save;
 import renderer.Renderer;
-import ui.StandardStructuresPanel;
-import ui.ButtonPanel;
+
 
 /**
  * MyKeyAdapter is responsible for adding hotkeys to our program.
@@ -21,7 +17,7 @@ public class MyKeyAdapter extends KeyAdapter {
     public MyKeyAdapter(Renderer renderer) {
         this.renderer = renderer;
     }
-
+    //TODO add zoom in and zoom out hotkeys
     /**
      * In this method we add hotkeys we want to have,
      * and assign functionality to them.
