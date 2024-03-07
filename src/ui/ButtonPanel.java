@@ -10,6 +10,9 @@ import java.awt.event.ActionEvent;
 import java.awt.Color;
 import java.awt.event.ActionListener;
 
+/**
+ * Represents a panel containing buttons for user interactions in the GUI.
+ */
 public class ButtonPanel extends JPanel implements ActionListener{
     private JButton configButton;
     private JButton startButton;
@@ -21,6 +24,10 @@ public class ButtonPanel extends JPanel implements ActionListener{
     private JButton exitButton;
     private Renderer renderer;
 
+    /**
+     * Constructs a ButtonPanel with specified buttons and associates it with a renderer.
+     * @param renderer The renderer associated with this button panel.
+     */
     public ButtonPanel(Renderer renderer) {
         this.renderer = renderer;
 
@@ -52,6 +59,10 @@ public class ButtonPanel extends JPanel implements ActionListener{
         add(exitButton);
     }
 
+    /**
+     * Invoked when a button is clicked, performs actions based on the clicked button.
+     * @param e The ActionEvent associated with the button click.
+     */
     public void actionPerformed(ActionEvent e) {
 
         if (e.getSource() == configButton) {
