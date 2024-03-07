@@ -13,6 +13,7 @@ import input.ZoomHandler;
 import logic.Logic;
 import ui.StandardStructuresPanel;
 
+
 /**
  * The Renderer class handles the visual representation of the Game of Life
  * grid.
@@ -21,10 +22,12 @@ import ui.StandardStructuresPanel;
  */
 public class Renderer {
     private JPanel structuresPanel;
+    private JPanel buttonPanel;
     private JPanel mainPanel;
     private double zoomFactor = 1.0;
     private boolean gameState = false;
     private boolean eraseElements = false;
+    private boolean showButtons = true;
     private final Color BLACK = Color.BLACK;
     private JFrame frame;
     private static Renderer instance;
@@ -63,7 +66,8 @@ public class Renderer {
         frame.addMouseWheelListener(new ZoomHandler(this));
 
         mainPanel = new MyPanel();
-        mainPanel.add(new ButtonPanel(this));
+        buttonPanel = new ButtonPanel(this);
+        mainPanel.add(buttonPanel);
         // structuresPanel = new StandrardStructuresPanel();
         // mainPanel.add(structuresPanel);
         frame.add(mainPanel);
@@ -197,7 +201,20 @@ public class Renderer {
         return this.grid;
     }
 
-   public void setZoomFactor(double zoomFactor) {
+    
+    public JPanel getButtonPanel() {
+        return buttonPanel;
+    }
+
+    public boolean isShowButtons() {
+        return showButtons;
+    }
+
+    public void setShowButtons(boolean showButtons) {
+        this.showButtons = showButtons;
+    }
+
+    public void setZoomFactor(double zoomFactor) {
         this.zoomFactor = zoomFactor;
     }
 

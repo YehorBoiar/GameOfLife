@@ -3,10 +3,13 @@ package input;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
+import javax.swing.JPanel;
+
 import fileio.Load;
 import fileio.Save;
 import renderer.Renderer;
 import ui.StandardStructuresPanel;
+import ui.ButtonPanel;
 
 /**
  * MyKeyAdapter is responsible for adding hotkeys to our program.
@@ -34,9 +37,10 @@ public class MyKeyAdapter extends KeyAdapter {
         if (e.isControlDown() && keyCode == KeyEvent.VK_D){
             renderer.setEraseElements(!renderer.isEraseElements());
         }
-        // if (e.isControlDown() && keyCode == KeyEvent.VK_M) {
-        //     displayStandardStructuresPanel();
-        // }
+        if (e.isControlDown() && keyCode == KeyEvent.VK_M) {
+            displayButtons();
+            renderer.getFrame().repaint();
+        }
         if (e.isControlDown() && keyCode == KeyEvent.VK_S) {
             Save save = new Save(renderer.getGrid());
             save.SaveToFile();
@@ -63,11 +67,12 @@ public class MyKeyAdapter extends KeyAdapter {
         }
     }
 
-    // private void displayStandardStructuresPanel(){
-    //     StandrardStructuresPanel panel = renderer.getStructuresPanel();
-    //     panel.setDisplay(!panel.getDisplay());
-    //     System.out.println("Display standard structures: " + renderer.getStructuresPanel().getDisplay());
-    // }
+    private void displayButtons(){
+        boolean showButtons = renderer.isShowButtons();
+        renderer.setShowButtons(!showButtons);
+        renderer.getButtonPanel().setVisible(!showButtons);
+        System.out.println("Display button panel: " + !showButtons);
+    }
 
     private void leftPan() {
         

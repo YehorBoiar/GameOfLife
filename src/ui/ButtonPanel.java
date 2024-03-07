@@ -24,14 +24,6 @@ public class ButtonPanel extends JPanel implements ActionListener{
     public ButtonPanel(Renderer renderer) {
         this.renderer = renderer;
 
-        //setPreferredSize(new Dimension(600, 50)); // Set the preferred size for the panel
-        //setLayout(new FlowLayout(FlowLayout.CENTER));
-
-        /*startButton = new JButton("Start");
-        startButton.setPreferredSize(new Dimension(30, 30)); // Set the size for the start button
-        stopButton = new JButton("Stop");
-        stopButton.setPreferredSize(new Dimension(30, 30)); // Set the size for the stop button */
-
         configButton = new JButton("Config");
         startButton = new JButton("Start");
         stopButton = new JButton("Stop");
