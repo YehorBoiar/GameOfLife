@@ -14,7 +14,7 @@ import renderer.Renderer;
  */
 public class MyMouseListener extends MouseAdapter {
     private final Renderer renderer;
-
+    
     /**
      * Constructs a new MyMouseListener with the specified Renderer.
      *
@@ -47,7 +47,6 @@ public class MyMouseListener extends MouseAdapter {
             // Clamp the indices to valid grid bounds
             x = Math.min(Math.max(0, x), renderer.getWidth() - 1);
             y = Math.min(Math.max(0, y), renderer.getHeight() - 1);
-
             renderer.reverseElement(y, x, renderer.isEraseElements());
             System.out.println("Mouse Clicked: " + x + "," + y);
             renderer.getFrame().repaint(); // Repaint the frame to update the drawing

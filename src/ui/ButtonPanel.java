@@ -5,6 +5,7 @@ import javax.swing.JPanel;
 import main.Main;
 import fileio.Load;
 import fileio.Save;
+import input.MenuListener;
 import renderer.Renderer;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
@@ -14,6 +15,7 @@ import java.awt.event.ActionListener;
  * Represents a panel containing buttons for user interactions in the GUI.
  */
 public class ButtonPanel extends JPanel implements ActionListener{
+    private StructuresMenu menu;
     private JButton configButton;
     private JButton startButton;
     private JButton stopButton;
@@ -31,6 +33,7 @@ public class ButtonPanel extends JPanel implements ActionListener{
     public ButtonPanel(Renderer renderer) {
         setBackground(Color.BLACK);
         this.renderer = renderer;
+
         //TODO add zoom button and back to the start menu button.
         configButton = new JButton("Config");
         startButton = new JButton("Start");
@@ -41,23 +44,23 @@ public class ButtonPanel extends JPanel implements ActionListener{
         loadButton = new JButton("Load");
         exitButton = new JButton("Exit");
 
+        menu = new StructuresMenu(configButton);
+
         JButton[] buttons = {configButton,startButton,stopButton,speedUpButton,slowDownButton,saveButton,loadButton,exitButton};
 
         for (int i = 0; i < buttons.length; i++ ) {
             buttons[i].setBackground(Color.RED);
             buttons[i].addActionListener(this);
             buttons[i].setFocusable(false);
-    
+            add(buttons[i]);
         }
-
-        add(configButton);
-        add(startButton);
-        add(stopButton);
-        add(speedUpButton);
-        add(slowDownButton);
-        add(saveButton);
-        add(loadButton);
-        add(exitButton);
+        
+        configButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae){
+                menu.show(configButton, 0, configButton.getHeight());
+            }
+        });
     }
 
     /**
@@ -65,10 +68,6 @@ public class ButtonPanel extends JPanel implements ActionListener{
      * @param e The ActionEvent associated with the button click.
      */
     public void actionPerformed(ActionEvent e) {
-
-        if (e.getSource() == configButton) {
-            System.out.println("Config");
-        }
 
         if (e.getSource() == startButton) {
             renderer.setGameState(true);
@@ -103,6 +102,14 @@ public class ButtonPanel extends JPanel implements ActionListener{
 
 
          
+    }
+
+    public StructuresMenu getMenu() {
+        return menu;
+    }
+
+    public void setMenu(StructuresMenu menu) {
+        this.menu = menu;
     }
 
 }

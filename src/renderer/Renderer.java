@@ -11,7 +11,6 @@ import input.MyMouseMotionAdapter;
 import input.PanningHandler;
 import input.ZoomHandler;
 import logic.Logic;
-import ui.StandardStructuresPanel;
 
 
 /**
@@ -21,7 +20,6 @@ import ui.StandardStructuresPanel;
  * based on user input.
  */
 public class Renderer {
-    private JPanel structuresPanel;
     private JPanel buttonPanel;
     private JPanel mainPanel;
     private double zoomFactor = 1.0;
