@@ -29,6 +29,7 @@ public class ButtonPanel extends JPanel implements ActionListener{
      * @param renderer The renderer associated with this button panel.
      */
     public ButtonPanel(Renderer renderer) {
+        setBackground(Color.BLACK);
         this.renderer = renderer;
         //TODO add zoom button and back to the start menu button.
         configButton = new JButton("Config");
