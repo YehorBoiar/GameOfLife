@@ -108,7 +108,7 @@ public class MyKeyAdapter extends KeyAdapter {
 
         // Calculate the maximum pan offset to prevent panning beyond the rightmost edge
         // of the grid
-        int maxPanOffsetX = (int) ((renderer.getCols() * 10 * renderer.getZoomFactor())
+        int maxPanOffsetX = (int) ((renderer.getCols() * renderer.calcSquareSize())
                 - renderer.getFrame().getWidth());
 
         // Calculate the new pan offset
@@ -128,7 +128,7 @@ public class MyKeyAdapter extends KeyAdapter {
     private void downPan() {
         // Calculate the maximum pan offset to prevent panning beyond the bottom edge of
         // the grid
-        int maxPanOffsetY = (int) ((renderer.getRows() * 10 * renderer.getZoomFactor())
+        int maxPanOffsetY = (int) ((renderer.getRows() * renderer.calcSquareSize())
                 - renderer.getFrame().getHeight());
 
         // Calculate the new pan offset
