@@ -28,8 +28,8 @@ public class Renderer {
     private final Color BLACK = Color.BLACK;
     private JFrame frame;
     private static Renderer instance;
-    private int rows = 100; // TODO - Handle the case when our grid becomes very large (e.g 1000x1000)
-    private int cols = 100;
+    private int rows = 50; // TODO - Handle the case when our grid becomes very large (e.g 1000x1000)
+    private int cols = 50;
     private boolean[][] grid = new boolean[rows][cols];
     private Logic logic = new Logic(); // instantiate Logic class
     private int lastMouseX = -1;
@@ -97,7 +97,7 @@ public class Renderer {
      * @param g
      */
     private void drawGrid(Graphics g) {
-        int squareSize = (int) (10 * zoomFactor);
+        int squareSize = calcSquareSize();
 
         // Draw vertical grid lines (columns)
         for (int i = 0; i <= cols; i++) {
@@ -120,7 +120,7 @@ public class Renderer {
      * @param g The Graphics object used for drawing.
      */
     public void drawSquares(Graphics g) {
-        int squareSize = (int) (10 * zoomFactor);
+        int squareSize = calcSquareSize();
 
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
@@ -138,6 +138,11 @@ public class Renderer {
                 }
             }
         }
+    }
+
+    public int calcSquareSize(){
+        int squareSize = (int) (frame.getHeight()/cols * zoomFactor);
+        return squareSize;
     }
 
     /**

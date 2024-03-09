@@ -47,7 +47,7 @@ public class MyMouseMotionAdapter extends MouseAdapter {
      */
     private void handleMouseDrag(MouseEvent e) {
         if (SwingUtilities.isLeftMouseButton(e)) {
-            int squareSize = (int) (10 * renderer.getZoomFactor());
+            int squareSize = renderer.calcSquareSize();
             int x = (int) ((e.getX() + renderer.getPanOffsetX()) / squareSize);
             int y = (int) ((e.getY() + renderer.getPanOffsetY() - 40) / squareSize);
         

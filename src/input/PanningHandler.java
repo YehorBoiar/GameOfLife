@@ -46,10 +46,10 @@ public class PanningHandler extends MouseAdapter {
     // Rest of the code remains unchanged
 
     private int getMaxPanOffsetX() {
-        return (int) (renderer.getCols() * 10 * renderer.getZoomFactor() - renderer.getFrame().getWidth());
+        return (int) (renderer.getCols() * renderer.calcSquareSize() - renderer.getFrame().getWidth());
     }
 
     private int getMaxPanOffsetY() {
-        return (int) (renderer.getRows() * 10 * renderer.getZoomFactor() - renderer.getFrame().getHeight());
+        return (int) (renderer.getRows() * renderer.calcSquareSize() - renderer.getFrame().getHeight());
     }
 }
