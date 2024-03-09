@@ -49,5 +49,5 @@ git commit -m "Thoughtful message"
             └── Renderer.java
         └── 📁ui
             └── ButtonPanel.java
-            └── StandrardStructuresPanel.java
+            └── StructuresMenu.java
 ```

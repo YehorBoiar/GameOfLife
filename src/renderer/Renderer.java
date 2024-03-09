@@ -12,7 +12,6 @@ import input.PanningHandler;
 import input.ZoomHandler;
 import logic.Logic;
 
-
 /**
  * The Renderer class handles the visual representation of the Game of Life
  * grid.
@@ -21,10 +20,10 @@ import logic.Logic;
  */
 public class Renderer {
     private JPanel buttonPanel;
+    private MyMouseListener mouseListener;
     private JPanel mainPanel;
     private double zoomFactor = 1.0;
     private boolean gameState = false;
-    private boolean eraseElements = false;
     private boolean showButtons = true;
     private final Color BLACK = Color.BLACK;
     private JFrame frame;
@@ -37,7 +36,6 @@ public class Renderer {
     private int lastMouseY = -1;
     private int panOffsetX = 0;
     private int panOffsetY = 0;
-
 
     /**
      * Private constructor to create a new instance of the Renderer class.
@@ -57,26 +55,22 @@ public class Renderer {
         frame.setSize(width * 10, height * 10);
         frame.getContentPane().setBackground(BLACK);
 
-        frame.addMouseListener(new MyMouseListener(this));
+        mouseListener = new MyMouseListener(this);
+        frame.addMouseListener(mouseListener);
         frame.addKeyListener(new MyKeyAdapter(this));
         frame.addMouseMotionListener(new MyMouseMotionAdapter(this));
-        frame.addMouseMotionListener(new PanningHandler(this)); 
+        frame.addMouseMotionListener(new PanningHandler(this));
         frame.addMouseWheelListener(new ZoomHandler(this));
 
         mainPanel = new MyPanel();
         buttonPanel = new ButtonPanel(this);
         mainPanel.add(buttonPanel);
-        // structuresPanel = new StandrardStructuresPanel();
-        // mainPanel.add(structuresPanel);
         frame.add(mainPanel);
-
 
         frame.setResizable(false);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
     }
-
-
 
     /**
      * Inner class representing the drawing panel inside the JFrame.
@@ -85,7 +79,7 @@ public class Renderer {
         public MyPanel() {
             setBackground(BLACK); // Set the background color to black
         }
-        
+
         @Override
         protected void paintComponent(Graphics g) {
             super.paintComponent(g);
@@ -99,23 +93,24 @@ public class Renderer {
 
     /**
      * Draws a white grid on a panel
+     * 
      * @param g
      */
     private void drawGrid(Graphics g) {
         int squareSize = (int) (10 * zoomFactor);
-    
+
         // Draw vertical grid lines (columns)
         for (int i = 0; i <= width; i++) {
             int x = (int) (i * squareSize - panOffsetX);
             g.setColor(Color.GRAY);
-            g.drawLine(x, 0, x, getHeight()*squareSize);
+            g.drawLine(x, 0, x, getHeight() * squareSize);
         }
-    
+
         // Draw horizontal grid lines (rows)
         for (int j = 0; j <= height; j++) {
             int y = (int) (j * squareSize - panOffsetY);
             g.setColor(Color.GRAY);
-            g.drawLine(0, y, getWidth()*squareSize, y);
+            g.drawLine(0, y, getWidth() * squareSize, y);
         }
     }
 
@@ -145,7 +140,7 @@ public class Renderer {
         }
     }
 
-        /**
+    /**
      * Helper method to get the rainbow color based on the position in the grid.
      *
      * @param row    The row index of the grid element.
@@ -156,7 +151,6 @@ public class Renderer {
         float hue = (float) ((row * width + column) % 360) / 360.0f;
         return Color.getHSBColor(hue, 1.0f, 1.0f);
     }
-
 
     /**
      * Updates the grid based on the Game of Life rules.
@@ -181,25 +175,29 @@ public class Renderer {
         return instance;
     }
 
-    /**
-     * Reverses the value of a specific element in the grid.
-     * Used to toggle the state of cells based on user input.
-     *
-     * @param row    The row index of the grid element.
-     * @param column The column index of the grid element.
-     * @param erase  If true, sets the element to false (erasing mode); if false, sets the element to true (drawing mode).
-     * @return The updated grid after toggling the state of the specified element.
-     */
-    public boolean[][] reverseElement(int row, int column, boolean erase) {
-        if (erase) {
-            this.grid[row][column] = false;
-        } else {
-            this.grid[row][column] = true;
-        }
-        return this.grid;
-    }
+/**
+ * Reverses the values of a specified array of elements in the grid.
+ * Used to toggle the state of cells based on user input.
+ *
+ * @param startRow The starting row index of the grid elements.
+ * @param startColumn The starting column index of the grid elements.
+ * @param elements 2D array of elements to reverse.
+ * @return The updated grid after toggling the state of the specified elements.
+ */
+public boolean[][] reverseElements(int startRow, int startColumn, boolean[][] elements) {
+    for (int i = 0; i < elements.length; i++) {
+        for (int j = 0; j < elements[i].length; j++) {
+            int row = startRow + i;
+            int column = startColumn + j;
 
-    
+            // Check if the indices are within the bounds of the grid
+            if (row >= 0 && row < this.grid.length && column >= 0 && column < this.grid[row].length) {
+                this.grid[row][column] = elements[i][j];
+            }
+        }
+    }
+    return this.grid;
+}
     public JPanel getButtonPanel() {
         return buttonPanel;
     }
@@ -285,13 +283,8 @@ public class Renderer {
         frame.repaint();
     }
 
-    public boolean isEraseElements() {
-        return eraseElements;
+    public MyMouseListener getMouseListener() {
+        return mouseListener;
     }
 
-    public void setEraseElements(boolean eraseElements) {
-        this.eraseElements = eraseElements;
-    }
-
-    
 }

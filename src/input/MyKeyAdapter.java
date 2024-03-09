@@ -31,9 +31,6 @@ public class MyKeyAdapter extends KeyAdapter {
             toggleGameState();
             renderer.getFrame().repaint();
         }
-        if (e.isControlDown() && keyCode == KeyEvent.VK_D){
-            renderer.setEraseElements(!renderer.isEraseElements());
-        }
         if (e.isControlDown() && keyCode == KeyEvent.VK_M) {
             displayButtons();
             renderer.getFrame().repaint();
@@ -61,6 +58,24 @@ public class MyKeyAdapter extends KeyAdapter {
         }
         if (keyCode == KeyEvent.VK_UP) {
             upPan();
+        }
+        if (keyCode == KeyEvent.VK_1) {
+            renderer.getMouseListener().setBrushID(0);
+        }
+        if (keyCode == KeyEvent.VK_2) {
+            renderer.getMouseListener().setBrushID(1);
+        }
+        if (keyCode == KeyEvent.VK_3) {
+            renderer.getMouseListener().setBrushID(2);
+        }
+        if (keyCode == KeyEvent.VK_4) {
+            renderer.getMouseListener().setBrushID(3);
+        }
+        if (keyCode == KeyEvent.VK_5) {
+            renderer.getMouseListener().setBrushID(4);
+        }
+        if (keyCode == KeyEvent.VK_6) {
+            renderer.getMouseListener().setBrushID(5);
         }
     }
 

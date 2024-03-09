@@ -5,6 +5,7 @@ import java.awt.event.MouseEvent;
 
 import javax.swing.SwingUtilities;
 
+import brushes.Brush;
 import renderer.Renderer;
 
 /**
@@ -14,7 +15,8 @@ import renderer.Renderer;
  */
 public class MyMouseListener extends MouseAdapter {
     private final Renderer renderer;
-    
+    private int brushID;
+
     /**
      * Constructs a new MyMouseListener with the specified Renderer.
      *
@@ -31,6 +33,7 @@ public class MyMouseListener extends MouseAdapter {
      * coordinates for panning.
      * If the left mouse button is pressed, it calculates the grid indices and
      * toggles the cell state.
+     * 
      * @param e The MouseEvent representing the mouse click event.
      */
     @Override
@@ -47,10 +50,25 @@ public class MyMouseListener extends MouseAdapter {
             // Clamp the indices to valid grid bounds
             x = Math.min(Math.max(0, x), renderer.getWidth() - 1);
             y = Math.min(Math.max(0, y), renderer.getHeight() - 1);
-            renderer.reverseElement(y, x, renderer.isEraseElements());
+            
+            if (brushID >= 0 && brushID < Brush.values().length) {
+                Brush.values()[brushID].execute(renderer, y, x);
+                System.out.println("BrushID: " + brushID);
+                System.out.println("Mouse Clicked: " + x + "," + y);
+                renderer.getFrame().repaint();
+            }
+
+            System.out.println("BrushID: " + brushID);
             System.out.println("Mouse Clicked: " + x + "," + y);
             renderer.getFrame().repaint(); // Repaint the frame to update the drawing
         }
     }
 
+    public int getBrushID() {
+        return brushID;
+    }
+
+    public void setBrushID(int brushID) {
+        this.brushID = brushID;
+    }
 }

@@ -5,6 +5,7 @@ import java.awt.event.MouseEvent;
 
 import javax.swing.SwingUtilities;
 
+import brushes.Brush;
 import renderer.Renderer;
 
 /**
@@ -55,8 +56,8 @@ public class MyMouseMotionAdapter extends MouseAdapter {
             y = Math.min(Math.max(0, y), renderer.getHeight() - 1);
             // Check if we try to draw on the side.
             if (x >= 0 && x < renderer.getWidth() && y >= 0 && y < renderer.getHeight()) { 
-                // Update the grid position directly without calculating steps
-                renderer.reverseElement(y, x, renderer.isEraseElements());
+
+                Brush.values()[renderer.getMouseListener().getBrushID()].execute(renderer, y, x);
                 renderer.setLastMouseX(x);
                 renderer.setLastMouseY(y);
                 renderer.getFrame().repaint();

@@ -5,7 +5,6 @@ import javax.swing.JPanel;
 import main.Main;
 import fileio.Load;
 import fileio.Save;
-import input.MenuListener;
 import renderer.Renderer;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
@@ -44,7 +43,7 @@ public class ButtonPanel extends JPanel implements ActionListener{
         loadButton = new JButton("Load");
         exitButton = new JButton("Exit");
 
-        menu = new StructuresMenu(configButton);
+        menu = new StructuresMenu(configButton, renderer);
 
         JButton[] buttons = {configButton,startButton,stopButton,speedUpButton,slowDownButton,saveButton,loadButton,exitButton};
 
@@ -102,14 +101,6 @@ public class ButtonPanel extends JPanel implements ActionListener{
 
 
          
-    }
-
-    public StructuresMenu getMenu() {
-        return menu;
-    }
-
-    public void setMenu(StructuresMenu menu) {
-        this.menu = menu;
     }
 
 }
