@@ -52,10 +52,10 @@ public class MyMouseMotionAdapter extends MouseAdapter {
             int y = (int) ((e.getY() + renderer.getPanOffsetY() - 40) / squareSize);
         
             // Ensure the adjusted coordinates are within valid grid bounds
-            x = Math.min(Math.max(0, x), renderer.getWidth() - 1);
-            y = Math.min(Math.max(0, y), renderer.getHeight() - 1);
+            x = Math.min(Math.max(0, x), renderer.getCols() - 1);
+            y = Math.min(Math.max(0, y), renderer.getRows() - 1);
             // Check if we try to draw on the side.
-            if (x >= 0 && x < renderer.getWidth() && y >= 0 && y < renderer.getHeight()) { 
+            if (x >= 0 && x < renderer.getCols() && y >= 0 && y < renderer.getRows()) { 
 
                 Brush.values()[renderer.getMouseListener().getBrushID()].execute(renderer, y, x);
                 renderer.setLastMouseX(x);

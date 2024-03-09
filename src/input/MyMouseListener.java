@@ -48,8 +48,8 @@ public class MyMouseListener extends MouseAdapter {
             int y = (int) ((e.getY() + renderer.getPanOffsetY() - 40) / squareSize);
 
             // Clamp the indices to valid grid bounds
-            x = Math.min(Math.max(0, x), renderer.getWidth() - 1);
-            y = Math.min(Math.max(0, y), renderer.getHeight() - 1);
+            x = Math.min(Math.max(0, x), renderer.getCols() - 1);
+            y = Math.min(Math.max(0, y), renderer.getRows() - 1);
             
             if (brushID >= 0 && brushID < Brush.values().length) {
                 Brush.values()[brushID].execute(renderer, y, x);

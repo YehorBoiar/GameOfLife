@@ -28,9 +28,9 @@ public class Renderer {
     private final Color BLACK = Color.BLACK;
     private JFrame frame;
     private static Renderer instance;
-    private int height = 100; // TODO - Handle the case when our grid becomes very large (e.g 1000x1000)
-    private int width = 100;
-    private boolean[][] grid = new boolean[height][width];
+    private int rows = 100; // TODO - Handle the case when our grid becomes very large (e.g 1000x1000)
+    private int cols = 100;
+    private boolean[][] grid = new boolean[rows][cols];
     private Logic logic = new Logic(); // instantiate Logic class
     private int lastMouseX = -1;
     private int lastMouseY = -1;
@@ -52,7 +52,7 @@ public class Renderer {
      */
     private void configFrame() {
         frame.pack();
-        frame.setSize(width * 10, height * 10);
+        frame.setSize(1000, 1000);
         frame.getContentPane().setBackground(BLACK);
 
         mouseListener = new MyMouseListener(this);
@@ -100,17 +100,17 @@ public class Renderer {
         int squareSize = (int) (10 * zoomFactor);
 
         // Draw vertical grid lines (columns)
-        for (int i = 0; i <= width; i++) {
+        for (int i = 0; i <= cols; i++) {
             int x = (int) (i * squareSize - panOffsetX);
             g.setColor(Color.GRAY);
-            g.drawLine(x, 0, x, getHeight() * squareSize);
+            g.drawLine(x, 0, x, cols * squareSize);
         }
 
         // Draw horizontal grid lines (rows)
-        for (int j = 0; j <= height; j++) {
+        for (int j = 0; j <= rows; j++) {
             int y = (int) (j * squareSize - panOffsetY);
             g.setColor(Color.GRAY);
-            g.drawLine(0, y, getWidth() * squareSize, y);
+            g.drawLine(0, y, rows * squareSize, y);
         }
     }
 
@@ -122,8 +122,8 @@ public class Renderer {
     public void drawSquares(Graphics g) {
         int squareSize = (int) (10 * zoomFactor);
 
-        for (int i = 0; i < height; i++) {
-            for (int j = 0; j < width; j++) {
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
                 int x = (int) (j * squareSize - panOffsetX);
                 int y = (int) (i * squareSize - panOffsetY);
 
@@ -148,7 +148,7 @@ public class Renderer {
      * @return Color representing the rainbow color.
      */
     private Color getRainbowColor(int row, int column) {
-        float hue = (float) ((row * width + column) % 360) / 360.0f;
+        float hue = (float) ((row * cols + column) % 360) / 360.0f;
         return Color.getHSBColor(hue, 1.0f, 1.0f);
     }
 
@@ -258,12 +258,12 @@ public boolean[][] reverseElements(int startRow, int startColumn, boolean[][] el
         this.frame = frame;
     }
 
-    public int getHeight() {
-        return this.height;
+    public int getRows() {
+        return this.rows;
     }
 
-    public int getWidth() {
-        return width;
+    public int getCols() {
+        return cols;
     }
 
     public boolean getGameState() {

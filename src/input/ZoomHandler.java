@@ -50,12 +50,12 @@ public class ZoomHandler implements MouseWheelListener {
     }
     
     private void updatePanOffsets() {
-        int maxPanOffsetX = (int) ((renderer.getWidth() * 10 * renderer.getZoomFactor()) - renderer.getFrame().getWidth());
+        int maxPanOffsetX = (int) ((renderer.getCols() * 10 * renderer.getZoomFactor()) - renderer.getFrame().getWidth());
         if (renderer.getPanOffsetX() > maxPanOffsetX) {
             renderer.setPanOffsetX(maxPanOffsetX);
         }
     
-        int maxPanOffsetY = (int) ((renderer.getHeight() * 10 * renderer.getZoomFactor()) - renderer.getFrame().getHeight());
+        int maxPanOffsetY = (int) ((renderer.getRows() * 10 * renderer.getZoomFactor()) - renderer.getFrame().getHeight());
         if (renderer.getPanOffsetY() > maxPanOffsetY) {
             renderer.setPanOffsetY(maxPanOffsetY);
         }

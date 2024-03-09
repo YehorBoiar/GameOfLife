@@ -33,8 +33,8 @@ public class Load {
 	}
 
 	private boolean[][] writeToGrid(Scanner scanner, FileDialog fd) {
-		int maxRows = renderer.getHeight();
-		int maxCols = renderer.getWidth();
+		int maxRows = renderer.getRows();
+		int maxCols = renderer.getCols();
 
 		int rows = 0;
 		int cols = 0;
