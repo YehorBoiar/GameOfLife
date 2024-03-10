@@ -65,6 +65,5 @@ public class MyMouseMotionAdapter extends MouseAdapter {
 
         }
     }
-    
 
 }

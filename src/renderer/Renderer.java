@@ -154,7 +154,6 @@ public class Renderer {
 
     public double calcSquareSize(){
         double squareSize = (double) frame.getHeight()/cols * zoomFactor;
-        System.out.println(squareSize);
         return squareSize;
     }
 

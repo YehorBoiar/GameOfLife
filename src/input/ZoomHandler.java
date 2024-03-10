@@ -46,6 +46,7 @@ public class ZoomHandler implements MouseWheelListener {
         // Update the zoom factor and repaint
         renderer.setZoomFactor(newZoomFactor);
         renderer.setSquareSize(renderer.calcSquareSize());
+        System.out.println("Square size: " + renderer.getSquareSize());
         updatePanOffsets();
         renderer.getFrame().repaint();
     }
