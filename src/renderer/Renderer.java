@@ -28,14 +28,15 @@ public class Renderer {
     private final Color BLACK = Color.BLACK;
     private JFrame frame;
     private static Renderer instance;
-    private int rows = 50; // TODO - Handle the case when our grid becomes very large (e.g 1000x1000)
-    private int cols = 50;
+    private int rows = 450; // TODO - Handle the case when our grid becomes very large (e.g 1000x1000)
+    private int cols = 450;
     private boolean[][] grid = new boolean[rows][cols];
     private Logic logic = new Logic(); // instantiate Logic class
     private int lastMouseX = -1;
     private int lastMouseY = -1;
     private int panOffsetX = 0;
     private int panOffsetY = 0;
+    private int squareSize;
 
     /**
      * Private constructor to create a new instance of the Renderer class.
@@ -54,6 +55,7 @@ public class Renderer {
         frame.pack();
         frame.setSize(1000, 1000);
         frame.getContentPane().setBackground(BLACK);
+        squareSize = calcSquareSize();
 
         mouseListener = new MyMouseListener(this);
         frame.addMouseListener(mouseListener);
@@ -97,8 +99,6 @@ public class Renderer {
      * @param g
      */
     private void drawGrid(Graphics g) {
-        int squareSize = calcSquareSize();
-
         // Draw vertical grid lines (columns)
         for (int i = 0; i <= cols; i++) {
             int x = (int) (i * squareSize - panOffsetX);
@@ -120,7 +120,6 @@ public class Renderer {
      * @param g The Graphics object used for drawing.
      */
     public void drawSquares(Graphics g) {
-        int squareSize = calcSquareSize();
 
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
@@ -132,17 +131,15 @@ public class Renderer {
                     Color rainbowColor = getRainbowColor(i, j);
                     g.setColor(rainbowColor);
                     g.fillRect(x, y, squareSize, squareSize);
-                } else {
-                    g.setColor(BLACK);
-                    g.fillRect(x, y, squareSize, squareSize);
                 }
             }
         }
     }
 
     public int calcSquareSize(){
-        int squareSize = (int) (frame.getHeight()/cols * zoomFactor);
-        return squareSize;
+        double squareSize = frame.getHeight()/cols * zoomFactor;
+        System.out.println(squareSize);
+        return (int) squareSize;
     }
 
     /**
@@ -290,6 +287,14 @@ public boolean[][] reverseElements(int startRow, int startColumn, boolean[][] el
 
     public MyMouseListener getMouseListener() {
         return mouseListener;
+    }
+
+    public int getSquareSize() {
+        return squareSize;
+    }
+
+    public void setSquareSize(int squareSize) {
+        this.squareSize = squareSize;
     }
 
 }
