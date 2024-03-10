@@ -48,9 +48,11 @@ public class MyMouseMotionAdapter extends MouseAdapter {
     private void handleMouseDrag(MouseEvent e) {
         if (SwingUtilities.isLeftMouseButton(e)) {
             double squareSize = renderer.calcSquareSize();
+            renderer.setLastMouseX(-1);
+            renderer.setLastMouseY(-1);
             int x = (int) ((e.getX() + renderer.getPanOffsetX()) / squareSize);
             int y = (int) ((e.getY() + renderer.getPanOffsetY() - 40) / squareSize);
-        
+            
             // Ensure the adjusted coordinates are within valid grid bounds
             x = Math.min(Math.max(0, x), renderer.getCols() - 1);
             y = Math.min(Math.max(0, y), renderer.getRows() - 1);
@@ -58,8 +60,6 @@ public class MyMouseMotionAdapter extends MouseAdapter {
             if (x >= 0 && x < renderer.getCols() && y >= 0 && y < renderer.getRows()) { 
 
                 Brush.values()[renderer.getMouseListener().getBrushID()].execute(renderer, y, x);
-                renderer.setLastMouseX(x);
-                renderer.setLastMouseY(y);
                 renderer.getFrame().repaint();
             }
 
