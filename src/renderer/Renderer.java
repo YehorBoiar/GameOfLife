@@ -32,8 +32,8 @@ public class Renderer {
     private final Color BLACK = Color.BLACK;
     private JFrame frame;
     private static Renderer instance;
-    private int rows = 450; // TODO - Handle the case when our grid becomes very large (e.g 1000x1000)
-    private int cols = 450;
+    private int rows = 50; // TODO - Handle the case when our grid becomes very large (e.g 1000x1000)
+    private int cols = 50;
     private boolean[][] grid = new boolean[rows][cols];
     private Logic logic = new Logic(); // instantiate Logic class
     private int lastMouseX = -1;

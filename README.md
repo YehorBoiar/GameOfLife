@@ -28,14 +28,26 @@ git commit -m "Thoughtful message"
 ## File structure
 ```
 └── 📁p2repo
+    └── 📁.vscode
+        └── settings.json
     └── README.md
     └── 📁games
         └── game0.gol
+    └── 📁icons
+        └── Big_Dot.png
+        └── Big_Erase.png
+        └── Dot.png
+        └── Erase.png
+        └── Glider.png
+        └── Twicker.png
     └── 📁src
+        └── 📁brushes
+            └── Brush.java
         └── 📁fileio
             └── Load.java
             └── Save.java
         └── 📁input
+            └── MenuListener.java
             └── MyKeyAdapter.java
             └── MyMouseListener.java
             └── MyMouseMotionAdapter.java
