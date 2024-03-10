@@ -3,6 +3,11 @@ package renderer;
 import ui.ButtonPanel;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Rectangle;
+import java.awt.geom.Line2D;
+import java.awt.geom.Rectangle2D;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import input.MyKeyAdapter;
@@ -36,7 +41,7 @@ public class Renderer {
     private int lastMouseY = -1;
     private int panOffsetX = 0;
     private int panOffsetY = 0;
-    private int squareSize;
+    private double squareSize;
 
     /**
      * Private constructor to create a new instance of the Renderer class.
@@ -85,9 +90,13 @@ public class Renderer {
         @Override
         protected void paintComponent(Graphics g) {
             super.paintComponent(g);
-            drawSquares(g);
-            if (!gameState) {
-                drawGrid(g);
+        
+            if (g instanceof Graphics2D) {
+                Graphics2D g2d = (Graphics2D) g;
+                drawSquares(g2d);
+                if (!gameState) {
+                    drawGrid(g2d);
+                }
             }
         }
 
@@ -98,48 +107,56 @@ public class Renderer {
      * 
      * @param g
      */
-    private void drawGrid(Graphics g) {
+    private void drawGrid(Graphics2D g) {
+        Graphics2D g2d = (Graphics2D) g.create();
+    
         // Draw vertical grid lines (columns)
         for (int i = 0; i <= cols; i++) {
-            int x = (int) (i * squareSize - panOffsetX);
-            g.setColor(Color.GRAY);
-            g.drawLine(x, 0, x, cols * squareSize);
+            double x = i * squareSize - panOffsetX;
+            g2d.setColor(Color.GRAY);
+            Line2D.Double line = new Line2D.Double(x, 0, x, frame.getHeight()); // Fix here
+            g2d.draw(line);
         }
-
+    
         // Draw horizontal grid lines (rows)
         for (int j = 0; j <= rows; j++) {
-            int y = (int) (j * squareSize - panOffsetY);
-            g.setColor(Color.GRAY);
-            g.drawLine(0, y, rows * squareSize, y);
+            double y = j * squareSize - panOffsetY;
+            g2d.setColor(Color.GRAY);
+            Line2D.Double line = new Line2D.Double(0, y, frame.getWidth(), y); // Fix here
+            g2d.draw(line);
         }
+    
+        g2d.dispose();
     }
-
     /**
      * Draws squares on the panel based on the current state of the grid.
      *
      * @param g The Graphics object used for drawing.
      */
-    public void drawSquares(Graphics g) {
-
+    public void drawSquares(Graphics2D g) {
+        Graphics2D g2d = (Graphics2D)g.create();
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
-                int x = (int) (j * squareSize - panOffsetX);
-                int y = (int) (i * squareSize - panOffsetY);
+                double x = j * squareSize - panOffsetX;
+                double y = i * squareSize - panOffsetY;
 
                 if (grid[i][j]) {
                     // Set color of squares in the rainbow sequence
                     Color rainbowColor = getRainbowColor(i, j);
-                    g.setColor(rainbowColor);
-                    g.fillRect(x, y, squareSize, squareSize);
+                    g2d.setColor(rainbowColor);
+                    Rectangle2D.Double rect = new Rectangle2D.Double(x, y, squareSize, squareSize);
+                    g2d.fill(rect);
                 }
             }
         }
+
+        g2d.dispose();
     }
 
-    public int calcSquareSize(){
-        double squareSize = frame.getHeight()/cols * zoomFactor;
+    public double calcSquareSize(){
+        double squareSize = (double) frame.getHeight()/cols * zoomFactor;
         System.out.println(squareSize);
-        return (int) squareSize;
+        return squareSize;
     }
 
     /**
@@ -289,11 +306,11 @@ public boolean[][] reverseElements(int startRow, int startColumn, boolean[][] el
         return mouseListener;
     }
 
-    public int getSquareSize() {
+    public double getSquareSize() {
         return squareSize;
     }
 
-    public void setSquareSize(int squareSize) {
+    public void setSquareSize(double squareSize) {
         this.squareSize = squareSize;
     }
 

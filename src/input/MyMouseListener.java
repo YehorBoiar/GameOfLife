@@ -42,7 +42,7 @@ public class MyMouseListener extends MouseAdapter {
             renderer.setLastMouseX(e.getX());
             renderer.setLastMouseY(e.getY());
         } else {
-            int squareSize = renderer.calcSquareSize();
+            double squareSize = renderer.calcSquareSize();
 
             int x = (int) ((e.getX() + renderer.getPanOffsetX()) / squareSize);
             int y = (int) ((e.getY() + renderer.getPanOffsetY() - 40) / squareSize);
