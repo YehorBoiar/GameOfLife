@@ -5,6 +5,7 @@ import java.awt.event.KeyEvent;
 import fileio.Load;
 import fileio.Save;
 import renderer.Renderer;
+import input.PanningHandler;
 
 
 /**
@@ -12,13 +13,15 @@ import renderer.Renderer;
  */
 public class MyKeyAdapter extends KeyAdapter {
     private Renderer renderer;
-    private final int MOVE = 50; 
+    //private final int MOVE = 50; 
     private ZoomHandler zoomHandler;
+    private PanningHandler panHandler;
 
     public MyKeyAdapter(Renderer renderer) {
         this.renderer = renderer;
 
         zoomHandler = new ZoomHandler(renderer);
+        panHandler = new PanningHandler(renderer);
     }
     //TODO add zoom in and zoom out hotkeys
     /**
@@ -50,16 +53,16 @@ public class MyKeyAdapter extends KeyAdapter {
             System.exit(0);
         }
         if (keyCode == KeyEvent.VK_RIGHT) {
-            rightPan();
+            panHandler.rightPan();
         }
         if (keyCode == KeyEvent.VK_LEFT) {
-            leftPan();
+            panHandler.leftPan();
         }
         if (keyCode == KeyEvent.VK_DOWN) {
-            downPan();
+            panHandler.downPan();
         }
         if (keyCode == KeyEvent.VK_UP) {
-            upPan();
+            panHandler.upPan();
         }
         if (keyCode == KeyEvent.VK_1) {
             renderer.getMouseListener().setBrushID(0);
@@ -80,11 +83,11 @@ public class MyKeyAdapter extends KeyAdapter {
             renderer.getMouseListener().setBrushID(5);
         }
 
-        if (e.isControlDown() && keyCode == KeyEvent.VK_UP) {
+        if (keyCode == KeyEvent.VK_EQUALS) {
             zoomHandler.updateZoom(renderer.getZoomFactor() * 1.1, renderer);
         }
 
-        if (e.isControlDown() && keyCode == KeyEvent.VK_DOWN) {
+        if (keyCode == KeyEvent.VK_MINUS) {
             zoomHandler.updateZoom(renderer.getZoomFactor() * 0.9, renderer);
         }
     }
@@ -96,81 +99,7 @@ public class MyKeyAdapter extends KeyAdapter {
         System.out.println("Display button panel: " + !showButtons);
     }
 
-    private void leftPan() {
-        
-
-        // Calculate the new pan offset
-        int newPanOffsetX = renderer.getPanOffsetX() - MOVE;
-
-        // Check if the new pan offset is within bounds
-        if (newPanOffsetX >= 0) {
-            renderer.setPanOffsetX(newPanOffsetX);
-            renderer.getFrame().repaint();
-        } else {
-            // If moving out of bounds, set the pan offset to the minimum allowed
-            renderer.setPanOffsetX(0);
-            renderer.getFrame().repaint();
-        }
-    }
-
-    private void rightPan() {
-        
-
-        // Calculate the maximum pan offset to prevent panning beyond the rightmost edge
-        // of the grid
-        int maxPanOffsetX = (int) ((renderer.getCols() * renderer.calcSquareSize())
-                - renderer.getFrame().getWidth());
-
-        // Calculate the new pan offset
-        int newPanOffsetX = renderer.getPanOffsetX() + MOVE;
-
-        // Check if the new pan offset is within bounds
-        if (newPanOffsetX <= maxPanOffsetX) {
-            renderer.setPanOffsetX(newPanOffsetX);
-            renderer.getFrame().repaint();
-        } else {
-            // If moving out of bounds, set the pan offset to the maximum allowed
-            renderer.setPanOffsetX(maxPanOffsetX);
-            renderer.getFrame().repaint();
-        }
-    }
-
-    private void downPan() {
-        // Calculate the maximum pan offset to prevent panning beyond the bottom edge of
-        // the grid
-        int maxPanOffsetY = (int) ((renderer.getRows() * renderer.calcSquareSize())
-                - renderer.getFrame().getHeight());
-
-        // Calculate the new pan offset
-        int newPanOffsetY = renderer.getPanOffsetY() + MOVE;
-
-        // Check if the new pan offset is within bounds
-        if (newPanOffsetY <= maxPanOffsetY) {
-            renderer.setPanOffsetY(newPanOffsetY);
-            renderer.getFrame().repaint();
-        } else {
-            // If moving out of bounds, set the pan offset to the maximum allowed
-            renderer.setPanOffsetY(maxPanOffsetY);
-            renderer.getFrame().repaint();
-        }
-    }
-
-    private void upPan() {
-        
     
-        // Calculate the new pan offset
-        int newPanOffsetY = renderer.getPanOffsetY() - MOVE;
-    
-        // Check if the new pan offset is within bounds
-        if (newPanOffsetY >= 0) {
-            renderer.setPanOffsetY(newPanOffsetY);
-            renderer.getFrame().repaint();
-        } else {
-            // If moving out of bounds, set the pan offset to the minimum allowed
-            renderer.setPanOffsetY(0);
-            renderer.getFrame().repaint();
-        }
-    }
 
     private void toggleGameState() {
         renderer.setGameState(!renderer.getGameState());
