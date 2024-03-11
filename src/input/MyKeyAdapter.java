@@ -13,9 +13,12 @@ import renderer.Renderer;
 public class MyKeyAdapter extends KeyAdapter {
     private Renderer renderer;
     private final int MOVE = 50; 
+    private ZoomHandler zoomHandler;
 
     public MyKeyAdapter(Renderer renderer) {
         this.renderer = renderer;
+
+        zoomHandler = new ZoomHandler(renderer);
     }
     //TODO add zoom in and zoom out hotkeys
     /**
@@ -75,6 +78,14 @@ public class MyKeyAdapter extends KeyAdapter {
         }
         if (keyCode == KeyEvent.VK_6) {
             renderer.getMouseListener().setBrushID(5);
+        }
+
+        if (e.isControlDown() && keyCode == KeyEvent.VK_UP) {
+            zoomHandler.updateZoom(renderer.getZoomFactor() * 1.1, renderer);
+        }
+
+        if (e.isControlDown() && keyCode == KeyEvent.VK_DOWN) {
+            zoomHandler.updateZoom(renderer.getZoomFactor() * 0.9, renderer);
         }
     }
 
