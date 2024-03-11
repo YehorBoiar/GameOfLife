@@ -13,7 +13,7 @@ public class Save {
         try {
             File saveDir = new File("games");
             
-            File[] files = saveDir.listFiles(); // TODO - handle the case when user inputs the directory path
+            File[] files = saveDir.listFiles(); 
         
             String filename = saveDir.getPath() + "/" + "game" +files.length + ".gol";
             File file = new File(filename);

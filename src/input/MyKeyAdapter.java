@@ -18,7 +18,6 @@ public class MyKeyAdapter extends KeyAdapter {
         this.renderer = renderer;
     }
     //TODO add zoom in and zoom out hotkeys
-    //TODO add accelerate and decelarate hotkeys
     /**
      * In this method we add hotkeys we want to have,
      * and assign functionality to them.
