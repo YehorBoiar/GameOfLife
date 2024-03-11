@@ -3,6 +3,7 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 import main.Main;
+import input.ZoomHandler;
 import fileio.Load;
 import fileio.Save;
 import renderer.Renderer;
@@ -23,6 +24,8 @@ public class ButtonPanel extends JPanel implements ActionListener{
     private JButton saveButton;
     private JButton loadButton;
     private JButton exitButton;
+    private JButton zoomInButton;
+    private JButton zoomOutButton;
     private Renderer renderer;
 
     /**
@@ -42,10 +45,12 @@ public class ButtonPanel extends JPanel implements ActionListener{
         saveButton = new JButton("Save");
         loadButton = new JButton("Load");
         exitButton = new JButton("Exit");
+        zoomInButton = new JButton("Zoom In");
+        zoomOutButton = new JButton("Zoom Out");
 
         menu = new StructuresMenu(configButton, renderer);
 
-        JButton[] buttons = {configButton,startButton,stopButton,speedUpButton,slowDownButton,saveButton,loadButton,exitButton};
+        JButton[] buttons = {configButton,startButton,stopButton,speedUpButton,slowDownButton,saveButton,loadButton,exitButton, zoomInButton, zoomOutButton};
 
         for (int i = 0; i < buttons.length; i++ ) {
             buttons[i].setBackground(Color.RED);
@@ -99,7 +104,15 @@ public class ButtonPanel extends JPanel implements ActionListener{
             System.exit(0);
         }
 
+        if (e.getSource() == zoomInButton) {
+            ZoomHandler zoom = new ZoomHandler(renderer);
+            zoom.updateZoom(renderer.getZoomFactor() * 1.1, renderer);
+        }
 
+        if ((e.getSource() == zoomOutButton)) {
+            ZoomHandler zoom = new ZoomHandler(renderer);
+            zoom.updateZoom(renderer.getZoomFactor() * 0.9, renderer);
+        }
          
     }
 
