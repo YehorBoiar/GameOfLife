@@ -58,20 +58,18 @@ public class ButtonPanel extends JPanel implements ActionListener{
             buttons[i].setFocusable(false);
             add(buttons[i]);
         }
-        
-        configButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent ae){
-                menu.show(configButton, 0, configButton.getHeight());
-            }
-        });
-    }
+    
+    } 
 
     /**
      * Invoked when a button is clicked, performs actions based on the clicked button.
      * @param e The ActionEvent associated with the button click.
      */
     public void actionPerformed(ActionEvent e) {
+
+        if (e.getSource() == configButton) {
+            menu.show(configButton, 0, configButton.getHeight());
+        }
 
         if (e.getSource() == startButton) {
             renderer.setGameState(true);
