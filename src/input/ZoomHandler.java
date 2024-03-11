@@ -40,15 +40,8 @@ public class ZoomHandler implements MouseWheelListener {
             newZoomFactor = renderer.getZoomFactor() / 1.1;
         }
 
-        // Limit the zoom factor to the minimum value
-        newZoomFactor = Math.max(1.0, newZoomFactor);
+       updateZoom(newZoomFactor,renderer); 
 
-        // Update the zoom factor and repaint
-        renderer.setZoomFactor(newZoomFactor);
-        renderer.setSquareSize(renderer.calcSquareSize());
-        System.out.println("Square size: " + renderer.getSquareSize());
-        updatePanOffsets();
-        renderer.getFrame().repaint();
     }
     
     private void updatePanOffsets() {
@@ -61,6 +54,18 @@ public class ZoomHandler implements MouseWheelListener {
         if (renderer.getPanOffsetY() > maxPanOffsetY) {
             renderer.setPanOffsetY(maxPanOffsetY);
         }
+    }
+
+    public void updateZoom(double newZoomFactor, Renderer renderer) {
+        // Limit the zoom factor to the minimum value
+        newZoomFactor = Math.max(1.0, newZoomFactor);
+
+        // Update the zoom factor and repaint
+        renderer.setZoomFactor(newZoomFactor);
+        renderer.setSquareSize(renderer.calcSquareSize());
+        System.out.println("Square size: " + renderer.getSquareSize());
+        updatePanOffsets();
+        renderer.getFrame().repaint();
     }
 
 }
