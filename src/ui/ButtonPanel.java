@@ -27,6 +27,7 @@ public class ButtonPanel extends JPanel implements ActionListener{
     private JButton zoomInButton;
     private JButton zoomOutButton;
     private Renderer renderer;
+    private ZoomHandler zoomHandler;
 
     /**
      * Constructs a ButtonPanel with specified buttons and associates it with a renderer.
@@ -47,6 +48,7 @@ public class ButtonPanel extends JPanel implements ActionListener{
         exitButton = new JButton("Exit");
         zoomInButton = new JButton("Zoom In");
         zoomOutButton = new JButton("Zoom Out");
+   zoomHandler = new ZoomHandler(renderer);     
 
         menu = new StructuresMenu(configButton, renderer);
 
@@ -103,13 +105,12 @@ public class ButtonPanel extends JPanel implements ActionListener{
         }
 
         if (e.getSource() == zoomInButton) {
-            ZoomHandler zoom = new ZoomHandler(renderer);
-            zoom.updateZoom(renderer.getZoomFactor() * 1.1, renderer);
+            zoomHandler.updateZoom(renderer.getZoomFactor() * 1.1, renderer);
         }
 
         if ((e.getSource() == zoomOutButton)) {
-            ZoomHandler zoom = new ZoomHandler(renderer);
-            zoom.updateZoom(renderer.getZoomFactor() * 0.9, renderer);
+            ZoomHandler zoomHandler = new ZoomHandler(renderer);
+            zoomHandler.updateZoom(renderer.getZoomFactor() * 0.9, renderer);
         }
          
     }
