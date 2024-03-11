@@ -113,7 +113,7 @@ public class Renderer {
         for (int i = 0; i <= cols; i++) {
             double x = i * squareSize - panOffsetX;
             g2d.setColor(Color.GRAY);
-            Line2D.Double line = new Line2D.Double(x, 0, x, frame.getHeight()); // Fix here
+            Line2D.Double line = new Line2D.Double(x, 0, x, frame.getHeight()); 
             g2d.draw(line);
         }
     
@@ -121,7 +121,7 @@ public class Renderer {
         for (int j = 0; j <= rows; j++) {
             double y = j * squareSize - panOffsetY;
             g2d.setColor(Color.GRAY);
-            Line2D.Double line = new Line2D.Double(0, y, frame.getWidth(), y); // Fix here
+            Line2D.Double line = new Line2D.Double(0, y, frame.getWidth(), y); 
             g2d.draw(line);
         }
     
