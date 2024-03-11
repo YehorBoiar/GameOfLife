@@ -56,6 +56,12 @@ public class ZoomHandler implements MouseWheelListener {
         }
     }
 
+    /** 
+     * Updates the zoom factor as well as the grid size and square size. 
+     * 
+     * @param newZoomFactor The desired zoom factor to change to.
+     * @param renderer The Renderer associated with this handler.
+     */
     public void updateZoom(double newZoomFactor, Renderer renderer) {
         // Limit the zoom factor to the minimum value
         newZoomFactor = Math.max(1.0, newZoomFactor);

@@ -1,7 +1,9 @@
 package renderer;
 
 import ui.ButtonPanel;
+import ui.PanPanel;
 import java.awt.Color;
+import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.geom.Line2D;
@@ -24,6 +26,7 @@ import logic.Logic;
  */
 public class Renderer {
     private JPanel buttonPanel;
+    private JPanel panPanel;
     private MyMouseListener mouseListener;
     private JPanel mainPanel;
     private double zoomFactor = 1.0;
@@ -69,8 +72,10 @@ public class Renderer {
         frame.addMouseWheelListener(new ZoomHandler(this));
 
         mainPanel = new MyPanel();
+        panPanel = new PanPanel(this);
         buttonPanel = new ButtonPanel(this);
         mainPanel.add(buttonPanel);
+        mainPanel.add(panPanel);
         frame.add(mainPanel);
 
         frame.setResizable(false);

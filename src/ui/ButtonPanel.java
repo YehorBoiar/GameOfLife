@@ -37,7 +37,7 @@ public class ButtonPanel extends JPanel implements ActionListener{
         setBackground(Color.BLACK);
         this.renderer = renderer;
 
-        //TODO add zoom button and back to the start menu button.
+        //TODO add back to the start menu button.
         configButton = new JButton("Config");
         startButton = new JButton("Start");
         stopButton = new JButton("Stop");
@@ -48,8 +48,8 @@ public class ButtonPanel extends JPanel implements ActionListener{
         exitButton = new JButton("Exit");
         zoomInButton = new JButton("Zoom In");
         zoomOutButton = new JButton("Zoom Out");
-   zoomHandler = new ZoomHandler(renderer);     
 
+        zoomHandler = new ZoomHandler(renderer);     
         menu = new StructuresMenu(configButton, renderer);
 
         JButton[] buttons = {configButton,startButton,stopButton,speedUpButton,slowDownButton,saveButton,loadButton,exitButton, zoomInButton, zoomOutButton};
