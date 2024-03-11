@@ -8,7 +8,7 @@ public enum Brush {
     ERASE(new boolean[][]{{false}}),
     BIG_ERASE(new boolean[][] {{false, false, false}, {false, false, false}, {false, false, false}}),
     GLIDER(new boolean[][]{{true, true, true}, {false, false, true}, {false, true, false}}),
-    TWICKER(new boolean[][]{{false, false, false}, {true, true, true}, {false, false, false}});
+    TWICKER(new boolean[][]{{true, true, true}});
 
     private final boolean[][] elements;
 
