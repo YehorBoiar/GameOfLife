@@ -7,6 +7,7 @@ import renderer.Renderer;
 
 public class PanningHandler extends MouseAdapter {
     private Renderer renderer;
+    private final int PAN_DISTANCE = 50; 
     
 
     public PanningHandler(Renderer renderer) {
@@ -25,25 +26,31 @@ public class PanningHandler extends MouseAdapter {
         int deltaX = e.getX() - renderer.getLastMouseX();
         int deltaY = e.getY() - renderer.getLastMouseY();
     
-        // Adjust the pan offset based on the dragging movement
-        int newPanOffsetX = renderer.getPanOffsetX() - deltaX;
-        int newPanOffsetY = renderer.getPanOffsetY() - deltaY;
-    
-        // Update the pan offset within bounds
-        newPanOffsetX = Math.max(0, Math.min(newPanOffsetX, getMaxPanOffsetX()));
-        newPanOffsetY = Math.max(0, Math.min(newPanOffsetY, getMaxPanOffsetY()));
-    
-        // Set the new pan offset and repaint
-        renderer.setPanOffsetX(newPanOffsetX);
-        renderer.setPanOffsetY(newPanOffsetY);
-        renderer.getFrame().repaint();
-    
         // Update the last mouse coordinates for the next drag event
         renderer.setLastMouseX(e.getX());
         renderer.setLastMouseY(e.getY());
+
+        updatePanOffset(deltaX, deltaY);
     }
 
     // Rest of the code remains unchanged
+
+    public void updatePanOffset(int deltaX,int deltaY) {
+
+         // Adjust the pan offset based on the dragging movement
+         int newPanOffsetX = renderer.getPanOffsetX() - deltaX;
+         int newPanOffsetY = renderer.getPanOffsetY() - deltaY;
+     
+         // Update the pan offset within bounds
+         newPanOffsetX = Math.max(0, Math.min(newPanOffsetX, getMaxPanOffsetX()));
+         newPanOffsetY = Math.max(0, Math.min(newPanOffsetY, getMaxPanOffsetY()));
+     
+         // Set the new pan offset and repaint
+         renderer.setPanOffsetX(newPanOffsetX);
+         renderer.setPanOffsetY(newPanOffsetY);
+         renderer.getFrame().repaint();
+
+    }
 
     private int getMaxPanOffsetX() {
         return (int) (renderer.getCols() * renderer.calcSquareSize() - renderer.getFrame().getWidth());
@@ -52,4 +59,29 @@ public class PanningHandler extends MouseAdapter {
     private int getMaxPanOffsetY() {
         return (int) (renderer.getRows() * renderer.calcSquareSize() - renderer.getFrame().getHeight());
     }
+
+    public void leftPan() {
+
+        updatePanOffset(PAN_DISTANCE, 0);
+
+    }
+
+    public void rightPan() {
+
+        updatePanOffset(-PAN_DISTANCE, 0);
+    
+    }
+
+    public void downPan() {
+
+        updatePanOffset(0,-PAN_DISTANCE);
+
+    }
+
+    public void upPan() {
+
+        updatePanOffset(0, PAN_DISTANCE);
+        
+    }
+
 }
