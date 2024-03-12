@@ -33,7 +33,7 @@ public class MyMouseMotionAdapter extends MouseAdapter {
      */
     @Override
     public void mouseDragged(MouseEvent e) {
-        // Check if the left mouse button is pressed (LMB)
+        // Checks if the left mouse button is pressed (LMB)
         if ((e.getModifiersEx() & MouseEvent.BUTTON1_DOWN_MASK) != 0) {
             handleMouseDrag(e);
         }
