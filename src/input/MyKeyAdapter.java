@@ -90,6 +90,10 @@ public class MyKeyAdapter extends KeyAdapter {
         if (keyCode == KeyEvent.VK_MINUS) {
             zoomHandler.updateZoom(renderer.getZoomFactor() * 0.9, renderer);
         }
+
+        if (keyCode == KeyEvent.VK_M) {
+            System.out.println("Main menu");
+        }
     }
 
     private void displayButtons(){
