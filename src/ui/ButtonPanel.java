@@ -39,7 +39,6 @@ public class ButtonPanel extends JPanel implements ActionListener{
         setBackground(Color.BLACK);
         this.renderer = renderer;
 
-        //TODO change functionality of back to menu button to send user to menu
         presetButton = new JButton("Presets");
         startButton = new JButton("Start");
         stopButton = new JButton("Stop");
@@ -108,7 +107,16 @@ public class ButtonPanel extends JPanel implements ActionListener{
         }
 
         if (e.getSource() == mainMenuButton) {
-            System.out.println("Main menu");
+
+            renderer.getFrame().setVisible(false);
+            
+            GameMenu mainMenu = GameMenu.getInstance();
+
+            mainMenu.setVisible(true);
+
+
+
+
         }
 
         if (e.getSource() == zoomInButton) {
