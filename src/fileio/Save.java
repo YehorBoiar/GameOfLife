@@ -2,6 +2,7 @@ package fileio;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.Writer;
+import java.io.IOException;
 
 public class Save {
     private boolean[][] grid;
@@ -31,10 +32,11 @@ public class Save {
                 writer.write("\n");
             }
             writer.close();
-        } catch (Exception e) {
-            System.out.println("aboba"); // TODO - handle it
+        } catch (IOException e) {
+            System.out.println("Game save was unsuccessful: " + e.getMessage());
         }
     }
 
 
 }
+
