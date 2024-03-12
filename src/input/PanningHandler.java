@@ -5,6 +5,11 @@ import java.awt.event.MouseEvent;
 
 import renderer.Renderer;
 
+/**
+ * Custom MouseAdapter for handling panning events in the Renderer.
+ * This listener allows panning across the frame using the mouse drags.
+ */
+
 public class PanningHandler extends MouseAdapter {
     private Renderer renderer;
     private final int PAN_DISTANCE = 50; 
@@ -16,7 +21,7 @@ public class PanningHandler extends MouseAdapter {
 
     @Override
     public void mouseDragged(MouseEvent e) {
-        // Check if the right mouse button is pressed (RMB)
+        // Checks if the right mouse button is pressed (RMB)
         if ((e.getModifiersEx() & MouseEvent.BUTTON3_DOWN_MASK) != 0) {
             handleRMBDrag(e);
         }
@@ -26,26 +31,29 @@ public class PanningHandler extends MouseAdapter {
         int deltaX = e.getX() - renderer.getLastMouseX();
         int deltaY = e.getY() - renderer.getLastMouseY();
     
-        // Update the last mouse coordinates for the next drag event
+        // Updates the last mouse coordinates for the next drag event
         renderer.setLastMouseX(e.getX());
         renderer.setLastMouseY(e.getY());
 
         updatePanOffset(deltaX, deltaY);
     }
 
-    // Rest of the code remains unchanged
+    /**
+     * This method adjusts the pan offset based on the dragging movement, 
+     * updates the pan offset within bounds and then sets the new pan offset and repaints.
+     * 
+     * @param deltaX The change in x coordinate.
+     * @param deltaY The change in y coordinate.
+     */
 
     public void updatePanOffset(int deltaX,int deltaY) {
 
-         // Adjust the pan offset based on the dragging movement
          int newPanOffsetX = renderer.getPanOffsetX() - deltaX;
          int newPanOffsetY = renderer.getPanOffsetY() - deltaY;
      
-         // Update the pan offset within bounds
          newPanOffsetX = Math.max(0, Math.min(newPanOffsetX, getMaxPanOffsetX()));
          newPanOffsetY = Math.max(0, Math.min(newPanOffsetY, getMaxPanOffsetY()));
-     
-         // Set the new pan offset and repaint
+    
          renderer.setPanOffsetX(newPanOffsetX);
          renderer.setPanOffsetY(newPanOffsetY);
          renderer.getFrame().repaint();
