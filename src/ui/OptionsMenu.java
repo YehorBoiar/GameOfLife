@@ -1,0 +1,233 @@
+package ui;
+
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JButton;
+import javax.swing.JTextField;
+import javax.swing.JOptionPane;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
+
+import java.awt.*;
+
+public class OptionsMenu extends JFrame implements ActionListener {
+
+    private static OptionsMenu theOptions;
+    private JPanel optionsPanel;
+    private JPanel textPanel;
+
+    private JTextField XField;
+    private JTextField YField;
+    private JTextField ZField;
+
+    private JLabel XLabel;
+    private JLabel YLabel;
+    private JLabel ZLabel;
+
+    private JButton backToGameMenu;
+    private GridBagConstraints gbc = new GridBagConstraints();
+
+    // default values
+    private int xValue = 2;
+    private int yValue = 3;
+    private int zValue = 3;
+
+    // getters
+    public int getX() {
+        return this.xValue;
+    }
+
+    public int getY() {
+        return this.yValue;
+    }
+
+    public int getZ() {
+        return this.zValue;
+    }
+
+    // return singleton instance
+    public static synchronized OptionsMenu getInstance() {
+        if (theOptions == null) {
+            theOptions = new OptionsMenu();
+        }
+        return theOptions;
+    }
+
+    private OptionsMenu() {
+
+        configFrame();
+
+        XLabel = makeLabel("X:");
+        YLabel = makeLabel("Y:");
+        ZLabel = makeLabel("Z:");
+
+        XField = makeTextField("2");
+        YField = makeTextField("3");
+        ZField = makeTextField("3");
+
+        configPanels();
+        configBackToMenuButton();
+
+    }
+
+    private void configFrame() {
+
+        setTitle("Options Menu");
+        setSize(1000, 1000);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLayout(new GridLayout());
+
+    }
+
+    private JLabel makeLabel(String labelName) {
+
+        JLabel label = new JLabel(labelName);
+
+        Font labelFont = new Font("Arial", Font.BOLD, 19);
+
+        label.setForeground(Color.WHITE);
+        label.setPreferredSize(new Dimension(50, 30));
+        label.setFont(labelFont);
+
+        return label;
+    }
+
+    private JTextField makeTextField(String defaultValue) {
+
+        JTextField field = new JTextField(defaultValue);
+
+        field.addActionListener(this);
+        field.addFocusListener(null);
+        field.setPreferredSize(new Dimension(100, 30));
+
+        field.addFocusListener(new FocusListener() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                if (field.getText().equals(defaultValue)) {
+                    field.setText("");
+                }
+            }
+
+            @Override
+            public void focusLost(FocusEvent e) {
+
+                if (field.getText().isEmpty()) {
+                    field.setText(defaultValue);
+                }
+            }
+        });
+
+        return field;
+
+    }
+
+    private int validateInput(JTextField field, int defaultValue) {
+
+        int value;
+
+        try {
+
+            int input = Integer.parseInt(field.getText());
+
+            if (!(input < 0 || input > 8)) {
+
+                value = input;
+
+                return value;
+            } else {
+                throw new NumberFormatException();
+            }
+
+        } catch (NumberFormatException ex) {
+
+            JOptionPane.showMessageDialog(null, "Enter an integer between 0-8");
+
+        }
+
+        return defaultValue;
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+
+        if (e.getSource() == XField) {
+
+            xValue = validateInput(XField, xValue);
+
+        }
+
+        if (e.getSource() == YField) {
+
+            yValue = validateInput(YField, yValue);
+
+        }
+
+        if (e.getSource() == ZField) {
+
+            zValue = validateInput(ZField, zValue);
+
+        }
+
+    }
+
+    private void configPanels() {
+
+        optionsPanel = new JPanel(new GridBagLayout());
+        optionsPanel.setBackground(Color.BLACK);
+
+        gbc.anchor = GridBagConstraints.CENTER;
+        gbc.gridwidth = GridBagConstraints.REMAINDER;
+        gbc.insets = new Insets(0, 0, 10, 0);
+
+        optionsPanel.add(XLabel);
+        optionsPanel.add(XField, gbc);
+        optionsPanel.add(YLabel);
+        optionsPanel.add(YField, gbc);
+        optionsPanel.add(ZLabel);
+        optionsPanel.add(ZField, gbc);
+
+        textPanel = new JPanel(new GridBagLayout());
+        textPanel.setBackground(Color.BLACK);
+
+        String paragraph = "<html>A live cell with fewer than X live neighbours dies <br>"
+                + "A live cell with X to Y live neighbours remains live <br>"
+                + "A live cell with more than Y live neighbours dies <br>"
+                + "A dead cell with exactly Z live neighbours becomes live</html>";
+
+        JLabel rules = new JLabel(paragraph);
+
+        Font customFont = new Font("Arial", Font.PLAIN, 17);
+        rules.setFont(customFont);
+        rules.setForeground(Color.WHITE);
+
+        textPanel.add(rules);
+
+        add(optionsPanel);
+        add(textPanel);
+
+    }
+
+    private void configBackToMenuButton() {
+
+        backToGameMenu = new JButton("Back to Main Menu");
+
+        backToGameMenu.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent a) {
+                setVisible(false);
+
+                GameMenu mainMenu = GameMenu.getInstance();
+
+                mainMenu.setVisible(true);
+            }
+        });
+
+        optionsPanel.add(backToGameMenu, gbc);
+    }
+
+}
