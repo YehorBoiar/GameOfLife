@@ -20,7 +20,7 @@ public class GameMenu extends JFrame {
 
     private GameMenu() {
 
-        setTitle("Game Menu");
+        setTitle("Main Menu");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(1000, 1000);
         configPanel();
