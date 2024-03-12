@@ -23,10 +23,8 @@ public class MyKeyAdapter extends KeyAdapter {
         zoomHandler = new ZoomHandler(renderer);
         panHandler = new PanningHandler(renderer);
     }
-    //TODO add zoom in and zoom out hotkeys
     /**
-     * In this method we add hotkeys we want to have,
-     * and assign functionality to them.
+     * In this method we add hotkeys and assign each a specific functionality.
      */
     @Override
     public void keyPressed(KeyEvent e) {
@@ -96,6 +94,9 @@ public class MyKeyAdapter extends KeyAdapter {
         }
     }
 
+    /**
+     * This method is responsible for displaying and hiding the button panels. 
+     */
     private void displayButtons(){
         boolean showButtons = renderer.isShowButtons();
         renderer.setShowButtons(!showButtons);
@@ -104,7 +105,9 @@ public class MyKeyAdapter extends KeyAdapter {
     }
 
     
-
+    /**
+     * This method is responsible for stopping and starting the game.
+     */
     private void toggleGameState() {
         renderer.setGameState(!renderer.getGameState());
         System.out.println("Game State toggled to: " + renderer.getGameState());
