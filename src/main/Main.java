@@ -2,8 +2,8 @@ package main;
 
 import javax.swing.Timer;
 import renderer.Renderer;
-import renderer.GameMenu;
-import renderer.OptionsMenu;
+import ui.GameMenu;
+import ui.OptionsMenu;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 

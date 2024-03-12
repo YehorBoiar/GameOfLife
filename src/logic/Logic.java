@@ -1,6 +1,6 @@
 package logic;
 
-import renderer.OptionsMenu;
+import ui.OptionsMenu;
 
 /**
  * Represents the logic for updating the Game of Life grid based on 
