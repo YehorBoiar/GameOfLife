@@ -26,8 +26,10 @@ public class ButtonPanel extends JPanel implements ActionListener{
     private JButton exitButton;
     private JButton zoomInButton;
     private JButton zoomOutButton;
+    private JButton mainMenuButton;
     private Renderer renderer;
     private ZoomHandler zoomHandler;
+
 
     /**
      * Constructs a ButtonPanel with specified buttons and associates it with a renderer.
@@ -46,13 +48,14 @@ public class ButtonPanel extends JPanel implements ActionListener{
         saveButton = new JButton("Save");
         loadButton = new JButton("Load");
         exitButton = new JButton("Exit");
+        mainMenuButton = new JButton("Main Menu");
         zoomInButton = new JButton("Zoom In");
         zoomOutButton = new JButton("Zoom Out");
 
         zoomHandler = new ZoomHandler(renderer);     
         menu = new StructuresMenu(configButton, renderer);
 
-        JButton[] buttons = {configButton,startButton,stopButton,speedUpButton,slowDownButton,saveButton,loadButton,exitButton, zoomInButton, zoomOutButton};
+        JButton[] buttons = {configButton,startButton,stopButton,speedUpButton,slowDownButton,saveButton,loadButton,exitButton, mainMenuButton, zoomInButton, zoomOutButton};
 
         for (int i = 0; i < buttons.length; i++ ) {
             buttons[i].setBackground(Color.RED);
@@ -102,6 +105,10 @@ public class ButtonPanel extends JPanel implements ActionListener{
 
         if (e.getSource() == exitButton) {
             System.exit(0);
+        }
+
+        if (e.getSource() == mainMenuButton) {
+            System.out.println("Main menu");
         }
 
         if (e.getSource() == zoomInButton) {
