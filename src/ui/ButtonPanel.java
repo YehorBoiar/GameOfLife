@@ -16,7 +16,7 @@ import java.awt.event.ActionListener;
  */
 public class ButtonPanel extends JPanel implements ActionListener{
     private StructuresMenu menu;
-    private JButton configButton;
+    private JButton presetButton;
     private JButton startButton;
     private JButton stopButton;
     private JButton speedUpButton;
@@ -39,8 +39,8 @@ public class ButtonPanel extends JPanel implements ActionListener{
         setBackground(Color.BLACK);
         this.renderer = renderer;
 
-        //TODO add back to the start menu button.
-        configButton = new JButton("Config");
+        //TODO change functionality of back to menu button to send user to menu
+        presetButton = new JButton("Presets");
         startButton = new JButton("Start");
         stopButton = new JButton("Stop");
         speedUpButton = new JButton("Speed");
@@ -53,9 +53,9 @@ public class ButtonPanel extends JPanel implements ActionListener{
         zoomOutButton = new JButton("Zoom Out");
 
         zoomHandler = new ZoomHandler(renderer);     
-        menu = new StructuresMenu(configButton, renderer);
+        menu = new StructuresMenu(presetButton, renderer);
 
-        JButton[] buttons = {configButton,startButton,stopButton,speedUpButton,slowDownButton,saveButton,loadButton,exitButton, mainMenuButton, zoomInButton, zoomOutButton};
+        JButton[] buttons = {presetButton,startButton,stopButton,speedUpButton,slowDownButton,saveButton,loadButton,exitButton, mainMenuButton, zoomInButton, zoomOutButton};
 
         for (int i = 0; i < buttons.length; i++ ) {
             buttons[i].setBackground(Color.RED);
@@ -72,8 +72,8 @@ public class ButtonPanel extends JPanel implements ActionListener{
      */
     public void actionPerformed(ActionEvent e) {
 
-        if (e.getSource() == configButton) {
-            menu.show(configButton, 0, configButton.getHeight());
+        if (e.getSource() == presetButton) {
+            menu.show(presetButton, 0, presetButton.getHeight());
         }
 
         if (e.getSource() == startButton) {
