@@ -1,25 +1,47 @@
 package main;
+
+import javax.swing.Timer;
 import renderer.Renderer;
+import renderer.GameMenu;
+import renderer.OptionsMenu;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class Main {
     private static int speed = 100;
+
     public static void main(String[] args) {
+
+        OptionsMenu.getInstance();
+
+        GameMenu menu = GameMenu.getInstance();
+        menu.setVisible(true);
+
+    }
+
+    public static void startGame() {
+
         Renderer renderer = Renderer.getInstance();
 
-        while (true) {
-            renderer.updateGrid();
-            try {
-                Thread.sleep(speed); // Add a delay to observe the changes
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+
+        Timer timer = new Timer(speed, new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                renderer.updateGrid();
             }
-        }
+
+        });
+
+        timer.start();
+
     }
 
     public static void speedUp() {
         if (speed >= 20) {
             speed -= 10;
-        }else{
+        } else {
             System.out.println("You've reached the limit!");
         }
     }

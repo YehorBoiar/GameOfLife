@@ -1,13 +1,30 @@
 package logic;
 
+import renderer.OptionsMenu;
+
 /**
  * Represents the logic for updating the Game of Life grid based on 
  * specified rules.
  */
 public class Logic {
-    private int x = 2;
-    private int y = 3;
-    private int z = 3;
+    private int x;
+    private int y;
+    private int z;
+
+    public Logic() {
+
+        OptionsMenu options = OptionsMenu.getInstance();
+
+        setX(options.getX());
+        setY(options.getY());
+        setZ(options.getZ());
+
+    
+        
+    }
+
+
+    
     
 
     public void setX(int x) {
