@@ -18,8 +18,8 @@ public class Load {
 			File file = fd.getFiles()[0];
 
 			if (!getExtension(file.getAbsolutePath()).equals("gol")) {
-				JOptionPane.showMessageDialog(null, "File you've chosen is not .gol file");
-				System.out.println("File you've chosen is not .gol file");
+				JOptionPane.showMessageDialog(null, "The file you've chosen is not .gol file.");
+				System.out.println("The file you've chosen is not .gol file.");
 				return;
 			}
 
@@ -28,7 +28,7 @@ public class Load {
 			renderer.setGrid(gridFromFile);
 			scanner.close();
 		} catch (FileNotFoundException e) {
-			System.out.println("File you've chosen doesn't exist" + e.getMessage());
+			System.out.println("The file you have chosen does not exist:" + e.getMessage());
 		}
 	}
 
