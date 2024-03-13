@@ -3,6 +3,7 @@ package ui;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -12,6 +13,7 @@ import javax.swing.JOptionPane;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 
+import javax.swing.*;
 import java.awt.*;
 
 public class OptionsMenu extends JFrame implements ActionListener {
@@ -23,10 +25,12 @@ public class OptionsMenu extends JFrame implements ActionListener {
     private JTextField XField;
     private JTextField YField;
     private JTextField ZField;
+    private JTextField gridSizeField;
 
     private JLabel XLabel;
     private JLabel YLabel;
     private JLabel ZLabel;
+    private JLabel gridSizeLabel;
 
     private JButton backToGameMenu;
     private GridBagConstraints gbc = new GridBagConstraints();
@@ -35,6 +39,7 @@ public class OptionsMenu extends JFrame implements ActionListener {
     private int xValue = 2;
     private int yValue = 3;
     private int zValue = 3;
+    private int gridSize = 100;
 
     // getters
     public int getX() {
@@ -49,6 +54,10 @@ public class OptionsMenu extends JFrame implements ActionListener {
         return this.zValue;
     }
 
+    public int getGridSize() {
+        return this.gridSize;
+    }
+
     // return singleton instance
     public static synchronized OptionsMenu getInstance() {
         if (theOptions == null) {
@@ -61,13 +70,15 @@ public class OptionsMenu extends JFrame implements ActionListener {
 
         configFrame();
 
-        XLabel = makeLabel("X:");
-        YLabel = makeLabel("Y:");
-        ZLabel = makeLabel("Z:");
+        XLabel = makeLabel("X");
+        YLabel = makeLabel("Y");
+        ZLabel = makeLabel("Z");
+        gridSizeLabel = makeLabel("Grid Size");
 
         XField = makeTextField("2");
         YField = makeTextField("3");
         ZField = makeTextField("3");
+        gridSizeField = makeTextField("100");
 
         configPanels();
         configBackToMenuButton();
@@ -85,12 +96,12 @@ public class OptionsMenu extends JFrame implements ActionListener {
 
     private JLabel makeLabel(String labelName) {
 
-        JLabel label = new JLabel(labelName);
+        JLabel label = new JLabel(labelName, SwingConstants.CENTER);
 
         Font labelFont = new Font("Arial", Font.BOLD, 19);
 
         label.setForeground(Color.WHITE);
-        label.setPreferredSize(new Dimension(50, 30));
+        label.setPreferredSize(new Dimension(110, 30));
         label.setFont(labelFont);
 
         return label;
@@ -172,6 +183,30 @@ public class OptionsMenu extends JFrame implements ActionListener {
 
         }
 
+        if (e.getSource() == gridSizeField) {
+
+            try {
+
+                int input = Integer.parseInt(gridSizeField.getText());
+    
+                if (!(input < 100 || input > 1000)) {
+    
+                    gridSize = input;
+    
+                    
+                } else {
+                    throw new NumberFormatException();
+                }
+    
+            } catch (NumberFormatException ex) {
+    
+                JOptionPane.showMessageDialog(null, "Enter an integer between 100-1000");
+    
+            }
+
+
+        }
+
     }
 
     private void configPanels() {
@@ -182,6 +217,8 @@ public class OptionsMenu extends JFrame implements ActionListener {
         gbc.anchor = GridBagConstraints.CENTER;
         gbc.gridwidth = GridBagConstraints.REMAINDER;
         gbc.insets = new Insets(0, 0, 10, 0);
+       
+
 
         optionsPanel.add(XLabel);
         optionsPanel.add(XField, gbc);
@@ -189,6 +226,9 @@ public class OptionsMenu extends JFrame implements ActionListener {
         optionsPanel.add(YField, gbc);
         optionsPanel.add(ZLabel);
         optionsPanel.add(ZField, gbc);
+        
+        optionsPanel.add(gridSizeLabel);
+        optionsPanel.add(gridSizeField,gbc);
 
         textPanel = new JPanel(new GridBagLayout());
         textPanel.setBackground(Color.BLACK);
@@ -227,6 +267,7 @@ public class OptionsMenu extends JFrame implements ActionListener {
             }
         });
 
+gbc.insets = new Insets(40, 0, 0, 0);
         optionsPanel.add(backToGameMenu, gbc);
     }
 
