@@ -34,6 +34,8 @@ public class OptionsMenu extends JFrame implements ActionListener {
     private JLabel gridSizeLabel;
 
     private JButton backToGameMenu;
+    private JButton hotKeyExplain;
+    
     private GridBagConstraints gbc = new GridBagConstraints();
 
     // default values
@@ -83,6 +85,7 @@ public class OptionsMenu extends JFrame implements ActionListener {
 
         configPanels();
         configBackToMenuButton();
+        explainButton();
 
     }
 
@@ -254,7 +257,9 @@ public class OptionsMenu extends JFrame implements ActionListener {
 
     private void configBackToMenuButton() {
 
-        backToGameMenu = new JButton("Back to Main Menu");
+        backToGameMenu = new JButton("MAIN MENU");
+        backToGameMenu.setBackground(Color.BLACK);
+        backToGameMenu.setForeground(Color.WHITE);
 
         backToGameMenu.addActionListener(new ActionListener() {
 
@@ -270,8 +275,44 @@ public class OptionsMenu extends JFrame implements ActionListener {
             }
         });
 
-gbc.insets = new Insets(40, 0, 0, 0);
+gbc.insets = new Insets(80, 0, 0, 0);
         optionsPanel.add(backToGameMenu, gbc);
+    }
+
+    private void explainButton(){
+        hotKeyExplain = new JButton("SHORTCUT KEYS");
+        hotKeyExplain.setBackground(Color.BLACK);
+        hotKeyExplain.setForeground(Color.WHITE);
+
+        hotKeyExplain.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent a) {
+
+                String keyexpl = "<html>--SHORTCUT KEYS-- <br>"
+                +"SPACE = Start/Stop Game<br>"
+                +"Ctrl+M = Hide Button Panel<br>"
+                +"Ctrl+S = Save Grid<br>"
+                +"Ctrl+O = Load Grid<br>"
+                +"Ctrl+Q = Exit Game<br>"
+                +"PRESS 1 = DOT<br>"
+                +"PRESS 2 = BIG DOT<br>"
+                +"PRESS 3 = ERASE DOT<br>"
+                +"PRESS 4 = BIG ERASE<br>"
+                +"PRESS 5 = GLIDER<br>"
+                +"PRESS 6 = TWICKER<br></html>";
+
+                JOptionPane.showMessageDialog(null, keyexpl);
+                
+                
+            }
+        });
+
+        gbc.insets = new Insets(20, 0, 0, 0);
+                optionsPanel.add(hotKeyExplain, gbc);
+
+
+
     }
 
 }

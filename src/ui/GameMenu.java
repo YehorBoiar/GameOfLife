@@ -47,12 +47,13 @@ public class GameMenu extends JFrame {
         JButton optionsButton = new JButton("OPTIONS");
         optionsButton.setBackground(Color.BLACK);
         optionsButton.setForeground(Color.WHITE);
-   
+
+        
 
         GridBagConstraints gbc = new GridBagConstraints();
 
         gbc.anchor = GridBagConstraints.CENTER;
-       // gbc.fill = GridBagConstraints.HORIZONTAL;
+       //gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.gridwidth = GridBagConstraints.REMAINDER;
         gbc.ipadx = 0;
         gbc.ipady = 200;
@@ -92,6 +93,7 @@ gbc.insets = new Insets(0, 0, 10, 0);
             @Override
             public void actionPerformed(ActionEvent a) {
                 
+                dispose();
                 System.exit(0);
 
             }
