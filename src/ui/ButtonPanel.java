@@ -115,8 +115,6 @@ public class ButtonPanel extends JPanel implements ActionListener{
             mainMenu.setVisible(true);
 
 
-
-
         }
 
         if (e.getSource() == zoomInButton) {

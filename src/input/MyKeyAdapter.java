@@ -5,6 +5,7 @@ import java.awt.event.KeyEvent;
 import fileio.Load;
 import fileio.Save;
 import renderer.Renderer;
+import ui.GameMenu;
 import input.PanningHandler;
 
 
@@ -13,7 +14,6 @@ import input.PanningHandler;
  */
 public class MyKeyAdapter extends KeyAdapter {
     private Renderer renderer;
-    //private final int MOVE = 50; 
     private ZoomHandler zoomHandler;
     private PanningHandler panHandler;
 
@@ -89,8 +89,11 @@ public class MyKeyAdapter extends KeyAdapter {
             zoomHandler.updateZoom(renderer.getZoomFactor() * 0.9, renderer);
         }
 
-        if (keyCode == KeyEvent.VK_M) {
-            System.out.println("Main menu");
+        if (keyCode == KeyEvent.VK_ESCAPE) {
+
+            renderer.getFrame().setVisible(false);
+            GameMenu mainMenu = GameMenu.getInstance();
+            mainMenu.setVisible(true);
         }
     }
 
@@ -101,6 +104,7 @@ public class MyKeyAdapter extends KeyAdapter {
         boolean showButtons = renderer.isShowButtons();
         renderer.setShowButtons(!showButtons);
         renderer.getButtonPanel().setVisible(!showButtons);
+        renderer.getPanPanel().setVisible(!showButtons);;
         System.out.println("Display button panel: " + !showButtons);
     }
 
