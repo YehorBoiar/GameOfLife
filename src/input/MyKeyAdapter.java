@@ -14,7 +14,6 @@ import input.PanningHandler;
  */
 public class MyKeyAdapter extends KeyAdapter {
     private Renderer renderer;
-    //private final int MOVE = 50; 
     private ZoomHandler zoomHandler;
     private PanningHandler panHandler;
 
