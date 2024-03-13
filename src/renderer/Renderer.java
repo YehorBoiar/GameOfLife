@@ -224,6 +224,10 @@ public boolean[][] reverseElements(int startRow, int startColumn, boolean[][] el
         return buttonPanel;
     }
 
+    public JPanel getPanPanel() {
+        return panPanel;
+    }
+
     public boolean isShowButtons() {
         return showButtons;
     }

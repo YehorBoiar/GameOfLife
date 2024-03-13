@@ -105,6 +105,7 @@ public class MyKeyAdapter extends KeyAdapter {
         boolean showButtons = renderer.isShowButtons();
         renderer.setShowButtons(!showButtons);
         renderer.getButtonPanel().setVisible(!showButtons);
+        renderer.getPanPanel().setVisible(!showButtons);;
         System.out.println("Display button panel: " + !showButtons);
     }
 
