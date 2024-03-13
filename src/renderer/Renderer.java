@@ -2,6 +2,9 @@ package renderer;
 
 import ui.ButtonPanel;
 import ui.PanPanel;
+import ui.GameMenu;
+import ui.OptionsMenu;
+
 import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Graphics;
@@ -51,7 +54,14 @@ public class Renderer {
      */
     private Renderer() {
         frame = new JFrame("Game of Life");
+
+        OptionsMenu options = OptionsMenu.getInstance();
+
+    
+   
         configFrame();
+
+
     }
 
     /**
