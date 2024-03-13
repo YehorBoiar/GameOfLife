@@ -90,7 +90,7 @@ public class MyKeyAdapter extends KeyAdapter {
             zoomHandler.updateZoom(renderer.getZoomFactor() * 0.9, renderer);
         }
 
-        if (keyCode == KeyEvent.VK_M) {
+        if (keyCode == KeyEvent.VK_ESCAPE) {
 
             renderer.getFrame().setVisible(false);
             GameMenu mainMenu = GameMenu.getInstance();
