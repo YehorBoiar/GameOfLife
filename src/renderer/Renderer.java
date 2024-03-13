@@ -89,7 +89,7 @@ public class Renderer {
 
         frame.setResizable(false);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setVisible(true);
+        //frame.setVisible(true);
     }
 
     /**

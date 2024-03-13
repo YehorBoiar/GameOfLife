@@ -3,6 +3,7 @@ package ui;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+//cd ../src; javac -d ../bin main/*.java input/*.java renderer/*.java logic/*.java ui/*.java fileio/*.java brushes/*.java ; cd ../bin; java -cp . main.Main
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
