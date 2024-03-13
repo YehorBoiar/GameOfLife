@@ -5,6 +5,7 @@ import java.awt.event.KeyEvent;
 import fileio.Load;
 import fileio.Save;
 import renderer.Renderer;
+import ui.GameMenu;
 import input.PanningHandler;
 
 
@@ -90,7 +91,10 @@ public class MyKeyAdapter extends KeyAdapter {
         }
 
         if (keyCode == KeyEvent.VK_M) {
-            System.out.println("Main menu");
+
+            renderer.getFrame().setVisible(false);
+            GameMenu mainMenu = GameMenu.getInstance();
+            mainMenu.setVisible(true);
         }
     }
 
