@@ -4,8 +4,8 @@ import javax.swing.Timer;
 import renderer.Renderer;
 import ui.GameMenu;
 import ui.OptionsMenu;
-import javax.swing.JFrame;
-import logic.Logic;
+//import javax.swing.JFrame;
+//import logic.Logic;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -25,11 +25,12 @@ public class Main {
     public static void startGame() {
 
         Renderer renderer = Renderer.getInstance();
-        JFrame frame = renderer.getFrame();
+       
 
         renderer.getLogic().updateLogic();
+         renderer.getFrame().setVisible(true);
 
-        frame.setVisible(true);
+        
 
 
         Timer timer = new Timer(speed, new ActionListener() {
