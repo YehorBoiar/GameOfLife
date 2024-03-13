@@ -89,7 +89,7 @@ public class Renderer {
 
         frame.setResizable(false);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        //frame.setVisible(true);
+        
     }
 
     /**
@@ -328,6 +328,10 @@ public boolean[][] reverseElements(int startRow, int startColumn, boolean[][] el
 
     public void setSquareSize(double squareSize) {
         this.squareSize = squareSize;
+    }
+
+    public Logic getLogic() {
+        return this.logic;
     }
 
 }
