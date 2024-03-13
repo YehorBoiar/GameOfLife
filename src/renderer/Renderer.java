@@ -55,8 +55,7 @@ public class Renderer {
     private Renderer() {
         frame = new JFrame("Game of Life");
 
-        OptionsMenu options = OptionsMenu.getInstance();
-
+       
     
    
         configFrame();
