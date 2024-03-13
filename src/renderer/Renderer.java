@@ -301,6 +301,14 @@ public boolean[][] reverseElements(int startRow, int startColumn, boolean[][] el
         return cols;
     }
 
+    public void setGridSize(int gridSize) {
+        this.rows = gridSize;
+        this.cols = gridSize;
+        this.grid = new boolean[rows][cols];
+
+        System.out.println(rows);
+    }
+
     public boolean getGameState() {
         return gameState;
     }
@@ -333,5 +341,7 @@ public boolean[][] reverseElements(int startRow, int startColumn, boolean[][] el
     public Logic getLogic() {
         return this.logic;
     }
+
+
 
 }

@@ -99,7 +99,7 @@ public class OptionsMenu extends JFrame implements ActionListener {
 
         JLabel label = new JLabel(labelName, SwingConstants.CENTER);
 
-        Font labelFont = new Font("Arial", Font.BOLD, 19);
+        Font labelFont = new Font(Font.MONOSPACED, Font.BOLD, 19);
 
         label.setForeground(Color.WHITE);
         label.setPreferredSize(new Dimension(110, 30));
@@ -241,7 +241,7 @@ public class OptionsMenu extends JFrame implements ActionListener {
 
         JLabel rules = new JLabel(paragraph);
 
-        Font customFont = new Font("Arial", Font.PLAIN, 17);
+        Font customFont = new Font(Font.MONOSPACED, Font.BOLD, 15);
         rules.setFont(customFont);
         rules.setForeground(Color.WHITE);
 
@@ -265,6 +265,8 @@ public class OptionsMenu extends JFrame implements ActionListener {
                 GameMenu mainMenu = GameMenu.getInstance();
 
                 mainMenu.setVisible(true);
+
+                //same action listener perhaps?
             }
         });
 

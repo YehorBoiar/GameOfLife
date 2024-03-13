@@ -12,10 +12,11 @@ import java.awt.event.ActionEvent;
 
 public class Main {
     private static int speed = 100;
+    private static OptionsMenu options = OptionsMenu.getInstance();
 
     public static void main(String[] args) {
 
-        OptionsMenu.getInstance();
+        
 
         GameMenu menu = GameMenu.getInstance();
         menu.setVisible(true);
@@ -29,6 +30,8 @@ public class Main {
 
         renderer.getLogic().updateLogic();
          renderer.getFrame().setVisible(true);
+
+        renderer.setGridSize(options.getGridSize());
 
         
 

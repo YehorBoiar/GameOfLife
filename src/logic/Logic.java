@@ -31,9 +31,6 @@ public class Logic {
         setY(options.getY());
         setZ(options.getZ());
 
-         System.out.println(x);
-        System.out.println(y);
-        System.out.println(z);
 
 
 
