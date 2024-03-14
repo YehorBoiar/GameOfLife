@@ -26,7 +26,8 @@ public class Main {
         Renderer renderer = Renderer.getInstance();
         renderer.setGridSize(options.getGridSize());
         renderer.setSquareSize(renderer.calcSquareSize());
-        renderer.configFrame();
+        renderer.getFrame().repaint();
+        
         renderer.getLogic().updateLogic();
         renderer.getFrame().setVisible(true);
 

@@ -2,11 +2,7 @@ package ui;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
-
-import main.Main;
 import input.PanningHandler;
-import fileio.Load;
-import fileio.Save;
 import renderer.Renderer;
 import java.awt.event.ActionEvent;
 import java.awt.Color;

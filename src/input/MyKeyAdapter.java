@@ -6,7 +6,6 @@ import fileio.Load;
 import fileio.Save;
 import renderer.Renderer;
 import ui.GameMenu;
-import input.PanningHandler;
 
 
 /**
