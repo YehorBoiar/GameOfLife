@@ -5,7 +5,6 @@ import renderer.Renderer;
 import ui.GameMenu;
 import ui.OptionsMenu;
 
-
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -15,7 +14,7 @@ public class Main {
 
     public static void main(String[] args) {
 
-        
+        OptionsMenu.getInstance();
 
         GameMenu menu = GameMenu.getInstance();
         menu.setVisible(true);
@@ -25,14 +24,10 @@ public class Main {
     public static void startGame() {
 
         Renderer renderer = Renderer.getInstance();
-       
-
         renderer.getLogic().updateLogic();
-         renderer.getFrame().setVisible(true);
-
+        renderer.getFrame().setVisible(true);
         renderer.setGridSize(options.getGridSize());
 
-        
 
 
         Timer timer = new Timer(speed, new ActionListener() {

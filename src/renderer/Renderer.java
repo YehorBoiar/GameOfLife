@@ -54,10 +54,6 @@ public class Renderer {
      */
     private Renderer() {
         frame = new JFrame("Game of Life");
-
-       
-    
-   
         configFrame();
 
 
@@ -215,20 +211,28 @@ public class Renderer {
  * @param elements 2D array of elements to reverse.
  * @return The updated grid after toggling the state of the specified elements.
  */
-public boolean[][] reverseElements(int startRow, int startColumn, boolean[][] elements) {
-    for (int i = 0; i < elements.length; i++) {
-        for (int j = 0; j < elements[i].length; j++) {
-            int row = startRow + i;
-            int column = startColumn + j;
+    public boolean[][] reverseElements(int startRow, int startColumn, boolean[][] elements) {
+        for (int i = 0; i < elements.length; i++) {
+            for (int j = 0; j < elements[i].length; j++) {
+                int row = startRow + i;
+                int column = startColumn + j;
 
-            // Check if the indices are within the bounds of the grid
-            if (row >= 0 && row < this.grid.length && column >= 0 && column < this.grid[row].length) {
-                this.grid[row][column] = elements[i][j];
+                // Check if the indices are within the bounds of the grid
+                if (row >= 0 && row < this.grid.length && column >= 0 && column < this.grid[row].length) {
+                    this.grid[row][column] = elements[i][j];
+                }
             }
         }
+        
+        return this.grid;
+    }   
+
+    public void nextStep() {
+        setGameState(true);
+        updateGrid();
+        setGameState(false);
     }
-    return this.grid;
-}
+
     public JPanel getButtonPanel() {
         return buttonPanel;
     }

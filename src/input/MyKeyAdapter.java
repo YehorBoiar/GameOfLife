@@ -95,6 +95,11 @@ public class MyKeyAdapter extends KeyAdapter {
             GameMenu mainMenu = GameMenu.getInstance();
             mainMenu.setVisible(true);
         }
+
+        if (keyCode == KeyEvent.VK_ENTER) {
+            renderer.nextStep();
+        }
+
     }
 
     /**

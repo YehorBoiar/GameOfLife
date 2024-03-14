@@ -19,6 +19,7 @@ public class ButtonPanel extends JPanel implements ActionListener{
     private JButton presetButton;
     private JButton startButton;
     private JButton stopButton;
+    private JButton stepButton;
     private JButton speedUpButton;
     private JButton slowDownButton;
     private JButton saveButton;
@@ -44,6 +45,7 @@ public class ButtonPanel extends JPanel implements ActionListener{
         stopButton = new JButton("Stop");
         speedUpButton = new JButton("Speed");
         slowDownButton = new JButton("Slow");
+        stepButton = new JButton("Step");
         saveButton = new JButton("Save");
         loadButton = new JButton("Load");
         exitButton = new JButton("Exit");
@@ -54,7 +56,7 @@ public class ButtonPanel extends JPanel implements ActionListener{
         zoomHandler = new ZoomHandler(renderer);     
         menu = new StructuresMenu(presetButton, renderer);
 
-        JButton[] buttons = {presetButton,startButton,stopButton,speedUpButton,slowDownButton,saveButton,loadButton,exitButton, mainMenuButton, zoomInButton, zoomOutButton};
+        JButton[] buttons = {presetButton,startButton,stopButton,speedUpButton,slowDownButton,stepButton,saveButton,loadButton,exitButton, mainMenuButton, zoomInButton, zoomOutButton};
 
         for (int i = 0; i < buttons.length; i++ ) {
             buttons[i].setBackground(Color.RED);
@@ -81,7 +83,7 @@ public class ButtonPanel extends JPanel implements ActionListener{
 
         if (e.getSource() == stopButton) {
             renderer.setGameState(false);
-            renderer.getFrame().repaint();;
+            renderer.getFrame().repaint();
         }
 
         if (e.getSource() == speedUpButton) {
@@ -90,6 +92,10 @@ public class ButtonPanel extends JPanel implements ActionListener{
 
         if (e.getSource() ==slowDownButton) {
             Main.slowDown();
+        }
+
+        if (e.getSource() == stepButton) {
+            renderer.nextStep();
         }
 
         if (e.getSource() == saveButton) {
