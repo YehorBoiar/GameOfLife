@@ -25,6 +25,8 @@ public class GameMenu extends JFrame {
 
         setTitle("Main Menu");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        //resizable false
+
         setSize(1000, 1000);
         configPanel();
         add(menuPanel);
@@ -48,8 +50,10 @@ public class GameMenu extends JFrame {
         optionsButton.setBackground(Color.BLACK);
         optionsButton.setForeground(Color.WHITE);
 
-        
+        //button config loop
 
+        
+//return gbc method
         GridBagConstraints gbc = new GridBagConstraints();
 
         gbc.anchor = GridBagConstraints.CENTER;
@@ -110,6 +114,8 @@ gbc.insets = new Insets(0, 0, 10, 0);
                 options.setVisible(true);
             }
         });
+
+        // use same action listener
 
     }
 

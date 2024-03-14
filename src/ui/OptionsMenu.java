@@ -193,7 +193,7 @@ public class OptionsMenu extends JFrame implements ActionListener {
 
                 int input = Integer.parseInt(gridSizeField.getText());
     
-                if (!(input < 100 || input > 1000)) {
+                if (!(input < 10 || input > 1000)) {
     
                     gridSize = input;
     
@@ -286,10 +286,7 @@ gbc.insets = new Insets(80, 0, 0, 0);
 
         hotKeyExplain.addActionListener(new ActionListener() {
 
-            @Override
-            public void actionPerformed(ActionEvent a) {
-
-                String keyexpl = "<html>--SHORTCUT KEYS-- <br>"
+String keyexpl = "<html>--SHORTCUT KEYS-- <br>"
                 +"SPACE = Start/Stop Game<br>"
                 +"Ctrl+M = Hide Button Panel<br>"
                 +"Ctrl+S = Save Grid<br>"
@@ -302,6 +299,12 @@ gbc.insets = new Insets(80, 0, 0, 0);
                 +"PRESS 5 = GLIDER<br>"
                 +"PRESS 6 = TWICKER<br></html>";
 
+            
+            
+            @Override
+            public void actionPerformed(ActionEvent a) {
+
+                
                 JOptionPane.showMessageDialog(null, keyexpl);
                 
                 

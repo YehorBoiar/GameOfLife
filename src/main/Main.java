@@ -4,8 +4,7 @@ import javax.swing.Timer;
 import renderer.Renderer;
 import ui.GameMenu;
 import ui.OptionsMenu;
-//import javax.swing.JFrame;
-//import logic.Logic;
+
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
