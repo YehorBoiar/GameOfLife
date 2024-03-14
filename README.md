@@ -12,7 +12,7 @@ git branch <branchName>
 git checkout <branchName>
 ```
 
-When you finish implementing your featrure and you think that it can go to the master branch 
+When you finish implementing your feature and you think that it can go to the master branch 
 ```git 
 git checkout master
 git merge <branchName>
