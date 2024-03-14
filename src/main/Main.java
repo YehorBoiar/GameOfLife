@@ -24,9 +24,11 @@ public class Main {
     public static void startGame() {
 
         Renderer renderer = Renderer.getInstance();
+        renderer.setGridSize(options.getGridSize());
+        renderer.setSquareSize(renderer.calcSquareSize());
+        renderer.configFrame();
         renderer.getLogic().updateLogic();
         renderer.getFrame().setVisible(true);
-        renderer.setGridSize(options.getGridSize());
 
 
 

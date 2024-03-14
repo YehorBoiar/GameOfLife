@@ -42,7 +42,7 @@ public class OptionsMenu extends JFrame implements ActionListener {
     private int xValue = 2;
     private int yValue = 3;
     private int zValue = 3;
-    private int gridSize = 100;
+    private int gridSize = 50;
 
     // getters
     public int getX() {
@@ -81,7 +81,7 @@ public class OptionsMenu extends JFrame implements ActionListener {
         XField = makeTextField("2");
         YField = makeTextField("3");
         ZField = makeTextField("3");
-        gridSizeField = makeTextField("100");
+        gridSizeField = makeTextField("50");
 
         configPanels();
         configBackToMenuButton();
@@ -204,7 +204,7 @@ public class OptionsMenu extends JFrame implements ActionListener {
     
             } catch (NumberFormatException ex) {
     
-                JOptionPane.showMessageDialog(null, "Enter an integer between 100-1000");
+                JOptionPane.showMessageDialog(null, "Enter an integer between 10-1000");
     
             }
 

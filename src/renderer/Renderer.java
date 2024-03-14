@@ -38,8 +38,8 @@ public class Renderer {
     private final Color BLACK = Color.BLACK;
     private JFrame frame;
     private static Renderer instance;
-    private int rows = 100; 
-    private int cols = 100;
+    private int rows = 50; 
+    private int cols = 50;
     private boolean[][] grid = new boolean[rows][cols];
     private Logic logic = new Logic(); // instantiate Logic class
     private int lastMouseX = -1;
@@ -54,8 +54,6 @@ public class Renderer {
      */
     private Renderer() {
         frame = new JFrame("Game of Life");
-        configFrame();
-
 
     }
 
@@ -63,7 +61,7 @@ public class Renderer {
      * Configures the settings of the JFrame, including size, background color, and
      * event listeners.
      */
-    private void configFrame() {
+    public void configFrame() {
         frame.pack();
         frame.setSize(1000, 1000);
         frame.getContentPane().setBackground(BLACK);
