@@ -2,7 +2,6 @@ package ui;
 
 import javax.swing.JPopupMenu;
 import renderer.Renderer;
-
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -30,15 +29,6 @@ public class StructuresMenu extends JPopupMenu {
         menuOption(createIcon("icons/Twicker.png"), 5);
     }
 
-    private void menuOption(String name, int brushID) {
-        JMenuItem menuItem = new JMenuItem(name);
-        menuItem.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                renderer.getMouseListener().setBrushID(brushID);
-            }
-        });
-        add(menuItem);
-    }
 
     private void menuOption(Icon icon, int brushID) {
         JMenuItem menuItem = new JMenuItem(icon);
