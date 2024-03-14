@@ -2,17 +2,17 @@
 
 ## Workflow
 
-Before you start write your code, please, write `git pull` so we don't have as much conflicts as we could.
+Before you start write your code, please, write `git pull` so we can avoid as many conflicts as possible.
 
 
-For implementing a new big feature you should create a new branch and do it there.
+For implementing a new big feature, create a new branch and do it there.
 
 ```git 
 git branch <branchName>
 git checkout <branchName>
 ```
 
-When you finish implementing your feature and you think that it can go to the master branch 
+When you finish implementing your feature and you think that it can go to the master branch:
 ```git 
 git checkout master
 git merge <branchName>
@@ -33,6 +33,8 @@ git commit -m "Thoughtful message"
     └── README.md
     └── 📁games
         └── game0.gol
+        └── game1.gol
+        └── game2.gol
     └── 📁icons
         └── Big_Dot.png
         └── Big_Erase.png
@@ -61,5 +63,8 @@ git commit -m "Thoughtful message"
             └── Renderer.java
         └── 📁ui
             └── ButtonPanel.java
+            └── GameMenu.java
+            └── OptionsMenu.java
+            └── PanPanel.java
             └── StructuresMenu.java
 ```
