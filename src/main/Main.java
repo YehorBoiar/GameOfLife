@@ -12,6 +12,7 @@ public class Main {
     private static int speed = 100;
     private static OptionsMenu options = OptionsMenu.getInstance();
     private static Timer timer;
+
     public static void main(String[] args) {
 
         OptionsMenu.getInstance();
@@ -27,11 +28,9 @@ public class Main {
         renderer.setGridSize(options.getGridSize());
         renderer.setSquareSize(renderer.calcSquareSize());
         renderer.getFrame().repaint();
-        
+
         renderer.getLogic().updateLogic();
         renderer.getFrame().setVisible(true);
-
-
 
         timer = new Timer(speed, new ActionListener() {
 

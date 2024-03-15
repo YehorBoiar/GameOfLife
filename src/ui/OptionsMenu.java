@@ -14,6 +14,10 @@ import java.awt.event.FocusListener;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * OptionsMenu class handles the generation of the options menu GUI
+ * Takes and validates custom input from the player
+ */
 public class OptionsMenu extends JFrame implements ActionListener {
 
     private static OptionsMenu theOptions;
@@ -32,7 +36,7 @@ public class OptionsMenu extends JFrame implements ActionListener {
 
     private JButton backToGameMenu;
     private JButton hotKeyExplain;
-    
+
     private GridBagConstraints gbc = new GridBagConstraints();
 
     // default values
@@ -58,7 +62,7 @@ public class OptionsMenu extends JFrame implements ActionListener {
         return this.gridSize;
     }
 
-    // return singleton instance
+    // returns singleton instance
     public static synchronized OptionsMenu getInstance() {
         if (theOptions == null) {
             theOptions = new OptionsMenu();
@@ -66,6 +70,10 @@ public class OptionsMenu extends JFrame implements ActionListener {
         return theOptions;
     }
 
+    /**
+     * Constructor in which all the components are invoked to be configured
+     * 
+     */
     private OptionsMenu() {
 
         configFrame();
@@ -86,6 +94,9 @@ public class OptionsMenu extends JFrame implements ActionListener {
 
     }
 
+    /**
+     * Configures JFrame settings and layout manager
+     */
     private void configFrame() {
 
         setTitle("Options Menu");
@@ -95,6 +106,12 @@ public class OptionsMenu extends JFrame implements ActionListener {
 
     }
 
+    /**
+     * This method creates new JLabels and customises them for a preferred look
+     * 
+     * @param labelName The text displayed in the JLabel
+     * @return customised JLabel
+     */
     private JLabel makeLabel(String labelName) {
 
         JLabel label = new JLabel(labelName, SwingConstants.CENTER);
@@ -108,6 +125,14 @@ public class OptionsMenu extends JFrame implements ActionListener {
         return label;
     }
 
+    /**
+     * Creates new text fields, adds a focusListener and actionListener so that they
+     * respond to 'Enter' button click
+     * 
+     * @param defaultValue The default x,y,z, values that are intially displayed in
+     *                     the text field
+     * @return Customised JTextField
+     */
     private JTextField makeTextField(String defaultValue) {
 
         JTextField field = new JTextField(defaultValue);
@@ -137,6 +162,14 @@ public class OptionsMenu extends JFrame implements ActionListener {
 
     }
 
+    /**
+     * Validates the user input in the text fields so that they are integers within
+     * set bounds; rejects invalid input so game can proceed
+     * 
+     * @param field        JTextField in which input is to be validated
+     * @param defaultValue the value that is used if input is invalid
+     * @return validated input
+     */
     private int validateInput(JTextField field, int defaultValue) {
 
         int value;
@@ -163,6 +196,10 @@ public class OptionsMenu extends JFrame implements ActionListener {
         return defaultValue;
     }
 
+    /**
+     * Depending on text field into which input is entered, perform validation of
+     * input and set the new input to pass into logic of the game
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
 
@@ -189,27 +226,30 @@ public class OptionsMenu extends JFrame implements ActionListener {
             try {
 
                 int input = Integer.parseInt(gridSizeField.getText());
-    
+
                 if (!(input < 10 || input > 1000)) {
-    
+
                     gridSize = input;
-    
-                    
+
                 } else {
                     throw new NumberFormatException();
                 }
-    
-            } catch (NumberFormatException ex) {
-    
-                JOptionPane.showMessageDialog(null, "Enter an integer between 10-1000");
-    
-            }
 
+            } catch (NumberFormatException ex) {
+
+                JOptionPane.showMessageDialog(null, "Enter an integer between 10-1000");
+
+            }
 
         }
 
     }
 
+    /**
+     * Configures the settings of the two major JPanels in the frame
+     * Adds all labels, text and buttons to suitable panel
+     * Added to the JFrame
+     */
     private void configPanels() {
 
         optionsPanel = new JPanel(new GridBagLayout());
@@ -218,8 +258,6 @@ public class OptionsMenu extends JFrame implements ActionListener {
         gbc.anchor = GridBagConstraints.CENTER;
         gbc.gridwidth = GridBagConstraints.REMAINDER;
         gbc.insets = new Insets(0, 0, 10, 0);
-       
-
 
         optionsPanel.add(XLabel);
         optionsPanel.add(XField, gbc);
@@ -227,9 +265,9 @@ public class OptionsMenu extends JFrame implements ActionListener {
         optionsPanel.add(YField, gbc);
         optionsPanel.add(ZLabel);
         optionsPanel.add(ZField, gbc);
-        
+
         optionsPanel.add(gridSizeLabel);
-        optionsPanel.add(gridSizeField,gbc);
+        optionsPanel.add(gridSizeField, gbc);
 
         textPanel = new JPanel(new GridBagLayout());
         textPanel.setBackground(Color.BLACK);
@@ -252,6 +290,10 @@ public class OptionsMenu extends JFrame implements ActionListener {
 
     }
 
+    /**
+     * Configures the Back to Main Menu button which returns the player to the Main
+     * Menu
+     */
     private void configBackToMenuButton() {
 
         backToGameMenu = new JButton("MAIN MENU");
@@ -274,7 +316,11 @@ public class OptionsMenu extends JFrame implements ActionListener {
         optionsPanel.add(backToGameMenu, gbc);
     }
 
-    private void explainButton(){
+    /**
+     * Configures the Short Key explanation button which when clicked displays
+     * information regarding hot key functions
+     */
+    private void explainButton() {
         hotKeyExplain = new JButton("SHORTCUT KEYS");
         hotKeyExplain.setBackground(Color.BLACK);
         hotKeyExplain.setForeground(Color.WHITE);
@@ -282,36 +328,30 @@ public class OptionsMenu extends JFrame implements ActionListener {
         hotKeyExplain.addActionListener(new ActionListener() {
 
             String keyExplanation = "<html>--SHORTCUT KEYS-- <br>"
-                            +"SPACE = Start/Stop Game<br>"
-                            +"Ctrl+M = Hide Button Panel<br>"
-                            +"Ctrl+S = Save Grid<br>"
-                            +"Ctrl+O = Load Grid<br>"
-                            +"Ctrl+Q = Exit Game<br>"
-                            +"ENTER = Next step<br>"
-                            +"ESCAPE = Main Menu<br>"
-                            +"PRESS 1 = DOT<br>"
-                            +"PRESS 2 = BIG DOT<br>"
-                            +"PRESS 3 = ERASE DOT<br>"
-                            +"PRESS 4 = BIG ERASE<br>"
-                            +"PRESS 5 = GLIDER<br>"
-                            +"PRESS 6 = TWICKER<br></html>";
+                    + "SPACE = Start/Stop Game<br>"
+                    + "Ctrl+M = Hide Button Panel<br>"
+                    + "Ctrl+S = Save Grid<br>"
+                    + "Ctrl+O = Load Grid<br>"
+                    + "Ctrl+Q = Exit Game<br>"
+                    + "ENTER = Next step<br>"
+                    + "ESCAPE = Main Menu<br>"
+                    + "PRESS 1 = DOT<br>"
+                    + "PRESS 2 = BIG DOT<br>"
+                    + "PRESS 3 = ERASE DOT<br>"
+                    + "PRESS 4 = BIG ERASE<br>"
+                    + "PRESS 5 = GLIDER<br>"
+                    + "PRESS 6 = TWICKER<br></html>";
 
-            
-            
             @Override
             public void actionPerformed(ActionEvent a) {
 
-                
                 JOptionPane.showMessageDialog(null, keyExplanation);
-                
-                
+
             }
         });
 
         gbc.insets = new Insets(20, 0, 0, 0);
         optionsPanel.add(hotKeyExplain, gbc);
-
-
 
     }
 

@@ -15,16 +15,22 @@ import java.awt.Insets;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * The GameMenu class generates the main menu JFrame and allows user to start game, exit game and go to options menu.
+ */
 public class GameMenu extends JFrame {
 
     private static GameMenu gameMenu;
     private JPanel menuPanel;
 
+    /**
+     * Private constructor which creates the singleton instance of the Game Menu class
+     * Configures the JFrame
+     */
     private GameMenu() {
 
         setTitle("Main Menu");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        //resizable false
 
         setSize(1000, 1000);
         configPanel();
@@ -32,6 +38,9 @@ public class GameMenu extends JFrame {
 
     }
 
+    /**
+     * Configures all the components of the main menu panel; including button, title and label
+     */
     private void configPanel() {
 
         menuPanel = new JPanel(new GridBagLayout());
@@ -49,26 +58,19 @@ public class GameMenu extends JFrame {
         optionsButton.setBackground(Color.BLACK);
         optionsButton.setForeground(Color.WHITE);
 
-        //button config loop
-
-        
-        //return gbc method
         GridBagConstraints gbc = new GridBagConstraints();
 
         gbc.anchor = GridBagConstraints.CENTER;
-       //gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.gridwidth = GridBagConstraints.REMAINDER;
         gbc.ipadx = 0;
         gbc.ipady = 200;
         gbc.insets = new Insets(0, 0, 10, 0);
 
         JLabel Title = new JLabel("G A M E  O F  L I F E");
-        
 
         Font customFont = new Font(Font.MONOSPACED, Font.BOLD, 70);
         Title.setFont(customFont);
         Title.setForeground(Color.WHITE);
-        
 
         menuPanel.add(Title, gbc);
         gbc.insets = new Insets(0, 0, 10, 0);
@@ -77,14 +79,12 @@ public class GameMenu extends JFrame {
         menuPanel.add(startButton, gbc);
         menuPanel.add(exitButton, gbc);
         menuPanel.add(optionsButton, gbc);
-        
 
         startButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent a) {
 
                 setVisible(false);
-                
 
                 Main.startGame();
 
@@ -95,7 +95,7 @@ public class GameMenu extends JFrame {
 
             @Override
             public void actionPerformed(ActionEvent a) {
-                
+
                 dispose();
                 System.exit(0);
 
@@ -114,10 +114,12 @@ public class GameMenu extends JFrame {
             }
         });
 
-        // use same action listener
-
     }
 
+    /**
+     * Retrieves the singleton instance of the Game Menu class
+     * @return Game Menu instance
+     */
     public static synchronized GameMenu getInstance() {
         if (gameMenu == null) {
             gameMenu = new GameMenu();
