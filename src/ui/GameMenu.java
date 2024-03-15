@@ -71,7 +71,7 @@ public class GameMenu extends JFrame {
         
 
         menuPanel.add(Title, gbc);
-gbc.insets = new Insets(0, 0, 10, 0);
+        gbc.insets = new Insets(0, 0, 10, 0);
         gbc.ipadx = 30;
         gbc.ipady = 30;
         menuPanel.add(startButton, gbc);

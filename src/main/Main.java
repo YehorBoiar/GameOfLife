@@ -11,7 +11,7 @@ import java.awt.event.ActionEvent;
 public class Main {
     private static int speed = 100;
     private static OptionsMenu options = OptionsMenu.getInstance();
-
+    private static Timer timer;
     public static void main(String[] args) {
 
         OptionsMenu.getInstance();
@@ -33,12 +33,12 @@ public class Main {
 
 
 
-        Timer timer = new Timer(speed, new ActionListener() {
+        timer = new Timer(speed, new ActionListener() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-
                 renderer.updateGrid();
+                timer.setDelay(speed);
             }
 
         });
