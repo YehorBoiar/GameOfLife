@@ -52,7 +52,7 @@ public class GameMenu extends JFrame {
         //button config loop
 
         
-//return gbc method
+        //return gbc method
         GridBagConstraints gbc = new GridBagConstraints();
 
         gbc.anchor = GridBagConstraints.CENTER;
