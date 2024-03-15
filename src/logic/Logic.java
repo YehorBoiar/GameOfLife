@@ -13,27 +13,11 @@ public class Logic {
 
     private OptionsMenu options = OptionsMenu.getInstance();
 
-    public Logic() {
-
-        
-
-       
-
-       
-
-    
-        
-    }
-
     public void updateLogic() {
 
         setX(options.getX());
         setY(options.getY());
         setZ(options.getZ());
-
-
-
-
 
     }
 
