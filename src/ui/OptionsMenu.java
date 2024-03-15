@@ -267,12 +267,10 @@ public class OptionsMenu extends JFrame implements ActionListener {
                 GameMenu mainMenu = GameMenu.getInstance();
 
                 mainMenu.setVisible(true);
-
-                //same action listener perhaps?
             }
         });
 
-gbc.insets = new Insets(80, 0, 0, 0);
+        gbc.insets = new Insets(80, 0, 0, 0);
         optionsPanel.add(backToGameMenu, gbc);
     }
 
@@ -283,20 +281,20 @@ gbc.insets = new Insets(80, 0, 0, 0);
 
         hotKeyExplain.addActionListener(new ActionListener() {
 
-String keyexpl = "<html>--SHORTCUT KEYS-- <br>"
-                +"SPACE = Start/Stop Game<br>"
-                +"Ctrl+M = Hide Button Panel<br>"
-                +"Ctrl+S = Save Grid<br>"
-                +"Ctrl+O = Load Grid<br>"
-                +"Ctrl+Q = Exit Game<br>"
-                +"ENTER = Next step<br>"
-                +"ESCAPE = Main Menu<br>"
-                +"PRESS 1 = DOT<br>"
-                +"PRESS 2 = BIG DOT<br>"
-                +"PRESS 3 = ERASE DOT<br>"
-                +"PRESS 4 = BIG ERASE<br>"
-                +"PRESS 5 = GLIDER<br>"
-                +"PRESS 6 = TWICKER<br></html>";
+            String keyExplanation = "<html>--SHORTCUT KEYS-- <br>"
+                            +"SPACE = Start/Stop Game<br>"
+                            +"Ctrl+M = Hide Button Panel<br>"
+                            +"Ctrl+S = Save Grid<br>"
+                            +"Ctrl+O = Load Grid<br>"
+                            +"Ctrl+Q = Exit Game<br>"
+                            +"ENTER = Next step<br>"
+                            +"ESCAPE = Main Menu<br>"
+                            +"PRESS 1 = DOT<br>"
+                            +"PRESS 2 = BIG DOT<br>"
+                            +"PRESS 3 = ERASE DOT<br>"
+                            +"PRESS 4 = BIG ERASE<br>"
+                            +"PRESS 5 = GLIDER<br>"
+                            +"PRESS 6 = TWICKER<br></html>";
 
             
             
@@ -304,14 +302,14 @@ String keyexpl = "<html>--SHORTCUT KEYS-- <br>"
             public void actionPerformed(ActionEvent a) {
 
                 
-                JOptionPane.showMessageDialog(null, keyexpl);
+                JOptionPane.showMessageDialog(null, keyExplanation);
                 
                 
             }
         });
 
         gbc.insets = new Insets(20, 0, 0, 0);
-                optionsPanel.add(hotKeyExplain, gbc);
+        optionsPanel.add(hotKeyExplain, gbc);
 
 
 
