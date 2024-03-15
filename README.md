@@ -4,7 +4,16 @@ This is our implementation of Game Of Life, a zero-player game, designed by math
 
 The game proceeds in steps and on each step, each cell in the grid may change its status based on the number of live cells touching it. This process continues, one step at a time, and can end up producing some very interesting patterns.
 
-To run the code, install an extension to run Java code in a preferred IDE, we used 'Extension Pack for Java' by Microsoft for Visual Studio Code. Then run the main() method from /src/main/Main.java and we hope you enjoy our project.
+To run the code, follow the instructions below. We hope you enjoy our program. 
+
+To run:
+```
+java -cp ".:src" main.Main
+```
+
+To compile:
+```
+javac @sources.txt
 
 ## Workflow
 
