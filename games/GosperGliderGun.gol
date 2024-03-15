@@ -1,0 +1,56 @@
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+........................o
+......................o.o
+............oo......oo............oo
+...........o...o....oo............oo
+oo........o.....o...oo
+oo........o...o.oo....o.o
+..........o.....o.......o
+...........o...o
+............oo
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+Gosper Glider gun
+This is the first known gun and the first known finite pattern with unbounded growth. 
+It is the most compact known gun in terms of bounding box (the smallest rectangular array of cells that contains the entire pattern) : 36 x 9. 
+It is made up of two Queen bee shuttles and is stabilised by two blocks. The Queen bee shuttle is an oscillator which travels between two blocks. 
+Both are founded by Bill Gosper in 1970. It can be synthesised by 8 gliders which is the smallest known glider synthesis of any gun. 
+https://conwaylife.com/wiki/Gosper_glider_gun
