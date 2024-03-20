@@ -14,6 +14,7 @@ java -cp ".:src" main.Main
 To compile:
 ```
 javac @sources.txt
+```
 
 ## Workflow
 
